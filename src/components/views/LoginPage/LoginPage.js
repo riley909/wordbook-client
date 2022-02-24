@@ -3,6 +3,28 @@ import { useDispatch } from 'react-redux';
 import { loginUser } from '../../../_actions/user_action';
 
 function LoginPage() {
+  const dispatch = useDispatch();
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const onEmailHandler = (event) => {
+    setEmail(event.currentTarget.value);
+  };
+  const onPasswordHandler = (event) => {
+    setPassword(event.currentTarget.value);
+  };
+  const onSubmitHandler = (event) => {
+    event.preventDefault();
+
+    const body = {
+      email: email,
+      password: password,
+    };
+
+    dispatch(loginUser(body));
+  };
+
   return (
     <div
       style={{
