@@ -1,13 +1,13 @@
-import axios from 'axios';
-import { LOGIN_USER } from './types';
+import { LOGIN } from './types';
+import * as api from '../utils/api';
 
-export function loginUser(dataToSubmit) {
-  const request = axios
-    .post('http://localhost:4000/auth/signin', dataToSubmit)
-    .then((res) => res.data);
-
-  return {
-    type: LOGIN_USER,
-    payload: request,
-  };
-}
+export const login = (data) => async (dispatch) => {
+  dispatch({ type: LOGIN });
+  try {
+    const res = await api.login(data);
+    dispatch({ type: `${LOGIN}_SUCCESS`, payload: res.data });
+    return res.data;
+  } catch (error) {
+    dispatch({ type: `${LOGIN}_FAILURE`, payload: error });
+  }
+};
