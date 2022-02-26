@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { loginUser } from '../../../_actions/user_action';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { login } from '../../../_actions/user_action';
 
 function LoginPage() {
+  const state = useSelector((state) => state);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -18,19 +19,16 @@ function LoginPage() {
   };
   const onSubmitHandler = (event) => {
     event.preventDefault();
-
     const body = {
       email: email,
       password: password,
     };
 
-    dispatch(loginUser(body)).then((response) => {
-      if (response.payload) {
-        navigate('/');
-      } else {
-        console.log(response.payload);
-      }
-    });
+    const res = dispatch(login(body));
+    if (res.token) {
+      navigate('/');
+    }
+    console.log(state);
   };
 
   return (
