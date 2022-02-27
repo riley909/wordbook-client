@@ -1,13 +1,22 @@
-import axios from 'axios';
-import { LOGIN_USER } from './types';
+import { LOGIN } from './types';
+import * as api from '../utils/api';
 
-export function loginUser(dataToSubmit) {
-  const request = axios
-    .post('http://localhost:4000/auth/signin', dataToSubmit)
-    .then((res) => res.data);
+export const login = (data) => {
+  let isLoading = true;
 
-  return {
-    type: LOGIN_USER,
-    payload: request,
+  return async (dispatch) => {
+    dispatch({ type: LOGIN });
+    dispatch({ type: `${LOGIN}_LOADING`, payload: isLoading });
+    try {
+      const res = await api.login(data);
+      dispatch({ type: `${LOGIN}_SUCCESS`, payload: res.data });
+      isLoading = false;
+      dispatch({ type: `${LOGIN}_LOADING`, payload: isLoading });
+      return res.data;
+    } catch (error) {
+      dispatch({ type: `${LOGIN}_FAILURE`, payload: error });
+      isLoading = false;
+      dispatch({ type: `${LOGIN}_LOADING`, payload: isLoading });
+    }
   };
-}
+};
