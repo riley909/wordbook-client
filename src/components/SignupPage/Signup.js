@@ -1,7 +1,8 @@
-import { Col, Input, Row, Form, Button } from 'antd';
+import { Col, Input, Row, Form, Button, Tooltip } from 'antd';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import styles from '../../styles/SignupPage.module.css';
+import { QuestionCircleOutlined } from '@ant-design/icons';
 
 export default function Signup({ signup }) {
   const formik = useFormik({
@@ -67,7 +68,10 @@ export default function Signup({ signup }) {
               <Form.Item>
                 <div className={styles.password_area}>
                   <span className={styles.password_title}>비밀번호</span>
-                  <span className={styles.required}> *</span>
+                  <span className={styles.required}> * </span>
+                  <Tooltip title="영문 소문자로 이루어진 8-32자리 문자. 숫자 혹은 특수문자 1자 이상. 영문 대문자 1자 이상.">
+                    <QuestionCircleOutlined />
+                  </Tooltip>
                   <div className={styles.input_area}>
                     <Input.Password
                       id="password"
