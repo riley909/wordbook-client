@@ -9,6 +9,23 @@ export default function Signup() {
       password: '',
       confirmPassword: '',
     },
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .email(`이메일 주소를 다시 확인해 주세요.`)
+        .required('이메일 주소를 입력해 주세요'),
+      password: Yup.string()
+        .matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
+          message:
+            '비밀번호는 숫자 혹은 특수문자 최소 1자리, 영문 대문자 최소 1자리, 영문 소문자를 포함해야 합니다.',
+        })
+        .min(8, `비밀번호는 최소 8자리 입니다.`)
+        .max(32, `비밀번호는 최대 32자리 입니다.`)
+        .required('비밀번호를 입력해 주세요'),
+      confirmPassword: Yup.string().oneOf(
+        [Yup.ref('password'), null],
+        '비밀번호가 일치하지 않습니다.'
+      ),
+    }),
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
     },
