@@ -1,0 +1,119 @@
+.signup_row {
+  height: 100vh;
+}
+.signup_title {
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  color: #25259b;
+  text-transform: uppercase;
+  margin-top: 80px;
+}
+.signup_subtitle {
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.signup_underline {
+  width: 200px;
+  height: 5px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 10px;
+  margin-bottom: 40px;
+  background: linear-gradient(to right, #30307b, #e7e7fe);
+}
+.signup_contents {
+  display: flex;
+  margin-top: 50px;
+  background-color: #f3f7f8;
+  margin-left: auto;
+  margin-right: auto;
+  width: 800px;
+}
+
+.required {
+  color: #ce0f32;
+}
+
+.email_area {
+  margin-top: 40px;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.email_title {
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: left;
+  padding-left: 40px;
+}
+
+.password_area {
+  margin-left: 40px;
+  margin-right: 40px;
+  margin-top: 5px;
+}
+
+.password_title {
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: left;
+  padding-left: 40px;
+}
+
+.confirm_password_area {
+  margin-left: 40px;
+  margin-right: 40px;
+  margin-top: 5px;
+}
+
+.confirm_password_title {
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: left;
+  padding-left: 40px;
+}
+
+.input_area {
+  padding-bottom: 10px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.input {
+  width: 100%;
+  border-radius: 5px;
+  border-width: 1px;
+  font-family: Roboto;
+}
+
+.button_area {
+  text-align: center;
+  padding-left: 40px;
+  padding-right: 40px;
+  margin-top: 20px;
+  margin-bottom: 70px;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.button {
+  border-color: #3c3cb1;
+  background-color: #3c3cb1;
+  text-transform: uppercase;
+  border-radius: 5px;
+  border-width: 2px;
+  color: white;
+  width: 100%;
+  font-weight: bold;
+}
+
+.button:hover {
+  background-color: #3c3cb1;
+  color: white;
+}
