@@ -1,6 +1,7 @@
 import { Col, Input, Row, Form, Button } from 'antd';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import styles from '../../styles/SignupPage.module.css';
 
 export default function Signup({ signup }) {
   const formik = useFormik({
@@ -36,50 +37,78 @@ export default function Signup({ signup }) {
   });
 
   return (
-    <Row align="middle">
+    <Row align="middle" className={styles.signup_row}>
       <Col span={24}>
-        <Row>
+        <Row justify="center" className={styles.signup_contents}>
           <Col span={12}>
-            <div>Sign Up</div>
-            <div>| 회원가입 |</div>
-            <div />
+            <div className={styles.signup_title}>Sign Up</div>
+            <div className={styles.signup_subtitle}>| 회원가입 |</div>
+            <div className={styles.signup_underline} />
             <Form onSubmit={formik.handleSubmit}>
-              <Form.Item label="이메일" required>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  {...formik.getFieldProps('email')}
-                />
-                {formik.touched.email && formik.errors.email ? (
-                  <div>{formik.errors.email}</div>
-                ) : null}
-              </Form.Item>
-
-              <Form.Item required label="비밀번호">
-                <Input.Password
-                  id="password"
-                  name="password"
-                  {...formik.getFieldProps('password')}
-                />
-                {formik.touched.password && formik.errors.password ? (
-                  <div>{formik.errors.password}</div>
-                ) : null}
-              </Form.Item>
-
-              <Form.Item required label="비밀번호 확인">
-                <Input.Password
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  {...formik.getFieldProps('confirmPassword')}
-                />
-                {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
-                  <div>{formik.errors.confirmPassword}</div>
-                ) : null}
+              <Form.Item>
+                <div className={styles.email_area}>
+                  <span className={styles.email_title}>이메일</span>
+                  <span className={styles.required}> *</span>
+                  <div className={styles.input_area}>
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      {...formik.getFieldProps('email')}
+                      className={styles.input}
+                    />
+                    {formik.touched.email && formik.errors.email ? (
+                      <div>{formik.errors.email}</div>
+                    ) : null}
+                  </div>
+                </div>
               </Form.Item>
 
               <Form.Item>
-                <Button onClick={formik.handleSubmit}>회원가입</Button>
+                <div className={styles.password_area}>
+                  <span className={styles.password_title}>비밀번호</span>
+                  <span className={styles.required}> *</span>
+                  <div className={styles.input_area}>
+                    <Input.Password
+                      id="password"
+                      name="password"
+                      {...formik.getFieldProps('password')}
+                      className={styles.input}
+                    />
+                    {formik.touched.password && formik.errors.password ? (
+                      <div>{formik.errors.password}</div>
+                    ) : null}
+                  </div>
+                </div>
+              </Form.Item>
+
+              <Form.Item>
+                <div className={styles.confirm_password_area}>
+                  <span className={styles.confirm_password_title}>비밀번호 확인</span>
+                  <span className={styles.required}> *</span>
+                  <div className={styles.input_area}>
+                    <Input.Password
+                      id="confirmPassword"
+                      name="confirmPassword"
+                      {...formik.getFieldProps('confirmPassword')}
+                      className={styles.input}
+                    />
+                    {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
+                      <div>{formik.errors.confirmPassword}</div>
+                    ) : null}
+                  </div>
+                </div>
+              </Form.Item>
+
+              <Form.Item>
+                <div className={styles.button_area}>
+                  <Button
+                    size="large"
+                    onClick={formik.handleSubmit}
+                    className={styles.button}>
+                    SIGNUP
+                  </Button>
+                </div>
               </Form.Item>
             </Form>
           </Col>
