@@ -2,7 +2,7 @@ import { Col, Input, Row, Form, Button } from 'antd';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
-export default function Signup() {
+export default function Signup({ signup }) {
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -27,19 +27,20 @@ export default function Signup() {
       ),
     }),
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      const body = {
+        email: values.email,
+        password: values.password,
+      };
+      signup(body);
     },
   });
 
   return (
     <Row align="middle">
-      1
       <Col span={24}>
-        2
         <Row>
-          3
           <Col span={12}>
-            4<div>Sign Up</div>
+            <div>Sign Up</div>
             <div>| 회원가입 |</div>
             <div />
             <Form onSubmit={formik.handleSubmit}>
@@ -78,7 +79,7 @@ export default function Signup() {
               </Form.Item>
 
               <Form.Item>
-                <Button>회원가입</Button>
+                <Button onClick={formik.handleSubmit}>회원가입</Button>
               </Form.Item>
             </Form>
           </Col>
