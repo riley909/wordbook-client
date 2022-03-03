@@ -3,8 +3,11 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import styles from '../../styles/SignupPage.module.css';
 import { QuestionCircleOutlined } from '@ant-design/icons';
+import { useRef, useState } from 'react';
 
-export default function Signup({ signup }) {
+export default function Signup({ signup, emailCheck }) {
+  const emailRef = useRef(null);
+  const [errorText, setErrorText] = useState('');
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -37,6 +40,16 @@ export default function Signup({ signup }) {
     },
   });
 
+  const handleEmailCheck = async () => {
+    const email = emailRef.current.state.value;
+    const result = await emailCheck(email);
+    if (result) {
+      setErrorText('이미 사용중인 이메일 입니다.');
+    } else {
+      setErrorText('사용 가능한 이메일 입니다.');
+    }
+  };
+
   return (
     <Row align="middle" className={styles.signup_row}>
       <Col span={24}>
@@ -46,7 +59,7 @@ export default function Signup({ signup }) {
             <div className={styles.signup_subtitle}>| 회원가입 |</div>
             <div className={styles.signup_underline} />
             <Form onSubmit={formik.handleSubmit}>
-              <Form.Item>
+              <Form.Item className={styles.form_area}>
                 <div className={styles.email_area}>
                   <span className={styles.email_title}>이메일</span>
                   <span className={styles.required}> *</span>
@@ -57,15 +70,20 @@ export default function Signup({ signup }) {
                       type="email"
                       {...formik.getFieldProps('email')}
                       className={styles.input}
+                      ref={emailRef}
                     />
-                    {formik.touched.email && formik.errors.email ? (
-                      <div>{formik.errors.email}</div>
-                    ) : null}
+                    <Button onClick={handleEmailCheck}>중복 확인</Button>
+                    <div className={styles.error_text_area}>
+                      {formik.touched.email && formik.errors.email ? (
+                        <div className={styles.error_text}>{formik.errors.email}</div>
+                      ) : null}
+                      <div className={styles.error_text}>{errorText}</div>
+                    </div>
                   </div>
                 </div>
               </Form.Item>
 
-              <Form.Item>
+              <Form.Item className={styles.form_area}>
                 <div className={styles.password_area}>
                   <span className={styles.password_title}>비밀번호</span>
                   <span className={styles.required}> * </span>
@@ -79,14 +97,16 @@ export default function Signup({ signup }) {
                       {...formik.getFieldProps('password')}
                       className={styles.input}
                     />
-                    {formik.touched.password && formik.errors.password ? (
-                      <div>{formik.errors.password}</div>
-                    ) : null}
+                    <div className={styles.error_text_area}>
+                      {formik.touched.password && formik.errors.password ? (
+                        <div className={styles.error_text}>{formik.errors.password}</div>
+                      ) : null}
+                    </div>
                   </div>
                 </div>
               </Form.Item>
 
-              <Form.Item>
+              <Form.Item className={styles.form_area}>
                 <div className={styles.confirm_password_area}>
                   <span className={styles.confirm_password_title}>비밀번호 확인</span>
                   <span className={styles.required}> *</span>
@@ -97,9 +117,13 @@ export default function Signup({ signup }) {
                       {...formik.getFieldProps('confirmPassword')}
                       className={styles.input}
                     />
-                    {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
-                      <div>{formik.errors.confirmPassword}</div>
-                    ) : null}
+                    <div className={styles.error_text_area}>
+                      {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
+                        <div className={styles.error_text}>
+                          {formik.errors.confirmPassword}
+                        </div>
+                      ) : null}
+                    </div>
                   </div>
                 </div>
               </Form.Item>
