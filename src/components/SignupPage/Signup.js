@@ -64,15 +64,22 @@ export default function Signup({ signup, emailCheck }) {
                   <span className={styles.email_title}>이메일</span>
                   <span className={styles.required}> *</span>
                   <div className={styles.input_area}>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      {...formik.getFieldProps('email')}
-                      className={styles.input}
-                      ref={emailRef}
-                    />
-                    <Button onClick={handleEmailCheck}>중복 확인</Button>
+                    <div className={styles.email_check_input_area}>
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        {...formik.getFieldProps('email')}
+                        className={styles.input}
+                        ref={emailRef}
+                      />
+                      <Button
+                        size="small"
+                        onClick={handleEmailCheck}
+                        className={styles.email_check_button}>
+                        중복 확인
+                      </Button>
+                    </div>
                     <div className={styles.error_text_area}>
                       {formik.touched.email && formik.errors.email ? (
                         <div className={styles.error_text}>{formik.errors.email}</div>
