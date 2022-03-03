@@ -37,6 +37,10 @@
   color: #ce0f32;
 }
 
+.form_area {
+  margin-bottom: 0;
+}
+
 .email_area {
   margin-top: 40px;
   margin-left: 40px;
@@ -80,7 +84,6 @@
 }
 
 .input_area {
-  padding-bottom: 10px;
   padding-left: 40px;
   padding-right: 40px;
 }
@@ -90,6 +93,15 @@
   border-radius: 5px;
   border-width: 1px;
   font-family: Roboto;
+}
+
+.error_text_area {
+  height: 40px;
+}
+
+.error_text {
+  color: #ce0f32;
+  font-size: smaller;
 }
 
 .button_area {
