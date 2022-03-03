@@ -9,13 +9,13 @@ export default function LoginContainer() {
   const navigate = useNavigate();
 
   const login = useCallback(
-    (reqData) => {
-      const response = dispatch(loginStart(reqData));
-      if (response.token) {
+    async (reqData) => {
+      const response = await dispatch(loginStart(reqData));
+      if (response.accessToken) {
         navigate('/');
       }
     },
-    [dispatch]
+    [dispatch, navigate]
   );
 
   return <Login login={login} />;
