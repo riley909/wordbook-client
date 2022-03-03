@@ -1,3 +1,4 @@
+import { SIGNUP } from '../_actions/types';
 import { initialState } from './initialState';
 
 export default function (state = initialState, action) {
@@ -24,6 +25,16 @@ export default function (state = initialState, action) {
       return {
         ...state,
         auth: { loading: false, token: null, error: action.payload },
+      };
+    case `${SIGNUP}_SUCCESS`:
+      return {
+        ...state,
+        signup: { error: null, data: action.payload },
+      };
+    case `${SIGNUP}_FAILURE`:
+      return {
+        ...state,
+        signup: { error: action.payload, data: null },
       };
     default:
       return state;

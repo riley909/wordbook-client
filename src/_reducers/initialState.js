@@ -4,4 +4,9 @@ export const initialState = {
     error: null,
     token: null,
   },
+  signup: {
+    loading: false,
+    error: null,
+    data: null,
+  },
 };
