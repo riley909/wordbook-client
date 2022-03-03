@@ -7,7 +7,7 @@ import { useRef, useState } from 'react';
 
 export default function Signup({ signup, emailCheck }) {
   const emailRef = useRef(null);
-  const [errorText, setErrorText] = useState('');
+  const [errorText, setErrorText] = useState({ error: null, message: '' });
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -42,11 +42,15 @@ export default function Signup({ signup, emailCheck }) {
 
   const handleEmailCheck = async () => {
     const email = emailRef.current.state.value;
-    const result = await emailCheck(email);
-    if (result) {
-      setErrorText('이미 사용중인 이메일 입니다.');
+    if (!email) {
+      setErrorText({ error: true, message: '' });
     } else {
-      setErrorText('사용 가능한 이메일 입니다.');
+      const result = await emailCheck(email);
+      if (result) {
+        setErrorText({ error: true, message: '이미 사용중인 이메일 입니다.' });
+      } else {
+        setErrorText({ error: false, message: '사용 가능한 이메일 입니다.' });
+      }
     }
   };
 
@@ -82,9 +86,17 @@ export default function Signup({ signup, emailCheck }) {
                     </div>
                     <div className={styles.error_text_area}>
                       {formik.touched.email && formik.errors.email ? (
-                        <div className={styles.error_text}>{formik.errors.email}</div>
+                        <div className={styles.error_text_invalid}>
+                          {formik.errors.email}
+                        </div>
                       ) : null}
-                      <div className={styles.error_text}>{errorText}</div>
+                      {errorText.error ? (
+                        <div className={styles.error_text_invalid}>
+                          {errorText.message}
+                        </div>
+                      ) : (
+                        <div className={styles.error_text_valid}>{errorText.message}</div>
+                      )}
                     </div>
                   </div>
                 </div>

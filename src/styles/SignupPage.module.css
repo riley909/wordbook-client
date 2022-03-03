@@ -113,8 +113,13 @@
   height: 40px;
 }
 
-.error_text {
+.error_text_invalid {
   color: #ce0f32;
+  font-size: smaller;
+}
+
+.error_text_valid {
+  color: #007b0e;
   font-size: smaller;
 }
 
