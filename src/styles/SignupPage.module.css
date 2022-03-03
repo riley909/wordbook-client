@@ -55,6 +55,20 @@
   padding-left: 40px;
 }
 
+.email_check_input_area {
+  display: flex;
+  flex-direction: row;
+}
+.email_check_button {
+  border-color: #3c3cb1;
+  background-color: #3c3cb1;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  font-size: smaller;
+  margin: auto;
+}
+
 .password_area {
   margin-left: 40px;
   margin-right: 40px;
