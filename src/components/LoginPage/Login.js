@@ -14,7 +14,7 @@ export default function Login({ login }) {
     if (token !== null) {
       navigate('/');
     }
-  }, []);
+  }, [navigate, token]);
 
   function onButtonClick() {
     const email = emailRef.current.state.value;
