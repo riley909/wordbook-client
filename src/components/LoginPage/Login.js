@@ -1,10 +1,20 @@
 import { Button, Col, Input, Row } from 'antd';
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import styles from '../../styles/LoginPage.module.css';
 
 export default function Login({ login }) {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+  const navigate = useNavigate();
+  const token = useSelector((state) => state.user.auth.token);
+
+  useEffect(() => {
+    if (token !== null) {
+      navigate('/');
+    }
+  }, []);
 
   function onButtonClick() {
     const email = emailRef.current.state.value;
