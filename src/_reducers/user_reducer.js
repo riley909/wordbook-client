@@ -1,9 +1,21 @@
-import { SIGNUP } from '../_actions/types';
-import { initialState } from './initialState';
+import { LOGIN, SIGNUP } from '../_actions/types';
 
-export default function (state = initialState, action) {
+export const userState = {
+  auth: {
+    loading: false,
+    error: null,
+    token: null,
+  },
+  signup: {
+    loading: false,
+    error: null,
+    data: null,
+  },
+};
+
+export default function (state = userState, action) {
   switch (action.type) {
-    case 'LOGIN_LOADING':
+    case `${LOGIN}_LOADING`:
       return {
         ...state,
         auth: {
@@ -12,7 +24,7 @@ export default function (state = initialState, action) {
           error: null,
         },
       };
-    case 'LOGIN_SUCCESS':
+    case `${LOGIN}_SUCCESS`:
       return {
         ...state,
         auth: {
@@ -21,7 +33,7 @@ export default function (state = initialState, action) {
           error: null,
         },
       };
-    case 'LOGIN_FAILURE':
+    case `${LOGIN}_FAILURE`:
       return {
         ...state,
         auth: { loading: false, token: null, error: action.payload },
