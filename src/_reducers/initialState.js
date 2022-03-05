@@ -1,10 +1,7 @@
 import Cookies from 'universal-cookie';
 
 const cookie = new Cookies();
-let token = null;
-if (cookie.get('Authorization')) {
-  token = cookie.get('Authorization');
-}
+const token = cookie.get('Authorization') || null;
 
 export const initialState = {
   auth: {
