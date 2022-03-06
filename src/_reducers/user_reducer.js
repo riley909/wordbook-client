@@ -4,7 +4,7 @@ export const userState = {
   auth: {
     loading: false,
     error: null,
-    token: token,
+    token: null,
   },
   signup: {
     loading: false,
