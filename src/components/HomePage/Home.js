@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import Layout from './Layout';
 import styles from '../../styles/Home.module.css';
 import { FaBookMedical } from 'react-icons/fa';
+import { getQuery } from '../../utils/api';
 import { useRef } from 'react';
 
 export default function Home({ search }) {
@@ -14,7 +15,16 @@ export default function Home({ search }) {
   const signup = () => {};
   const logout = () => {};
   const mybook = () => {};
-  const onSearch = () => {};
+
+  const onSearch = () => {
+    const q = searchRef.current.state.value;
+    if (q) {
+      const queries = getQuery(q);
+      search(queries);
+    } else {
+      alert('검색어를 입력해 주세요.');
+    }
+  };
 
   return (
     <div>
