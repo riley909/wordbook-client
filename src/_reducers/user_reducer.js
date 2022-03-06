@@ -1,7 +1,19 @@
 import { SIGNUP } from '../_actions/types';
-import { initialState } from './initialState';
 
-export default function (state = initialState, action) {
+export const userState = {
+  auth: {
+    loading: false,
+    error: null,
+    token: token,
+  },
+  signup: {
+    loading: false,
+    error: null,
+    data: null,
+  },
+};
+
+export default function (state = userState, action) {
   switch (action.type) {
     case 'LOGIN_LOADING':
       return {
