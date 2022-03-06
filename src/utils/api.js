@@ -7,3 +7,15 @@ export const login = async (data) =>
 export const signup = async (data) => await axios.post(`${baseUrl}/auth/signup`, data);
 export const getEmail = async (email) =>
   await axios.get(`${baseUrl}/auth/email/${email}`);
+
+export const query = {
+  start,
+  num,
+  q,
+  part,
+  sort,
+};
+export const search = async (query) =>
+  await axios.get(
+    `${baseUrl}/search?q=${query.q}&start=${query.start}&num=${query.num}&part=${query.part}&sort=${query.sort}`
+  );
