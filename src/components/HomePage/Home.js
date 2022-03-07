@@ -1,7 +1,7 @@
 import { Button, PageHeader } from 'antd';
 import Search from 'antd/lib/input/Search';
 import { useSelector } from 'react-redux';
-import Layout from './Layout';
+import LayoutTop from './LayoutTop';
 import styles from '../../styles/Home.module.css';
 import { FaBookMedical } from 'react-icons/fa';
 import { getQuery } from '../../utils/api';
@@ -58,7 +58,7 @@ export default function Home({ search, login, signup, logout, mybook }) {
           ]}
         />
       )}
-      <Layout>
+      <LayoutTop>
         <div className={styles.search_area}>
           <div className={styles.search_title}>[한국어 - 인도네시아어 사전]</div>
           <div className={styles.search_subtitle}>
@@ -72,7 +72,8 @@ export default function Home({ search, login, signup, logout, mybook }) {
             ref={searchRef}
           />
         </div>
-      </Layout>
+        <div></div>
+      </LayoutTop>
     </div>
   );
 }
