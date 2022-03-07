@@ -7,14 +7,9 @@ import { FaBookMedical } from 'react-icons/fa';
 import { getQuery } from '../../utils/api';
 import { useRef } from 'react';
 
-export default function Home({ search }) {
+export default function Home({ search, login, signup, logout, mybook }) {
   const token = useSelector((state) => state.user.auth.token);
   const searchRef = useRef(null);
-
-  const login = () => {};
-  const signup = () => {};
-  const logout = () => {};
-  const mybook = () => {};
 
   const onSearch = () => {
     const q = searchRef.current.state.value;
@@ -31,9 +26,9 @@ export default function Home({ search }) {
       {!token ? (
         <PageHeader
           title={
-            <div>
-              <FaBookMedical />
-              WORDBOOK
+            <div className={styles.header_title}>
+              <FaBookMedical className={styles.header_title_icon} />
+              <div>WORDBOOK</div>
             </div>
           }
           extra={[
