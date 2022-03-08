@@ -1,14 +1,14 @@
 import { Col, Row } from 'antd';
 import styles from '../../styles/Layout.module.css';
 
-const LayoutTop = ({ children }) => (
-  <Row align="middle" className={styles.layout_top_row}>
+const LayoutBottom = ({ children }) => (
+  <Row align="middle" className={styles.layout_bottom_row}>
     <Col span={24}>
       <Row justify="center" className={styles.layout_top_contents}>
-        <Col span={12}>{children}</Col>
+        {children}
       </Row>
     </Col>
   </Row>
 );
 
-export default LayoutTop;
+export default LayoutBottom;

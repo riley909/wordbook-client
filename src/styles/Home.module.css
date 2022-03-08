@@ -44,3 +44,19 @@
   margin-top: 50px;
   width: 350px;
 }
+
+.side_divider {
+  height: 58vh;
+  width: 1.3px;
+  background-color: #dfdfdf;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.divider {
+  background-color: #dfdfdf;
+}
+
+.b {
+  background-color: darkkhaki;
+}

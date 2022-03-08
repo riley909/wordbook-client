@@ -1,11 +1,15 @@
-import { Button, PageHeader } from 'antd';
+import { Button, Col, Divider, PageHeader, Row } from 'antd';
 import Search from 'antd/lib/input/Search';
 import { useSelector } from 'react-redux';
 import LayoutTop from './LayoutTop';
+import LayoutBottom from './LayoutBottom';
 import styles from '../../styles/Home.module.css';
 import { FaBookMedical } from 'react-icons/fa';
 import { getQuery } from '../../utils/api';
 import { useRef } from 'react';
+import TodaysWord from './TodaysWord';
+import MyQuiz from './MyQuiz';
+import Encyclopedia from './Encyclopedia';
 
 export default function Home({ search, login, signup, logout, mybook }) {
   const token = useSelector((state) => state.user.auth.token);
@@ -74,6 +78,23 @@ export default function Home({ search, login, signup, logout, mybook }) {
         </div>
         <div></div>
       </LayoutTop>
+      <LayoutBottom>
+        <Col span={16}>
+          <TodaysWord />
+          <MyQuiz />
+          <Divider className={styles.divider} />
+          <Encyclopedia />
+        </Col>
+        <div className={styles.side_divider} />
+        <Col span={6}>
+          <Divider className={styles.divider} />
+          Study Log 최근 글 5개
+          <Divider className={styles.divider} />
+          최근 검색어 5개
+        </Col>
+        <Divider style={{ backgroundColor: 'grey' }} />
+        <div>Footer</div>
+      </LayoutBottom>
     </div>
   );
 }

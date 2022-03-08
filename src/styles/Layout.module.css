@@ -8,3 +8,8 @@
   margin-right: auto;
   width: 800px;
 }
+
+.layout_bottom_row {
+  height: 65vh;
+  margin-top: 30px;
+}
