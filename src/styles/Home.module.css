@@ -58,10 +58,13 @@
 }
 
 .pedia_area {
-  display: flex;
   width: 515px;
   height: 100px;
   overflow: hidden;
+}
+
+.pedia_container {
+  display: flex;
 }
 
 .b {
