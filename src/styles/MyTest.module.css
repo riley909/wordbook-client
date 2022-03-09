@@ -1,0 +1,24 @@
+.quiz_area {
+  margin-bottom: 20px;
+}
+
+.quiz_title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 15px;
+  font-weight: bold;
+  margin-left: 15px;
+}
+
+.quiz_title_icon {
+  color: grey;
+}
+
+.quiz_contents {
+  width: 500px;
+  height: 120px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5px;
+}

@@ -8,7 +8,7 @@ import { FaBookMedical } from 'react-icons/fa';
 import { getQuery } from '../../utils/api';
 import { useEffect, useRef, useState } from 'react';
 import TodaysWord from './TodaysWord';
-import MyQuiz from './MyQuiz';
+import MyTest from './MyTest';
 import Encyclopedia from './Encyclopedia';
 import NextButton from './NextButton';
 
@@ -116,7 +116,7 @@ export default function Home({ search, login, signup, logout, mybook }) {
       <LayoutBottom>
         <Col span={16}>
           <TodaysWord />
-          <MyQuiz />
+          <MyTest />
           <Divider className={styles.divider} />
           <div>
             <div className={styles.pedia_area}>
