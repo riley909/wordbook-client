@@ -57,6 +57,13 @@
   background-color: #dfdfdf;
 }
 
+.pedia_area {
+  display: flex;
+  width: 515px;
+  height: 100px;
+  overflow: hidden;
+}
+
 .b {
   background-color: darkkhaki;
 }

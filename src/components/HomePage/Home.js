@@ -1,4 +1,4 @@
-import { Button, Col, Divider, PageHeader, Row } from 'antd';
+import { Button, Col, Divider, PageHeader } from 'antd';
 import Search from 'antd/lib/input/Search';
 import { useSelector } from 'react-redux';
 import LayoutTop from './LayoutTop';
@@ -10,6 +10,7 @@ import { useRef } from 'react';
 import TodaysWord from './TodaysWord';
 import MyQuiz from './MyQuiz';
 import Encyclopedia from './Encyclopedia';
+import NextButton from './NextButton';
 
 export default function Home({ search, login, signup, logout, mybook }) {
   const token = useSelector((state) => state.user.auth.token);
@@ -24,6 +25,9 @@ export default function Home({ search, login, signup, logout, mybook }) {
       alert('검색어를 입력해 주세요.');
     }
   };
+
+  const prev = () => {};
+  const next = () => {};
 
   return (
     <div>
@@ -83,7 +87,31 @@ export default function Home({ search, login, signup, logout, mybook }) {
           <TodaysWord />
           <MyQuiz />
           <Divider className={styles.divider} />
-          <Encyclopedia />
+          <div>
+            <div className={styles.pedia_area}>
+              <Encyclopedia
+                url1="https://terms.naver.com/entry.naver?docId=3595492&cid=58250&categoryId=58250"
+                title1="인도네시아어의 갈래와 사용현황"
+                url2="https://terms.naver.com/entry.naver?docId=3595494&categoryId=58250&cid=58250"
+                title2="인도네시아어의 기본 문법"
+                url3="https://terms.naver.com/entry.naver?docId=3595493&categoryId=58250&cid=58250"
+                title3="인도네시아어의 문자와 발음"
+                url4="https://terms.naver.com/entry.naver?docId=3595495&categoryId=58250&cid=58250"
+                title4="인도네시아어의 인사말과 기본표현"
+              />
+              <Encyclopedia
+                url1="https://terms.naver.com/entry.naver?docId=3595496&categoryId=58250&cid=58250"
+                title1="인도네시아어의 언어적 특징"
+                url2="https://terms.naver.com/entry.naver?docId=3595497&categoryId=58250&cid=58250"
+                title2="인도네시아어의 발달과 역사"
+                url3="https://terms.naver.com/entry.naver?docId=3595520&categoryId=58250&cid=58250"
+                title3="인도네시아어의 숫자와 날짜"
+                url4={null}
+                title4={null}
+              />
+            </div>
+            <NextButton prev={prev} next={next} />
+          </div>
         </Col>
         <div className={styles.side_divider} />
         <Col span={6}>
