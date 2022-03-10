@@ -1,8 +1,8 @@
-.quiz_area {
+.test_area {
   margin-bottom: 20px;
 }
 
-.quiz_title {
+.test_title {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -11,11 +11,11 @@
   margin-left: 15px;
 }
 
-.quiz_title_icon {
+.test_title_icon {
   color: grey;
 }
 
-.quiz_contents {
+.test_contents {
   width: 500px;
   height: 120px;
   margin-left: auto;
