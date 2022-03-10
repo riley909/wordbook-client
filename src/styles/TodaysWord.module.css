@@ -1,0 +1,61 @@
+.todays_word_area {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.today_title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 15px;
+  font-weight: bold;
+  margin-left: 15px;
+}
+
+.today_title_icon {
+  color: grey;
+}
+
+.today_contents {
+  width: 500px;
+  height: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5px;
+  border: 1px #dfdfdf solid;
+  text-align: center;
+}
+
+.word_area {
+  margin-top: 10px;
+}
+
+.word {
+  font-size: 18px;
+  font-weight: bold;
+  color: #6238c4;
+  margin-right: 10px;
+}
+
+.word_parts {
+  font-weight: bold;
+  color: #de654a;
+}
+
+.meaning_area {
+  padding-right: 40px;
+  padding-left: 40px;
+  margin-bottom: 15px;
+}
+
+.meaning {
+  font-weight: bold;
+}
+
+.divider {
+  height: 1px;
+  width: 410px;
+  background-color: #dfdfdf;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}

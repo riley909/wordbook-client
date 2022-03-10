@@ -1,0 +1,36 @@
+.pedia_title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 15px;
+  font-weight: bold;
+  margin-left: 15px;
+}
+
+.pedia_contents {
+  width: 500px;
+  height: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5px;
+}
+
+ul li {
+  list-style-type: square;
+  list-style-position: outside;
+  margin-bottom: 5px;
+}
+
+ul li::marker {
+  color: lightgrey;
+}
+
+ul li a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul li a:hover {
+  text-decoration: underline;
+  color: inherit;
+}

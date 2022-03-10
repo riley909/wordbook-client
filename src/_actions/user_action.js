@@ -1,5 +1,6 @@
-import { LOGIN, SIGNUP } from './types';
+import { LOGIN, LOGOUT, SIGNUP } from './types';
 import * as api from '../utils/api';
+import Cookies from 'universal-cookie';
 
 export const login = (data) => {
   let isLoading = true;
@@ -32,5 +33,14 @@ export const signup = (data) => {
     } catch (error) {
       dispatch({ type: `${SIGNUP}_FAILURE`, payload: error });
     }
+  };
+};
+
+export const logout = () => {
+  return async (dispatch) => {
+    dispatch({ type: LOGOUT });
+    const cookie = new Cookies();
+    cookie.remove('Authorization');
+    dispatch({ type: `${LOGOUT}_SUCCESS`, payload: null });
   };
 };

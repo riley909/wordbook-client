@@ -1,0 +1,13 @@
+.next_button_area {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.next_button {
+  display: table;
+}
+
+.next_button_icon {
+  display: table-cell;
+  vertical-align: middle;
+}

@@ -8,12 +8,8 @@ export const signup = async (data) => await axios.post(`${baseUrl}/auth/signup`,
 export const getEmail = async (email) =>
   await axios.get(`${baseUrl}/auth/email/${email}`);
 
-export const query = {
-  start,
-  num,
-  q,
-  part,
-  sort,
+export const getQuery = (q, start = 1, num = 10, part = 'word', sort = 'dict') => {
+  return { q, start, num, part, sort };
 };
 export const search = async (query) =>
   await axios.get(
