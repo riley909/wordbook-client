@@ -116,7 +116,7 @@ export default function Home({ search, login, signup, logout, mybook }) {
       <LayoutBottom>
         <Col span={16}>
           <TodaysWord />
-          <MyTest />
+          <MyTest login={login} />
           <Divider className={styles.divider} />
           <div>
             <div className={styles.pedia_area}>

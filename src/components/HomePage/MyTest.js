@@ -1,7 +1,7 @@
 import styles from '../../styles/MyTest.module.css';
 import { FaAngleRight } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
-import { Progress } from 'antd';
+import MyTestResultCard from './MyTestResultCard';
 
 const MyTest = ({ login }) => {
   const token = useSelector((state) => state.user.auth.token);
@@ -14,12 +14,17 @@ const MyTest = ({ login }) => {
           <FaAngleRight className={styles.test_title_icon} />
         </div>
         {!token ? (
-          <div className={styles.test_contents}>
-            <div>
-              <div>2021-03-09</div>
-              <Progress type="circle" percent={50} format={(percent) => `5 / 10`} />
+          <div>
+            <div className={styles.test_contents}>
+              <MyTestResultCard total={3} answers={1} date={'2022-03-09'} />
+              <MyTestResultCard total={5} answers={2} date={'2022-03-08'} />
+              <MyTestResultCard total={10} answers={7} date={'2022-03-06'} />
             </div>
-            <div onClick={login}>내 성적 확인하기 </div>
+            <div
+              onClick={login}
+              style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '10px' }}>
+              내 성적 확인하기
+            </div>
           </div>
         ) : (
           <div className={styles.test_contents}>내 성적</div>

@@ -16,9 +16,23 @@
 }
 
 .test_contents {
+  display: flex;
+  justify-content: space-around;
   width: 500px;
-  height: 120px;
+  height: 170px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 5px;
+}
+
+.test_result_card_area {
+  height: 160px;
+  width: fit-content;
+  border: #dfdfdf 1px solid;
+  border-radius: 8px;
+  box-shadow: 1px 1px 3px #dfdfdf;
+}
+
+.test_result_circle {
+  margin: 5px;
 }
