@@ -4,15 +4,19 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
+import DictListPage from './pages/DictListPage';
+import DictViewPage from './pages/DictViewPage';
 
 function App() {
   return (
     <Router>
       <div>
         <Routes>
-          <Route exact path="/" element={<HomePage />}></Route>
-          <Route exact path="/login" element={<LoginPage />}></Route>
-          <Route exact path="/signup" element={<SignupPage />}></Route>
+          <Route path="/" element={<HomePage />}></Route>
+          <Route path="/login" element={<LoginPage />}></Route>
+          <Route path="/signup" element={<SignupPage />}></Route>
+          <Route path="/dict/search" element={<DictListPage />}></Route>
+          <Route path="dict/searchView" element={<DictViewPage />}></Route>
         </Routes>
       </div>
     </Router>
