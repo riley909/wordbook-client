@@ -11,7 +11,7 @@ const TodaysWord = () => {
       <div className={styles.today_contents}>
         <div className={styles.word_area}>
           <span className={styles.word}>kucing</span>
-          <span class={styles.word_parts}>[Nomina : 명사]</span>
+          <span className={styles.word_parts}>[Nomina : 명사]</span>
         </div>
         <div className={styles.meaning_area}>
           <div className={styles.meaning}>고양이</div>
