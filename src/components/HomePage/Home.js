@@ -22,10 +22,9 @@ export default function Home({ search, login, signup, logout, mybook }) {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const onSearch = () => {
-    const q = searchRef.current.state.value;
-    if (q) {
-      const queries = getQuery(q);
-      search(queries);
+    const query = searchRef.current.state.value;
+    if (query) {
+      search(query);
     } else {
       alert('검색어를 입력해 주세요.');
     }
