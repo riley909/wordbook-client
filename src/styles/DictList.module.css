@@ -1,0 +1,51 @@
+.list_item_container {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.list_item_word_area {
+  display: flex;
+}
+
+.list_item_word {
+  font-weight: bold;
+  font-size: 20px;
+  color: #6238c4;
+}
+
+.list_item_pos {
+  margin: 5px 0 5px 10px;
+  font-size: 15px;
+  color: #de654a;
+}
+
+.list_item_trans_pos {
+  margin: 5px;
+  font-size: 15px;
+  color: #de654a;
+}
+
+.list_item_word_area span {
+  color: dimgray;
+}
+
+.list_item_idx {
+  font-weight: bold;
+  font-size: 17px;
+  margin-right: 5px;
+}
+
+.list_item_trans_word {
+  font-size: 17px;
+}
+
+.list_item_indent {
+  margin-left: 20px;
+}
+
+.list_item_divider {
+  height: 1px;
+  background-color: #dfdfdf;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
