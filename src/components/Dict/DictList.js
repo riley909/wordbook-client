@@ -2,14 +2,17 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import DictListItem from './DictListItem';
 import Header from '../NavBar/Header';
+import Pagination from './Pagination';
 
-export default function DictList() {
+export default function DictList({ query }) {
   const searchResults = useSelector((state) => state.dict.search.data);
-  console.log(searchResults);
 
   if (!searchResults) {
     return <Header />;
   }
+
+  const total = searchResults.channel.total;
+  const limit = searchResults.channel.num;
 
   return (
     <div>
@@ -17,7 +20,7 @@ export default function DictList() {
       <div>검색창 자리</div>
       <div>
         <div>
-          검색결과
+          '{query}'가 포함된 검색 결과 [총 {total}개]
           <div>
             {searchResults.channel.item.map((item, idx) => {
               let trans_pos = '';
@@ -70,6 +73,7 @@ export default function DictList() {
           </div>
         </div>
       </div>
+      <Pagination query={query} total={total} limit={limit} />
     </div>
   );
 }

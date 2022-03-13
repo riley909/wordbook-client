@@ -9,15 +9,17 @@ import { useDispatch } from 'react-redux';
 export default function DictListContainer() {
   const location = useLocation();
   const dispatch = useDispatch();
+  const queryData = QueryString.parse(location.search, { ignoreQueryPrefix: true });
 
   useEffect(() => {
     const fetchData = async () => {
-      const queryData = QueryString.parse(location.search, { ignoreQueryPrefix: true });
-      const queries = getQuery(queryData.q);
+      const queries = getQuery(queryData.q, queryData.page);
       await dispatch(searchStart(queries));
     };
     fetchData();
-  }, []);
 
-  return <DictList />;
+    // location이 바뀔때마다 dispatch
+  }, [location]);
+
+  return <DictList query={queryData.q} />;
 }
