@@ -1,18 +1,19 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import DictListItem from './DictListItem';
+import Header from '../NavBar/Header';
 
 export default function DictList() {
   const searchResults = useSelector((state) => state.dict.search.data);
   console.log(searchResults);
 
   if (!searchResults) {
-    return <div>헤더</div>;
+    return <Header />;
   }
 
   return (
     <div>
-      헤더
+      <Header />
       <div>검색창 자리</div>
       <div>
         <div>
