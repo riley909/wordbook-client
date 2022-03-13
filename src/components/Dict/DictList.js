@@ -4,6 +4,7 @@ import DictListItem from './DictListItem';
 import Header from '../NavBar/Header';
 import Pagination from './Pagination';
 import Layout from '../Layout/Layout';
+import styles from '../../styles/DictList.module.css';
 
 export default function DictList({ query }) {
   const searchResults = useSelector((state) => state.dict.search.data);
@@ -22,8 +23,8 @@ export default function DictList({ query }) {
         <div>검색창 자리</div>
         <div>
           <div>
-            <div>
-              '{query}'이(가) 포함된 검색 결과 [총 {total}개]
+            <div className={styles.total_text}>
+              <span>'{query}'</span>이(가) 포함된 검색 결과 <span>총 {total}개</span>
             </div>
             <div>
               {searchResults.channel.item.map((item) => {

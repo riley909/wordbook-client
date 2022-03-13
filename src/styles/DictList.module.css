@@ -1,3 +1,11 @@
+.total_text {
+}
+
+.total_text span {
+  font-weight: bold;
+  color: #d6983a;
+}
+
 .list_item_container {
   margin-top: 30px;
   margin-bottom: 20px;
