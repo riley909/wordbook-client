@@ -45,6 +45,7 @@ export default function Header() {
               회원가입
             </Button>,
           ]}
+          className={styles.shadow}
         />
       ) : (
         <PageHeader
