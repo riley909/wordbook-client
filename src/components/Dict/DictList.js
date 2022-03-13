@@ -5,6 +5,7 @@ import Header from '../NavBar/Header';
 import Pagination from './Pagination';
 import Layout from '../Layout/Layout';
 import styles from '../../styles/DictList.module.css';
+import { Col, Divider } from 'antd';
 
 export default function DictList({ query }) {
   const searchResults = useSelector((state) => state.dict.search.data);
@@ -20,8 +21,8 @@ export default function DictList({ query }) {
     <div>
       <Header />
       <Layout>
-        <div>검색창 자리</div>
-        <div>
+        <Col span={16}>
+          <div>검색창 자리</div>
           <div>
             <div className={styles.total_text}>
               <span>'{query}'</span>이(가) 포함된 검색 결과 <span>총 {total}개</span>
@@ -78,9 +79,19 @@ export default function DictList({ query }) {
               })}
             </div>
           </div>
-        </div>
+          <div className={styles.pagination_area}>
+            <Pagination query={query} total={total} limit={limit} />
+          </div>
+        </Col>
+        <div className={styles.side_divider} />
+        <Col span={6} className={styles.side}>
+          <Divider className={styles.divider} />
+          Study Log 최근 글 5개
+          <Divider className={styles.divider} />
+          최근 검색어 5개
+        </Col>
       </Layout>
-      <Pagination query={query} total={total} limit={limit} />
+      <div>Footer</div>
     </div>
   );
 }

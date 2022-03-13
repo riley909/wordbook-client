@@ -6,6 +6,21 @@
   color: #d6983a;
 }
 
+.side_divider {
+  width: 1px;
+  background-color: #dfdfdf;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.divider {
+  background-color: #dfdfdf;
+}
+
+.side {
+  /* background-color: aliceblue; */
+}
+
 .list_item_container {
   margin-top: 30px;
   margin-bottom: 20px;
@@ -57,4 +72,10 @@
   background-color: #dfdfdf;
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.pagination_area {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
 }
