@@ -11,6 +11,9 @@ export default function DictListItem({
   dfn,
 }) {
   const arrDfn = [];
+
+  // 뜻이 2개 이상일 경우
+  // [{trans1, dfn1}, {trans2, dfn2}..] 의 배열을 생성한다
   if (Array.isArray(trans_dfn)) {
     trans_dfn.map((val) => {
       arrDfn.push({ trans_dfn: val });
@@ -19,7 +22,6 @@ export default function DictListItem({
       arrDfn[idx].dfn = val;
     });
   }
-  console.log('arrDfn', arrDfn);
   return (
     <div>
       <div key={target_code}>
