@@ -3,6 +3,7 @@
 }
 
 .layout_contents {
+  display: flex;
   margin-left: auto;
   margin-right: auto;
   width: 900px;
