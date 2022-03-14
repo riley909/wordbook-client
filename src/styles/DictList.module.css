@@ -116,3 +116,23 @@
   justify-content: center;
   margin-bottom: 30px;
 }
+
+.pagination_button {
+  background-color: white;
+  border-style: none;
+  font-size: 16px;
+}
+
+.pagination_button:hover {
+  color: #d6983a;
+  border: 1px solid #dfdfdf;
+  cursor: pointer;
+}
+
+.pagination_button_current {
+  background-color: white;
+  color: #d6983a;
+  border: 1px solid #dfdfdf;
+  font-size: 16px;
+  font-weight: 500;
+}

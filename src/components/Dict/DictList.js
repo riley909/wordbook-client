@@ -18,6 +18,7 @@ export default function DictList({ query, search }) {
 
   const total = searchResults.channel.total;
   const limit = searchResults.channel.num;
+  const currentPage = searchResults.channel.start;
 
   const onSearch = () => {
     const query = searchRef.current.state.value;
@@ -108,7 +109,12 @@ export default function DictList({ query, search }) {
             </div>
           </div>
           <div className={styles.pagination_area}>
-            <Pagination query={query} total={total} limit={limit} />
+            <Pagination
+              query={query}
+              total={total}
+              limit={limit}
+              currentPage={currentPage}
+            />
           </div>
         </Col>
         <div className={styles.side_divider} />
