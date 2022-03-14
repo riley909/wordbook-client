@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import DictListItem from './DictListItem';
 import Header from '../NavBar/Header';
@@ -6,9 +6,11 @@ import Pagination from './Pagination';
 import Layout from '../Layout/Layout';
 import styles from '../../styles/DictList.module.css';
 import { Col, Divider } from 'antd';
+import Search from 'antd/lib/input/Search';
 
-export default function DictList({ query }) {
+export default function DictList({ query, search }) {
   const searchResults = useSelector((state) => state.dict.search.data);
+  const searchRef = useRef(null);
 
   if (!searchResults) {
     return <Header />;
@@ -17,12 +19,35 @@ export default function DictList({ query }) {
   const total = searchResults.channel.total;
   const limit = searchResults.channel.num;
 
+  const onSearch = () => {
+    const query = searchRef.current.state.value;
+    if (query) {
+      search(query);
+    } else {
+      alert('검색어를 입력해 주세요.');
+    }
+  };
+
   return (
     <div>
       <Header />
+      <div className={styles.search_area}>
+        <div className={styles.search_title_area}>
+          <div className={styles.search_title}>[한국어 - 인도네시아어 사전]</div>
+          <div className={styles.search_subtitle}>
+            | Kamus Bahasa Korea - Bahasa Indonesia |
+          </div>
+        </div>
+        <Search
+          allowClear
+          enterButton
+          onSearch={onSearch}
+          className={styles.search_input}
+          ref={searchRef}
+        />
+      </div>
       <Layout>
         <Col span={16}>
-          <div>검색창 자리</div>
           <div>
             <div className={styles.total_text}>
               <span>'{query}'</span>이(가) 포함된 검색 결과 <span>총 {total}개</span>
@@ -48,6 +73,7 @@ export default function DictList({ query }) {
                     trans_word.push(val.translation.trans_word);
                     trans_dfn.push(val.translation.trans_dfn);
                     dfn.push(val.definition);
+                    return null;
                   });
                 }
 
