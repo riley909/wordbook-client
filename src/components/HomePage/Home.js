@@ -66,8 +66,9 @@ export default function Home({ search, login }) {
             | Kamus Bahasa Korea - Bahasa Indonesia |
           </div>
           <Search
+            size="large"
             allowClear
-            onPressEnter
+            enterButton
             onSearch={onSearch}
             className={styles.search_input}
             ref={searchRef}
