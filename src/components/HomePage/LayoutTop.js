@@ -1,5 +1,5 @@
 import { Col, Row } from 'antd';
-import styles from '../../styles/Layout.module.css';
+import styles from '../../styles/HomeLayout.module.css';
 
 const LayoutTop = ({ children }) => (
   <Row align="middle" className={styles.layout_top_row}>

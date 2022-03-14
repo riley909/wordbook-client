@@ -1,0 +1,144 @@
+.search_area {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: 180px;
+}
+
+.search_title_area {
+  margin-right: 30px;
+}
+
+.search_title {
+  text-align: center;
+  font-size: 21px;
+  font-weight: bold;
+  color: #25259b;
+}
+.search_subtitle {
+  text-align: center;
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.search_input {
+  width: 400px;
+}
+
+.search_divider {
+  height: 1.5px;
+  background-color: black;
+  width: 900px;
+  margin: auto;
+}
+
+.total_text {
+}
+
+.total_text span {
+  font-weight: bold;
+  color: #d6983a;
+}
+
+.side_divider {
+  width: 1px;
+  background-color: #dfdfdf;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.divider {
+  background-color: #dfdfdf;
+}
+
+.side {
+  /* background-color: aliceblue; */
+}
+
+.list_item_container {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.list_item_word_area {
+  display: flex;
+}
+
+.list_item_word {
+  font-weight: bold;
+  font-size: 20px;
+  color: #6238c4;
+}
+
+.list_item_pos {
+  margin: 5px 0 5px 10px;
+  font-size: 15px;
+  color: #de654a;
+}
+
+.list_item_trans_pos {
+  margin: 5px;
+  font-size: 15px;
+  color: #de654a;
+}
+
+.list_item_word_area span {
+  color: dimgray;
+}
+
+.list_item_idx {
+  font-weight: bold;
+  font-size: 17px;
+  margin-right: 5px;
+}
+
+.list_item_trans_word {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.list_item_indent {
+  margin-left: 20px;
+}
+
+.list_item_divider {
+  height: 1px;
+  background-color: #dfdfdf;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.pagination_area {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.pagination_button {
+  background-color: white;
+  border-style: none;
+  font-size: 16px;
+}
+
+.pagination_button_current {
+  background-color: white;
+  color: #d6983a;
+  border: 1px solid #dfdfdf;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.pagination_button:hover {
+  color: #d6983a;
+  border: 1px solid #dfdfdf;
+  cursor: pointer;
+}
+
+.pagination_button:disabled {
+  color: #dfdfdf;
+  font-weight: 600;
+  border-style: none;
+}

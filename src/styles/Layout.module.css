@@ -1,15 +1,10 @@
-.layout_top_row {
-  height: 35vh;
-  background-color: #f3f7f8;
+.layout_row {
+  margin-top: 30px;
 }
 
-.layout_top_contents {
+.layout_contents {
+  display: flex;
   margin-left: auto;
   margin-right: auto;
-  width: 800px;
-}
-
-.layout_bottom_row {
-  height: 65vh;
-  margin-top: 30px;
+  width: 900px;
 }
