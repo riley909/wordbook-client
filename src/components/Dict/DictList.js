@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import DictListItem from './DictListItem';
 import Header from '../NavBar/Header';
@@ -11,6 +11,7 @@ import Search from 'antd/lib/input/Search';
 export default function DictList({ query, search }) {
   const searchResults = useSelector((state) => state.dict.search.data);
   const searchRef = useRef(null);
+  const [showingNum, setShowingNum] = useState({ start: 1, end: 5 });
 
   if (!searchResults) {
     return <Header />;
@@ -114,6 +115,8 @@ export default function DictList({ query, search }) {
               total={total}
               limit={limit}
               currentPage={currentPage}
+              showingNum={showingNum}
+              setShowingNum={setShowingNum}
             />
           </div>
         </Col>

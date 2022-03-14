@@ -123,16 +123,22 @@
   font-size: 16px;
 }
 
-.pagination_button:hover {
-  color: #d6983a;
-  border: 1px solid #dfdfdf;
-  cursor: pointer;
-}
-
 .pagination_button_current {
   background-color: white;
   color: #d6983a;
   border: 1px solid #dfdfdf;
   font-size: 16px;
   font-weight: 500;
+}
+
+.pagination_button:hover {
+  color: #d6983a;
+  border: 1px solid #dfdfdf;
+  cursor: pointer;
+}
+
+.pagination_button:disabled {
+  color: #dfdfdf;
+  font-weight: 600;
+  border-style: none;
 }
