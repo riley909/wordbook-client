@@ -39,6 +39,7 @@ export default function DictList({ query, search }) {
           </div>
         </div>
         <Search
+          size="large"
           allowClear
           enterButton
           onSearch={onSearch}
@@ -46,6 +47,7 @@ export default function DictList({ query, search }) {
           ref={searchRef}
         />
       </div>
+      <div className={styles.search_divider} />
       <Layout>
         <Col span={16}>
           <div>
