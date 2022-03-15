@@ -7,6 +7,7 @@ import Layout from '../Layout/Layout';
 import styles from '../../styles/DictList.module.css';
 import { Col, Divider } from 'antd';
 import Search from 'antd/lib/input/Search';
+import SearchInput from './SearchInput';
 
 export default function DictList({ query, search, wordClick }) {
   const searchResults = useSelector((state) => state.dict.search.data);
@@ -21,34 +22,10 @@ export default function DictList({ query, search, wordClick }) {
   const limit = searchResults.channel.num;
   const currentPage = searchResults.channel.start;
 
-  const onSearch = () => {
-    const query = searchRef.current.state.value;
-    if (query) {
-      search(query);
-    } else {
-      alert('검색어를 입력해 주세요.');
-    }
-  };
-
   return (
     <div>
       <Header />
-      <div className={styles.search_area}>
-        <div className={styles.search_title_area}>
-          <div className={styles.search_title}>[한국어 - 인도네시아어 사전]</div>
-          <div className={styles.search_subtitle}>
-            | Kamus Bahasa Korea - Bahasa Indonesia |
-          </div>
-        </div>
-        <Search
-          size="large"
-          allowClear
-          enterButton
-          onSearch={onSearch}
-          className={styles.search_input}
-          ref={searchRef}
-        />
-      </div>
+      <SearchInput search={search} />
       <div className={styles.search_divider} />
       <Layout>
         <Col span={16}>
