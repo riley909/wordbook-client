@@ -45,7 +45,7 @@ export default function (state = dictState, action) {
         ...state,
         searchView: {
           loading: action.payload,
-          ...state.search,
+          ...state.searchView,
         },
       };
     case `${DICT_SEARCH_VIEW}_SUCCESS`:
