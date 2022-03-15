@@ -15,3 +15,5 @@ export const search = async (query) =>
   await axios.get(
     `${baseUrl}/search?q=${query.q}&start=${query.start}&num=${query.num}&part=${query.part}&sort=${query.sort}`
   );
+export const searchView = async (query) =>
+  await axios.get(`${baseUrl}/searchView?target_code=${query}`);
