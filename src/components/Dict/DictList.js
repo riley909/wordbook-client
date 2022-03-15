@@ -8,6 +8,7 @@ import styles from '../../styles/DictList.module.css';
 import { Col, Divider } from 'antd';
 import Search from 'antd/lib/input/Search';
 import SearchInput from './SearchInput';
+import { sortPos } from '../../utils/sortPos';
 
 export default function DictList({ query, search, wordClick }) {
   const searchResults = useSelector((state) => state.dict.search.data);
@@ -35,16 +36,7 @@ export default function DictList({ query, search, wordClick }) {
             </div>
             <div>
               {searchResults.channel.item.map((item, idx) => {
-                let trans_pos = '';
-                if (item.pos === '명사') trans_pos = 'Nomina';
-                if (item.pos === '동사') trans_pos = 'Verba';
-                if (item.pos === '부사') trans_pos = 'Adverbia';
-                if (item.pos === '형용사') trans_pos = 'Adjektiva';
-                if (item.pos === '수사') trans_pos = 'Numeralia';
-                if (item.pos === '관형사') trans_pos = 'Pewatas';
-                if (item.pos === '접사') trans_pos = 'Imbuhan';
-                if (item.pos === '어미') trans_pos = 'Akhiran';
-                if (item.pos === '품사 없음') trans_pos = 'Tidak Berkelas Kata';
+                const trans_pos = sortPos(item.pos);
 
                 const trans_word = [];
                 const trans_dfn = [];
