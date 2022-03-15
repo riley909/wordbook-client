@@ -27,12 +27,16 @@ export default function Header() {
     navigate('/mybook');
   }, [navigate]);
 
+  const home = useCallback(() => {
+    navigate('/');
+  }, [navigate]);
+
   return (
     <>
       {!token ? (
         <PageHeader
           title={
-            <div className={styles.header_title}>
+            <div className={styles.header_title} onClick={home}>
               <FaBookMedical className={styles.header_title_icon} />
               <div>WORDBOOK</div>
             </div>
@@ -50,7 +54,7 @@ export default function Header() {
       ) : (
         <PageHeader
           title={
-            <div className={styles.header_title}>
+            <div className={styles.header_title} onClick={home}>
               <FaBookMedical className={styles.header_title_icon} />
               <div>WORDBOOK</div>
             </div>
