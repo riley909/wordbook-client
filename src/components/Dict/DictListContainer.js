@@ -30,5 +30,12 @@ export default function DictListContainer() {
     [navigate]
   );
 
-  return <DictList query={queryData.q} search={search} />;
+  const wordClick = useCallback(
+    (target_code) => {
+      navigate(`/dict/searchView?target_code=${target_code}`);
+    },
+    [navigate]
+  );
+
+  return <DictList query={queryData.q} search={search} wordClick={wordClick} />;
 }

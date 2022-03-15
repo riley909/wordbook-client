@@ -8,7 +8,7 @@ import styles from '../../styles/DictList.module.css';
 import { Col, Divider } from 'antd';
 import Search from 'antd/lib/input/Search';
 
-export default function DictList({ query, search }) {
+export default function DictList({ query, search, wordClick }) {
   const searchResults = useSelector((state) => state.dict.search.data);
   const searchRef = useRef(null);
   const [showingNum, setShowingNum] = useState({ start: 1, end: 5 });
@@ -57,7 +57,7 @@ export default function DictList({ query, search }) {
               <span>'{query}'</span>이(가) 포함된 검색 결과 <span>총 {total}개</span>
             </div>
             <div>
-              {searchResults.channel.item.map((item) => {
+              {searchResults.channel.item.map((item, idx) => {
                 let trans_pos = '';
                 if (item.pos === '명사') trans_pos = 'Nomina';
                 if (item.pos === '동사') trans_pos = 'Verba';
@@ -82,7 +82,7 @@ export default function DictList({ query, search }) {
                 }
 
                 return (
-                  <div>
+                  <div key={idx}>
                     {Array.isArray(item.sense) ? (
                       <DictListItem
                         target_code={item.target_code}
@@ -92,6 +92,7 @@ export default function DictList({ query, search }) {
                         trans_pos={trans_pos}
                         trans_dfn={trans_dfn}
                         dfn={dfn}
+                        wordClick={wordClick}
                       />
                     ) : (
                       <DictListItem
@@ -102,6 +103,7 @@ export default function DictList({ query, search }) {
                         trans_pos={trans_pos}
                         trans_dfn={item.sense.translation.trans_dfn}
                         dfn={item.sense.definition}
+                        wordClick={wordClick}
                       />
                     )}
                   </div>
