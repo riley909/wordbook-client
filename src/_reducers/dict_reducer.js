@@ -18,8 +18,8 @@ export default function (state = dictState, action) {
       return {
         ...state,
         search: {
-          loading: action.payload,
           ...state.search,
+          loading: action.payload,
         },
       };
     case `${DICT_SEARCH}_SUCCESS`:
@@ -44,8 +44,8 @@ export default function (state = dictState, action) {
       return {
         ...state,
         searchView: {
-          loading: action.payload,
           ...state.searchView,
+          loading: action.payload,
         },
       };
     case `${DICT_SEARCH_VIEW}_SUCCESS`:

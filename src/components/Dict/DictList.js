@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import DictListItem from './DictListItem';
 import Header from '../NavBar/Header';
@@ -6,22 +6,20 @@ import Pagination from './Pagination';
 import Layout from '../Layout/Layout';
 import styles from '../../styles/DictList.module.css';
 import { Col, Divider } from 'antd';
-import Search from 'antd/lib/input/Search';
 import SearchInput from './SearchInput';
 import { sortPos } from '../../utils/sortPos';
 
 export default function DictList({ query, search, wordClick }) {
-  const searchResults = useSelector((state) => state.dict.search.data);
-  const searchRef = useRef(null);
+  const searchState = useSelector((state) => state.dict.search);
   const [showingNum, setShowingNum] = useState({ start: 1, end: 5 });
 
-  if (!searchResults) {
+  if (searchState.loading) {
     return <Header />;
   }
 
-  const total = searchResults.channel.total;
-  const limit = searchResults.channel.num;
-  const currentPage = searchResults.channel.start;
+  const total = searchState.data.channel.total;
+  const limit = searchState.data.channel.num;
+  const currentPage = searchState.data.channel.start;
 
   return (
     <div>
@@ -35,7 +33,7 @@ export default function DictList({ query, search, wordClick }) {
               <span>'{query}'</span>이(가) 포함된 검색 결과 <span>총 {total}개</span>
             </div>
             <div>
-              {searchResults.channel.item.map((item, idx) => {
+              {searchState.data.channel.item.map((item, idx) => {
                 const trans_pos = sortPos(item.pos);
 
                 const trans_word = [];
