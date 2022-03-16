@@ -9,6 +9,7 @@ export default function DictListItem({
   trans_pos,
   trans_dfn,
   dfn,
+  wordClick,
 }) {
   const arrDfn = [];
 
@@ -24,11 +25,18 @@ export default function DictListItem({
     });
   }
 
+  const onWordClick = (event) => {
+    const target_code = event.target.id;
+    wordClick(target_code);
+  };
+
   return (
     <div className={styles.list_item_container}>
       <div key={target_code}>
         <div className={styles.list_item_word_area}>
-          <div className={styles.list_item_word}>{word}</div>
+          <div id={target_code} className={styles.list_item_word} onClick={onWordClick}>
+            {word}
+          </div>
           <div className={styles.list_item_pos}>
             <span>[ </span>
             {pos}

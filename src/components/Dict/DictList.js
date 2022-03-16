@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import DictListItem from './DictListItem';
 import Header from '../NavBar/Header';
@@ -6,49 +6,25 @@ import Pagination from './Pagination';
 import Layout from '../Layout/Layout';
 import styles from '../../styles/DictList.module.css';
 import { Col, Divider } from 'antd';
-import Search from 'antd/lib/input/Search';
+import SearchInput from './SearchInput';
+import { sortPos } from '../../utils/sortPos';
 
-export default function DictList({ query, search }) {
-  const searchResults = useSelector((state) => state.dict.search.data);
-  const searchRef = useRef(null);
+export default function DictList({ query, search, wordClick }) {
+  const searchState = useSelector((state) => state.dict.search);
   const [showingNum, setShowingNum] = useState({ start: 1, end: 5 });
 
-  if (!searchResults) {
+  if (searchState.loading) {
     return <Header />;
   }
 
-  const total = searchResults.channel.total;
-  const limit = searchResults.channel.num;
-  const currentPage = searchResults.channel.start;
-
-  const onSearch = () => {
-    const query = searchRef.current.state.value;
-    if (query) {
-      search(query);
-    } else {
-      alert('검색어를 입력해 주세요.');
-    }
-  };
+  const total = searchState.data.channel.total;
+  const limit = searchState.data.channel.num;
+  const currentPage = searchState.data.channel.start;
 
   return (
     <div>
       <Header />
-      <div className={styles.search_area}>
-        <div className={styles.search_title_area}>
-          <div className={styles.search_title}>[한국어 - 인도네시아어 사전]</div>
-          <div className={styles.search_subtitle}>
-            | Kamus Bahasa Korea - Bahasa Indonesia |
-          </div>
-        </div>
-        <Search
-          size="large"
-          allowClear
-          enterButton
-          onSearch={onSearch}
-          className={styles.search_input}
-          ref={searchRef}
-        />
-      </div>
+      <SearchInput search={search} />
       <div className={styles.search_divider} />
       <Layout>
         <Col span={16}>
@@ -57,17 +33,8 @@ export default function DictList({ query, search }) {
               <span>'{query}'</span>이(가) 포함된 검색 결과 <span>총 {total}개</span>
             </div>
             <div>
-              {searchResults.channel.item.map((item) => {
-                let trans_pos = '';
-                if (item.pos === '명사') trans_pos = 'Nomina';
-                if (item.pos === '동사') trans_pos = 'Verba';
-                if (item.pos === '부사') trans_pos = 'Adverbia';
-                if (item.pos === '형용사') trans_pos = 'Adjektiva';
-                if (item.pos === '수사') trans_pos = 'Numeralia';
-                if (item.pos === '관형사') trans_pos = 'Pewatas';
-                if (item.pos === '접사') trans_pos = 'Imbuhan';
-                if (item.pos === '어미') trans_pos = 'Akhiran';
-                if (item.pos === '품사 없음') trans_pos = 'Tidak Berkelas Kata';
+              {searchState.data.channel.item.map((item, idx) => {
+                const trans_pos = sortPos(item.pos);
 
                 const trans_word = [];
                 const trans_dfn = [];
@@ -82,7 +49,7 @@ export default function DictList({ query, search }) {
                 }
 
                 return (
-                  <div>
+                  <div key={idx}>
                     {Array.isArray(item.sense) ? (
                       <DictListItem
                         target_code={item.target_code}
@@ -92,6 +59,7 @@ export default function DictList({ query, search }) {
                         trans_pos={trans_pos}
                         trans_dfn={trans_dfn}
                         dfn={dfn}
+                        wordClick={wordClick}
                       />
                     ) : (
                       <DictListItem
@@ -102,6 +70,7 @@ export default function DictList({ query, search }) {
                         trans_pos={trans_pos}
                         trans_dfn={item.sense.translation.trans_dfn}
                         dfn={item.sense.definition}
+                        wordClick={wordClick}
                       />
                     )}
                   </div>
