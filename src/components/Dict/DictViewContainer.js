@@ -29,5 +29,12 @@ export default function DictViewContainer() {
     [navigate]
   );
 
-  return <DictView search={search} />;
+  const wordClick = useCallback(
+    (target_code) => {
+      navigate(`/dict/searchView?target_code=${target_code}`);
+    },
+    [navigate]
+  );
+
+  return <DictView search={search} wordClick={wordClick} />;
 }
