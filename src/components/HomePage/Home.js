@@ -9,6 +9,7 @@ import MyTest from './MyTest';
 import Encyclopedia from './Encyclopedia';
 import NextButton from './NextButton';
 import Header from '../NavBar/Header';
+import Side from '../NavBar/Side/Side';
 
 export default function Home({ search, login }) {
   const searchRef = useRef(null);
@@ -111,10 +112,7 @@ export default function Home({ search, login }) {
         </Col>
         <div className={styles.side_divider} />
         <Col span={6}>
-          <Divider className={styles.divider} />
-          Study Log 최근 글 5개
-          <Divider className={styles.divider} />
-          최근 검색어 5개
+          <Side />
         </Col>
         <Divider style={{ backgroundColor: 'grey' }} />
         <div>Footer</div>
