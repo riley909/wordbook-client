@@ -8,19 +8,20 @@ import styles from '../../styles/DictList.module.css';
 import { Col, Divider } from 'antd';
 import SearchInput from './SearchInput';
 import { sortPos } from '../../utils/sortPos';
+import Loading from './Loading';
 
 export default function DictList({ query, search, wordClick }) {
-  const searchState = useSelector((state) => state.dict.search);
+  const searchResults = useSelector((state) => state.dict.search.data);
+  const loading = useSelector((state) => state.dict.search.loading);
   const [showingNum, setShowingNum] = useState({ start: 1, end: 5 });
 
-  if (searchState.loading) {
-    return <Header />;
+  if (loading) {
+    return <Loading />;
   }
 
-  const total = searchState.data.channel.total;
-  const limit = searchState.data.channel.num;
-  const currentPage = searchState.data.channel.start;
-
+  const total = searchResults.channel.total;
+  const limit = searchResults.channel.num;
+  const currentPage = searchResults.channel.start;
   return (
     <div>
       <Header />
@@ -33,7 +34,7 @@ export default function DictList({ query, search, wordClick }) {
               <span>'{query}'</span>이(가) 포함된 검색 결과 <span>총 {total}개</span>
             </div>
             <div>
-              {searchState.data.channel.item.map((item, idx) => {
+              {searchResults.channel.item.map((item, idx) => {
                 const trans_pos = sortPos(item.pos);
 
                 const trans_word = [];
@@ -47,7 +48,6 @@ export default function DictList({ query, search, wordClick }) {
                     return null;
                   });
                 }
-
                 return (
                   <div key={idx}>
                     {Array.isArray(item.sense) ? (

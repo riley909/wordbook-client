@@ -1,18 +1,19 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
 import Header from '../NavBar/Header';
 import SearchInput from './SearchInput';
 import { sortPos } from '../../utils/sortPos';
 import SenseInfo from './SenseInfo';
+import Loading from './Loading';
 
 export default function DictView({ search, wordClick }) {
-  const searchViewState = useSelector((state) => state.dict.searchView);
+  const searchViewResult = useSelector((state) => state.dict.searchView.data);
+  const loading = useSelector((state) => state.dict.searchView.loading);
 
-  if (searchViewState.loading) {
-    return <Header />;
+  if (loading) {
+    return <Loading />;
   }
 
-  const item = searchViewState.data.channel.item;
+  const item = searchViewResult.channel.item;
   const trans_pos = sortPos(item.word_info.pos[0]);
 
   const onWordClick = (event) => {
