@@ -4,6 +4,9 @@ import SearchInput from './SearchInput';
 import { sortPos } from '../../utils/sortPos';
 import SenseInfo from './SenseInfo';
 import Loading from './Loading';
+import Layout from '../Layout/Layout';
+import styles from '../../styles/DictView.module.css';
+import { Col } from 'antd';
 
 export default function DictView({ search, wordClick }) {
   const searchViewResult = useSelector((state) => state.dict.searchView.data);
@@ -25,14 +28,27 @@ export default function DictView({ search, wordClick }) {
     <div>
       <Header />
       <SearchInput search={search} />
-      <div>
-        <div>{item.word_info.word}</div>
-        <div>
-          <div>{item.word_info.pos[0]}</div>
-          <div>{trans_pos}</div>
-        </div>
-        <SenseInfo sense_info={item.word_info.sense_info} onWordClick={onWordClick} />
-      </div>
+      <Layout>
+        <Col span={16}>
+          <div>
+            <div className={styles.word}>{item.word_info.word}</div>
+            <div className={styles.pos_area}>
+              <div className={styles.pos_title_area}>
+                <div>품사</div>
+                <div>Kelas Kata</div>
+              </div>
+              <div>
+                <div className={styles.pos}>{item.word_info.pos[0]}</div>
+                <div className={styles.trans_pos}>{trans_pos}</div>
+              </div>
+            </div>
+            <SenseInfo sense_info={item.word_info.sense_info} onWordClick={onWordClick} />
+          </div>
+        </Col>
+        <div className={styles.side_divider} />
+        <Col span={6}></Col>
+      </Layout>
+      <div>Footer</div>
     </div>
   );
 }

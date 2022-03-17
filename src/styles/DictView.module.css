@@ -1,3 +1,36 @@
+.word {
+  font-weight: 700;
+  font-size: 27px;
+  color: #6238c4;
+  cursor: pointer;
+}
+
+.pos_area {
+  display: flex;
+  padding: 15px 30px 15px 30px;
+  background-color: #eff2f5;
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
+
+.pos_title_area {
+  font-weight: bold;
+  margin-right: 50px;
+  font-size: 15px;
+}
+
+.pos {
+  font-size: 15px;
+  color: #de654a;
+  font-weight: bold;
+}
+
+.trans_pos {
+  font-size: 15px;
+  color: #de654a;
+  font-weight: bold;
+}
+
 .sense_idx {
   font-weight: bold;
   font-size: 17px;
@@ -67,4 +100,11 @@
   text-decoration: underline;
   cursor: pointer;
   margin-right: 3px;
+}
+
+.side_divider {
+  width: 1px;
+  background-color: #dfdfdf;
+  margin-left: 20px;
+  margin-right: 20px;
 }
