@@ -1,0 +1,12 @@
+.example_more_area {
+  width: fit-content;
+}
+
+.example_more_area:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.example_hide {
+  display: none;
+}
