@@ -1,3 +1,13 @@
+.divider {
+  background-color: #dfdfdf;
+  margin: 20px 0 20px 0;
+}
+
+.divider_vertical {
+  background-color: #dfdfdf;
+  margin: 0 12px 0 12px;
+}
+
 .latest_posts_title {
   font-weight: bold;
   margin-bottom: 10px;
