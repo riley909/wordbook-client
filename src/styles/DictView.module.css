@@ -1,5 +1,11 @@
 .example_more_area {
   width: fit-content;
+  margin-bottom: 20px;
+  color: #6666fc;
+}
+
+.example_more_icon {
+  color: #6666fc;
 }
 
 .example_more_area:hover {
@@ -9,4 +15,39 @@
 
 .example_hide {
   display: none;
+}
+
+.rel_area {
+  border: 1px solid #dfdfdf;
+  border-radius: 5px;
+  padding: 20px 25px 20px 25px;
+}
+
+.rel_type_area {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.rel_reference {
+  margin-bottom: 8px;
+}
+.rel_reference li {
+  list-style-type: square;
+  list-style-position: inside;
+}
+
+.rel_type {
+  background-color: rgb(150, 150, 150);
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 2px 4px 2px 4px;
+  margin-right: 8px;
+}
+
+.rel_word {
+  text-decoration: underline;
+  cursor: pointer;
+  margin-right: 3px;
 }
