@@ -9,7 +9,7 @@ export default function DictView({ search, wordClick }) {
   const searchViewResult = useSelector((state) => state.dict.searchView.data);
   const loading = useSelector((state) => state.dict.searchView.loading);
 
-  if (loading) {
+  if (loading || !searchViewResult) {
     return <Loading />;
   }
 
