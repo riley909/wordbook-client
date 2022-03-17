@@ -1,3 +1,20 @@
+.sense_idx {
+  font-weight: bold;
+  font-size: 17px;
+  margin-right: 5px;
+}
+
+.sense_trans_word {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.sense_indent {
+  margin-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 .example_more_area {
   width: fit-content;
   margin-bottom: 20px;
