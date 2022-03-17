@@ -38,10 +38,10 @@ export default function ExampleInfo({ example_info }) {
       {arrSort.length > limit && (
         <div className={styles.example_more_area} onClick={onShowMoreClick}>
           <div className={!isOpen ? null : styles.example_hide}>
-            더 보기 <FaCaretDown />
+            더 보기 <FaCaretDown className={styles.example_more_icon} />
           </div>
           <div className={isOpen ? null : styles.example_hide}>
-            닫기 <FaCaretUp />
+            닫기 <FaCaretUp className={styles.example_more_icon} />
           </div>
         </div>
       )}
