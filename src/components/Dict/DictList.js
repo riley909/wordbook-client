@@ -15,7 +15,7 @@ export default function DictList({ query, search, wordClick }) {
   const loading = useSelector((state) => state.dict.search.loading);
   const [showingNum, setShowingNum] = useState({ start: 1, end: 5 });
 
-  if (loading) {
+  if (loading || !searchResults) {
     return <Loading />;
   }
 
