@@ -2,7 +2,7 @@ import { Divider } from 'antd';
 import React from 'react';
 import styles from '../../../styles/NavBar/Side.module.css';
 import LatestPosts from './LatestPosts';
-import SearchWords from './SearchWords';
+import History from './History';
 
 export default function Side() {
   return (
@@ -15,7 +15,7 @@ export default function Side() {
       <Divider className={styles.divider} />
       <LatestPosts />
       <Divider className={styles.divider} />
-      <SearchWords />
+      <History />
       <Divider className={styles.divider} />
     </div>
   );
