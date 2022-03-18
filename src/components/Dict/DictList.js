@@ -24,13 +24,15 @@ export default function DictList({ query, search, wordClick }) {
   const limit = searchResults.channel.num;
   const currentPage = searchResults.channel.start;
 
-  // 검색결과가 1개일 때의 값
-  let trans_pos = sortPos(searchResults.channel.item.pos);
+  const item = searchResults.channel.item ? searchResults.channel.item : null;
+  const pos = item ? item.pos : null;
+  const sense = item ? item.sense : null;
+  let trans_pos = sortPos(pos);
   let trans_word = [];
   let trans_dfn = [];
   let dfn = [];
-  if (Array.isArray(searchResults.channel.item.sense)) {
-    searchResults.channel.item.sense.map((val) => {
+  if (Array.isArray(sense)) {
+    sense.map((val) => {
       trans_word.push(val.translation.trans_word);
       trans_dfn.push(val.translation.trans_dfn);
       dfn.push(val.definition);
@@ -50,90 +52,98 @@ export default function DictList({ query, search, wordClick }) {
               <span>'{query}'</span>이(가) 포함된 검색 결과 <span>총 {total}개</span>
             </div>
             <>
-              {/* 검색결과가 2개 이상일 경우 */}
-              {Array.isArray(searchResults.channel.item) ? (
-                <div>
-                  {searchResults.channel.item.map((item, idx) => {
-                    trans_pos = sortPos(item.pos);
-                    trans_word = [];
-                    trans_dfn = [];
-                    dfn = [];
-                    if (Array.isArray(item.sense)) {
-                      item.sense.map((val) => {
-                        trans_word.push(val.translation.trans_word);
-                        trans_dfn.push(val.translation.trans_dfn);
-                        dfn.push(val.definition);
-                        return null;
-                      });
-                    }
-                    return (
-                      <div key={idx}>
-                        {Array.isArray(item.sense) ? (
-                          <DictListItem
-                            target_code={item.target_code}
-                            trans_word={trans_word}
-                            word={item.word}
-                            pos={item.pos}
-                            trans_pos={trans_pos}
-                            trans_dfn={trans_dfn}
-                            dfn={dfn}
-                            wordClick={wordClick}
-                          />
-                        ) : (
-                          <DictListItem
-                            target_code={item.target_code}
-                            trans_word={item.sense.translation.trans_word}
-                            word={item.word}
-                            pos={item.pos}
-                            trans_pos={trans_pos}
-                            trans_dfn={item.sense.translation.trans_dfn}
-                            dfn={item.sense.definition}
-                            wordClick={wordClick}
-                          />
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
+              {!item ? (
+                <div>검색 결과가 없습니다.</div>
               ) : (
-                // 검색결과가 1개일 경우
-                <div>
-                  {Array.isArray(searchResults.channel.item.sense) ? (
-                    <DictListItem
-                      target_code={searchResults.channel.item.target_code}
-                      trans_word={trans_word}
-                      word={searchResults.channel.item.word}
-                      pos={searchResults.channel.item.pos}
-                      trans_pos={trans_pos}
-                      trans_dfn={trans_dfn}
-                      dfn={dfn}
-                      wordClick={wordClick}
-                    />
+                <>
+                  {/* 검색결과가 2개 이상일 경우 */}
+                  {Array.isArray(item) ? (
+                    <div>
+                      {item.map((val, idx) => {
+                        trans_pos = sortPos(val.pos);
+                        trans_word = [];
+                        trans_dfn = [];
+                        dfn = [];
+                        if (Array.isArray(val.sense)) {
+                          val.sense.map((el) => {
+                            trans_word.push(el.translation.trans_word);
+                            trans_dfn.push(el.translation.trans_dfn);
+                            dfn.push(el.definition);
+                            return null;
+                          });
+                        }
+                        return (
+                          <div key={idx}>
+                            {Array.isArray(val.sense) ? (
+                              <DictListItem
+                                target_code={val.target_code}
+                                trans_word={trans_word}
+                                word={val.word}
+                                pos={val.pos}
+                                trans_pos={trans_pos}
+                                trans_dfn={trans_dfn}
+                                dfn={dfn}
+                                wordClick={wordClick}
+                              />
+                            ) : (
+                              <DictListItem
+                                target_code={val.target_code}
+                                trans_word={val.sense.translation.trans_word}
+                                word={val.word}
+                                pos={val.pos}
+                                trans_pos={trans_pos}
+                                trans_dfn={val.sense.translation.trans_dfn}
+                                dfn={val.sense.definition}
+                                wordClick={wordClick}
+                              />
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
                   ) : (
-                    <DictListItem
-                      target_code={searchResults.channel.item.target_code}
-                      trans_word={searchResults.channel.item.sense.translation.trans_word}
-                      word={searchResults.channel.item.word}
-                      pos={searchResults.channel.item.pos}
-                      trans_pos={trans_pos}
-                      trans_dfn={searchResults.channel.item.sense.translation.trans_dfn}
-                      dfn={searchResults.channel.item.sense.definition}
-                      wordClick={wordClick}
-                    />
+                    // 검색결과가 1개일 경우
+                    <div>
+                      {Array.isArray(sense) ? (
+                        <DictListItem
+                          target_code={item.target_code}
+                          trans_word={trans_word}
+                          word={item.word}
+                          pos={pos}
+                          trans_pos={trans_pos}
+                          trans_dfn={trans_dfn}
+                          dfn={dfn}
+                          wordClick={wordClick}
+                        />
+                      ) : (
+                        <DictListItem
+                          target_code={item.target_code}
+                          trans_word={sense.translation.trans_word}
+                          word={item.word}
+                          pos={pos}
+                          trans_pos={trans_pos}
+                          trans_dfn={sense.translation.trans_dfn}
+                          dfn={sense.definition}
+                          wordClick={wordClick}
+                        />
+                      )}
+                    </div>
                   )}
-                </div>
+                </>
               )}
             </>
           </div>
           <div className={styles.pagination_area}>
-            <Pagination
-              query={query}
-              total={total}
-              limit={limit}
-              currentPage={currentPage}
-              showingNum={showingNum}
-              setShowingNum={setShowingNum}
-            />
+            {sense && (
+              <Pagination
+                query={query}
+                total={total}
+                limit={limit}
+                currentPage={currentPage}
+                showingNum={showingNum}
+                setShowingNum={setShowingNum}
+              />
+            )}
           </div>
         </Col>
         <div className={styles.side_divider} />
