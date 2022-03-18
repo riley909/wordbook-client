@@ -2,7 +2,7 @@ import { Button, PageHeader } from 'antd';
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaBookMedical } from 'react-icons/fa';
-import styles from '../../styles/Header.module.css';
+import styles from '../../styles/NavBar/Header.module.css';
 import { useNavigate } from 'react-router';
 import { logout as logoutStart } from '../../_actions/user_action';
 

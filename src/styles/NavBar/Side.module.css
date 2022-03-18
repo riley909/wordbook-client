@@ -1,0 +1,32 @@
+.divider {
+  background-color: #dfdfdf;
+  margin: 20px 0 20px 0;
+}
+
+.divider_vertical {
+  background-color: #dfdfdf;
+  margin: 0 12px 0 12px;
+}
+
+.latest_posts_title {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.history_title {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.button {
+  width: 100%;
+  height: 40px;
+  background-color: white;
+  border: #dfdfdf 1px solid;
+  margin-top: 20px;
+}
+
+.button:hover {
+  cursor: pointer;
+  color: #6666fc;
+}

@@ -9,6 +9,7 @@ import { Col, Divider } from 'antd';
 import SearchInput from './SearchInput';
 import { sortPos } from '../../utils/sortPos';
 import Loading from './Loading';
+import Side from '../NavBar/Side/Side';
 
 export default function DictList({ query, search, wordClick }) {
   const searchResults = useSelector((state) => state.dict.search.data);
@@ -91,10 +92,7 @@ export default function DictList({ query, search, wordClick }) {
         </Col>
         <div className={styles.side_divider} />
         <Col span={6} className={styles.side}>
-          <Divider className={styles.divider} />
-          Study Log 최근 글 5개
-          <Divider className={styles.divider} />
-          최근 검색어 5개
+          <Side />
         </Col>
       </Layout>
       <div>Footer</div>

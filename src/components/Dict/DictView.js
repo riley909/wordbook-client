@@ -7,6 +7,7 @@ import Loading from './Loading';
 import Layout from '../Layout/Layout';
 import styles from '../../styles/DictView.module.css';
 import { Col } from 'antd';
+import Side from '../NavBar/Side/Side';
 
 export default function DictView({ search, wordClick }) {
   const searchViewResult = useSelector((state) => state.dict.searchView.data);
@@ -46,7 +47,9 @@ export default function DictView({ search, wordClick }) {
           </div>
         </Col>
         <div className={styles.side_divider} />
-        <Col span={6}></Col>
+        <Col span={6}>
+          <Side />
+        </Col>
       </Layout>
       <div>Footer</div>
     </div>
