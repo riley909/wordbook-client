@@ -1,14 +1,14 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from '../../../styles/NavBar/Side.module.css';
 import QueryString from 'qs';
 import { useLocation } from 'react-router';
-import { FaTimes } from 'react-icons/fa';
+import { IoCloseOutline } from 'react-icons/io5';
 
 export default function History() {
   const location = useLocation();
 
   // 최근 검색어를 관리할 useState
-  // const [history, setHistory] = useState([]);
+  const [words, setWords] = useState([]);
   const queryData = QueryString.parse(location.search, { ignoreQueryPrefix: true });
   const query = queryData.q;
   const history = useRef([]);
@@ -22,6 +22,7 @@ export default function History() {
 
       // 히스토리 10개 저장
       history.current = parsed.slice(0, 9);
+      setWords([...history.current]);
     }
   }, []);
 
@@ -34,14 +35,16 @@ export default function History() {
     }
   }, [query]);
 
+  console.log(words);
+
   return (
     <div>
       <div className={styles.history_title}>내가 찾은 단어</div>
-      <div>
-        {history.current.map((val) => (
-          <div>
-            {val}
-            <FaTimes />
+      <div className={styles.history_container}>
+        {words.map((val, idx) => (
+          <div key={idx + 1} className={styles.history_word_area}>
+            <div>{val}</div>
+            <IoCloseOutline />
           </div>
         ))}
       </div>
