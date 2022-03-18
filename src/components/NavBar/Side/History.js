@@ -21,7 +21,7 @@ export default function History() {
       const parsed = JSON.parse(result);
 
       // 히스토리 10개 저장
-      history.current = parsed.slice(0, 9);
+      history.current = parsed.splice(0, 10);
       setWords([...history.current]);
     }
   }, []);
@@ -35,7 +35,11 @@ export default function History() {
     }
   }, [query]);
 
-  console.log(words);
+  const onDeleteClick = (id) => {
+    history.current = history.current.filter((el, idx) => idx !== id);
+    localStorage.setItem('history', JSON.stringify(history.current));
+    setWords([...history.current]);
+  };
 
   return (
     <div>
@@ -44,7 +48,9 @@ export default function History() {
         {words.map((val, idx) => (
           <div key={idx + 1} className={styles.history_word_area}>
             <div>{val}</div>
-            <IoCloseOutline />
+            <div onClick={() => onDeleteClick(idx)}>
+              <IoCloseOutline />
+            </div>
           </div>
         ))}
       </div>
