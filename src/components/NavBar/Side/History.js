@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from '../../../styles/NavBar/Side.module.css';
 import QueryString from 'qs';
-import { useLocation } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import { IoCloseOutline } from 'react-icons/io5';
 
 export default function History() {
@@ -12,6 +12,7 @@ export default function History() {
   const queryData = QueryString.parse(location.search, { ignoreQueryPrefix: true });
   const query = queryData.q;
   const history = useRef([]);
+  const navigate = useNavigate();
 
   // 로컬스토리지에서 히스토리 불러오기
   useEffect(() => {
@@ -41,13 +42,17 @@ export default function History() {
     setWords([...history.current]);
   };
 
+  const onWordClick = (word) => {
+    navigate(`/dict/search?page=1&q=${word}`);
+  };
+
   return (
     <div>
       <div className={styles.history_title}>내가 찾은 단어</div>
       <div className={styles.history_container}>
         {words.map((val, idx) => (
           <div key={idx + 1} className={styles.history_word_area}>
-            <div>{val}</div>
+            <div onClick={() => onWordClick(val)}>{val}</div>
             <div onClick={() => onDeleteClick(idx)}>
               <IoCloseOutline />
             </div>
