@@ -1,0 +1,19 @@
+.header_title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+}
+
+.header_title_text {
+  font-size: 18px;
+}
+
+.header_title_icon {
+  width: 15px;
+  color: #3c3cb1;
+}
+
+.shadow {
+  box-shadow: 1px 1px 7px #dfdfdf;
+}
