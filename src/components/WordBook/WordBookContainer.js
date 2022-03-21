@@ -1,8 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router';
 import WordBook from './WordBook';
 
 export default function WordBookContainer() {
-  const home = () => window.open('/');
+  const navigate = useNavigate();
 
-  return <WordBook home={home} />;
+  const home = () => window.open('/');
+  const wordbook = () => navigate('/wordbook');
+
+  return <WordBook home={home} wordbook={wordbook} />;
 }
