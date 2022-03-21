@@ -65,10 +65,12 @@
   font-size: 22px;
   color: #3c3cb1;
   margin-right: 20px;
+  cursor: pointer;
 }
 .list_settings_icon {
   font-size: 22px;
   color: #3c3cb1;
+  cursor: pointer;
 }
 
 .list_item_area {
@@ -78,6 +80,7 @@
 .list_item {
   margin: 0 20px 0 20px;
   height: 50px;
+  cursor: pointer;
 }
 
 .list_item_counter {
