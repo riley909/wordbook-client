@@ -12,7 +12,7 @@ export default function Side() {
 
   const toLogin = () => navigate('/login');
   const toWordBook = () => {
-    window.open('/wordBook', '단어장', 'width=450, height=700, scrollbars=yes');
+    window.open('/wordbook', '단어장', 'width=450, height=700, scrollbars=yes');
   };
 
   return (

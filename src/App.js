@@ -18,7 +18,7 @@ function App() {
           <Route path="/signup" element={<SignupPage />}></Route>
           <Route path="/dict/search" element={<DictListPage />}></Route>
           <Route path="dict/searchView" element={<DictViewPage />}></Route>
-          <Route path="/wordBook" element={<WordBookPage />}></Route>
+          <Route path="/wordbook" element={<WordBookPage />}></Route>
         </Routes>
       </div>
     </Router>
