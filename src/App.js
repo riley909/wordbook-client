@@ -6,6 +6,7 @@ import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import DictListPage from './pages/DictListPage';
 import DictViewPage from './pages/DictViewPage';
+import WordBookPage from './pages/WordBookPage';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/signup" element={<SignupPage />}></Route>
           <Route path="/dict/search" element={<DictListPage />}></Route>
           <Route path="dict/searchView" element={<DictViewPage />}></Route>
+          <Route path="/wordbook" element={<WordBookPage />}></Route>
         </Routes>
       </div>
     </Router>
