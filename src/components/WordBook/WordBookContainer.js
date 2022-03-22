@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import WordBook from './WordBook';
+import { createFolder as createFolderStart } from '../../_actions/wordbook_action';
 
 export default function WordBookContainer() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const home = () => window.open('/');
   const wordbook = () => navigate('/wordbook');
 
-  return <WordBook home={home} wordbook={wordbook} />;
+  const handleOk = useCallback(
+    async (reqData, token) => {
+      dispatch(await createFolderStart(reqData, token));
+    },
+    [dispatch]
+  );
+
+  return <WordBook home={home} wordbook={wordbook} handleOk={handleOk} />;
 }

@@ -1,4 +1,4 @@
-import { Button, Divider, Modal, PageHeader } from 'antd';
+import { Divider, PageHeader } from 'antd';
 import React, { useState } from 'react';
 import { FaBookMedical } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
@@ -6,12 +6,12 @@ import { useNavigate } from 'react-router';
 import styles from '../../styles/WordBook.module.css';
 import { FaFolderPlus } from 'react-icons/fa';
 import { BiCog } from 'react-icons/bi';
+import AddFolderModal from './AddFolderModal';
 
 export default function WordBook({ home, wordbook, handleOk }) {
   const navigate = useNavigate();
   const token = useSelector((state) => state.user.auth.token);
   const [visible, setVisible] = useState(false);
-  const [confirmLoading, setConfirmLoading] = useState(false);
 
   // 토큰이 없고, 팝업으로 접속하지 않을 경우
   if (!token) {
@@ -20,18 +20,6 @@ export default function WordBook({ home, wordbook, handleOk }) {
 
   const openModal = () => {
     setVisible(true);
-  };
-
-  const onOk = () => {
-    setConfirmLoading(true);
-    setTimeout(() => {
-      setVisible(false);
-      setConfirmLoading(false);
-    }, 2000);
-  };
-
-  const onCancel = () => {
-    setVisible(false);
   };
 
   return (
@@ -71,21 +59,7 @@ export default function WordBook({ home, wordbook, handleOk }) {
           </div>
         </div>
 
-        <Modal
-          title="새 폴더 추가"
-          visible={visible}
-          confirmLoading={confirmLoading}
-          onCancel={onCancel}
-          footer={[
-            <Button key="back" onClick={onCancel}>
-              취소
-            </Button>,
-            <Button key="submit" type="primary" onClick={onOk}>
-              확인
-            </Button>,
-          ]}>
-          <div>추가</div>
-        </Modal>
+        <AddFolderModal visible={visible} setVisible={setVisible} handleOk={handleOk} />
       </div>
     </div>
   );
