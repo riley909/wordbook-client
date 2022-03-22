@@ -17,3 +17,8 @@ export const search = async (query) =>
   );
 export const searchView = async (query) =>
   await axios.get(`${baseUrl}/searchView?target_code=${query}`);
+
+export const createFolder = async (data, token) =>
+  await axios.post(`${baseUrl}/folders`, data, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
