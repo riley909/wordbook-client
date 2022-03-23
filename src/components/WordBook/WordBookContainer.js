@@ -2,7 +2,10 @@ import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import WordBook from './WordBook';
-import { createFolder as createFolderStart } from '../../_actions/wordbook_action';
+import {
+  createFolder as createFolderStart,
+  getFolderList as getFolderListStart,
+} from '../../_actions/wordbook_action';
 
 export default function WordBookContainer() {
   const navigate = useNavigate();
@@ -18,5 +21,16 @@ export default function WordBookContainer() {
     [dispatch]
   );
 
-  return <WordBook home={home} wordbook={wordbook} handleOk={handleOk} />;
+  const getFolderList = useCallback(async () => {
+    dispatch(await getFolderListStart());
+  }, [dispatch]);
+
+  return (
+    <WordBook
+      home={home}
+      wordbook={wordbook}
+      handleOk={handleOk}
+      getFolderList={getFolderList}
+    />
+  );
 }

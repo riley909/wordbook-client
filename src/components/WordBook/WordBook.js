@@ -1,5 +1,5 @@
 import { Divider, PageHeader } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaBookMedical } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
@@ -7,16 +7,26 @@ import styles from '../../styles/WordBook.module.css';
 import { FaFolderPlus } from 'react-icons/fa';
 import { BiCog } from 'react-icons/bi';
 import AddFolderModal from './AddFolderModal';
+import FolderListItem from './FolderListItem';
+import Loading from '../Dict/Loading';
 
-export default function WordBook({ home, wordbook, handleOk }) {
+export default function WordBook({ home, wordbook, handleOk, getFolderList }) {
   const navigate = useNavigate();
   const token = useSelector((state) => state.user.auth.token);
+  const folderList = useSelector((state) => state.wordbook.folder.read.data);
+  const loading = useSelector((state) => state.wordbook.folder.read.loading);
   const [visible, setVisible] = useState(false);
 
   // 토큰이 없고, 팝업으로 접속하지 않을 경우
   if (!token) {
     navigate('/');
   }
+
+  console.log(folderList);
+
+  useEffect(() => {
+    getFolderList();
+  }, []);
 
   const openModal = () => {
     setVisible(true);
@@ -49,15 +59,18 @@ export default function WordBook({ home, wordbook, handleOk }) {
           </div>
         </div>
         <Divider className={styles.list_divider} />
-        <div className={styles.list_item_area}>
-          <div className={styles.list_item}>
-            <span>폴더</span> <span className={styles.list_item_counter}>0</span>
+
+        {loading || !folderList ? (
+          <Loading />
+        ) : (
+          <div className={styles.list_item_area}>
+            {folderList.map((val) => (
+              <div key={val.id}>
+                <FolderListItem id={val.id} name={val.name} />
+              </div>
+            ))}
           </div>
-          <Divider className={styles.list_divider} />
-          <div className={styles.list_item}>
-            <span>폴더</span> <span className={styles.list_item_counter}>0</span>
-          </div>
-        </div>
+        )}
 
         <AddFolderModal visible={visible} setVisible={setVisible} handleOk={handleOk} />
       </div>
