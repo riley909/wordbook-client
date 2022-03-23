@@ -13,8 +13,8 @@ import Loading from '../Dict/Loading';
 export default function WordBook({ home, wordbook, handleOk, getFolderList }) {
   const navigate = useNavigate();
   const token = useSelector((state) => state.user.auth.token);
-  const folderList = useSelector((state) => state.wordbook.folder.read.data);
-  const loading = useSelector((state) => state.wordbook.folder.read.loading);
+  const folderList = useSelector((state) => state.wordbook.folder.list.data);
+  const loading = useSelector((state) => state.wordbook.folder.list.loading);
   const [visible, setVisible] = useState(false);
 
   // 토큰이 없고, 팝업으로 접속하지 않을 경우
