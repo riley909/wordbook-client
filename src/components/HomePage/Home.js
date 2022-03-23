@@ -10,9 +10,22 @@ import Encyclopedia from './Encyclopedia';
 import NextButton from './NextButton';
 import Header from '../NavBar/Header';
 import Side from '../NavBar/Side/Side';
+import { useSelector } from 'react-redux';
 
-export default function Home({ search, login }) {
+export default function Home({ search, login, getProfile }) {
+  const token = useSelector((state) => state.user.auth.token);
   const searchRef = useRef(null);
+  const [email, setEmail] = useState('');
+  const myEmail = useSelector((state) =>
+    state.user.profile ? state.user.profile.data.email : null
+  );
+
+  useEffect(() => {
+    if (token) {
+      getProfile();
+      setEmail(myEmail);
+    }
+  }, []);
 
   // 슬라이드 개수(0부터 시작)
   const totalSlides = 1;
@@ -112,7 +125,7 @@ export default function Home({ search, login }) {
         </Col>
         <div className={styles.side_divider} />
         <Col span={6}>
-          <Side />
+          <Side email={email} />
         </Col>
         <Divider style={{ backgroundColor: 'grey' }} />
         <div>Footer</div>
