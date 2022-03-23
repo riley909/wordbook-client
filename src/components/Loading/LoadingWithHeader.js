@@ -4,7 +4,7 @@ import Header from '../NavBar/Header';
 import { LoadingOutlined } from '@ant-design/icons';
 import styles from '../../styles/Loading.module.css';
 
-export default function Loading() {
+export default function LoadingWithHeader() {
   const loadingIcon = <LoadingOutlined spin />;
 
   return (

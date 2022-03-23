@@ -1,4 +1,4 @@
-import { Divider, PageHeader } from 'antd';
+import { Divider, PageHeader, Spin } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { FaBookMedical } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
@@ -8,7 +8,7 @@ import { FaFolderPlus } from 'react-icons/fa';
 import { BiCog } from 'react-icons/bi';
 import AddFolderModal from './AddFolderModal';
 import FolderListItem from './FolderListItem';
-import Loading from '../Dict/Loading';
+import LoadingWithOutHeader from '../Loading/LoadingWithOutHeader';
 
 export default function WordBook({ home, wordbook, handleOk, getFolderList }) {
   const navigate = useNavigate();
@@ -61,7 +61,7 @@ export default function WordBook({ home, wordbook, handleOk, getFolderList }) {
         <Divider className={styles.list_divider} />
 
         {loading || !folderList ? (
-          <Loading />
+          <LoadingWithOutHeader />
         ) : (
           <div className={styles.list_item_area}>
             {folderList.map((val) => (
