@@ -1,10 +1,14 @@
-import { LOGIN, LOGOUT, SIGNUP } from '../_actions/types';
+import { GET_PROFILE, LOGIN, LOGOUT, SIGNUP } from '../_actions/types';
 
 export const userState = {
   auth: {
     loading: false,
     error: null,
     token: null,
+  },
+  profile: {
+    error: null,
+    data: null,
   },
   signup: {
     loading: false,
@@ -37,6 +41,16 @@ export default function (state = userState, action) {
       return {
         ...state,
         auth: { loading: false, token: null, error: action.payload },
+      };
+    case `${GET_PROFILE}_SUCCESS`:
+      return {
+        ...state,
+        profile: { error: null, data: action.payload },
+      };
+    case `${GET_PROFILE}_FAILURE`:
+      return {
+        ...state,
+        profile: { error: action.payload, data: null },
       };
     case `${SIGNUP}_SUCCESS`:
       return {
