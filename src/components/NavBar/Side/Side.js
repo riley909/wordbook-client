@@ -6,7 +6,7 @@ import History from './History';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 
-export default function Side() {
+export default function Side({ email }) {
   const token = useSelector((state) => state.user.auth.token);
   const navigate = useNavigate();
 
@@ -20,6 +20,9 @@ export default function Side() {
       {token ? (
         <div>
           <div>
+            <div className={styles.side_email_area}>
+              <span className={styles.side_email}>{email}</span> 님의
+            </div>
             <span onClick={toWordBook} className={styles.side_wordbook}>
               단어장
             </span>
