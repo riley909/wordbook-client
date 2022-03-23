@@ -1,6 +1,11 @@
-.side_wordbook {
+.side_email_area {
+  margin-bottom: 10px;
 }
-.side_wordbook:hover {
+.side_email {
+  font-weight: bold;
+}
+
+.side_wordbook {
   cursor: pointer;
 }
 
