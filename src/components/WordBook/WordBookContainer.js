@@ -12,8 +12,8 @@ export default function WordBookContainer() {
   const wordbook = () => navigate('/wordbook');
 
   const handleOk = useCallback(
-    async (reqData, token) => {
-      dispatch(await createFolderStart(reqData, token));
+    async (reqData) => {
+      dispatch(await createFolderStart(reqData));
     },
     [dispatch]
   );

@@ -1,15 +1,13 @@
 import { Button, Input, Modal } from 'antd';
 import React, { useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
 
 export default function AddFolderModal({ visible, setVisible, handleOk }) {
-  const token = useSelector((state) => state.user.auth.token);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const folderRef = useRef(null);
 
   const onOk = () => {
     const folderName = folderRef.current.state.value;
-    handleOk(folderName, token);
+    handleOk({ name: folderName });
     setConfirmLoading(true);
     setTimeout(() => {
       setVisible(false);
