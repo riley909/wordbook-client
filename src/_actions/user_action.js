@@ -1,6 +1,5 @@
-import { LOGIN, LOGOUT, SIGNUP } from './types';
+import { GET_PROFILE, LOGIN, LOGOUT, SIGNUP } from './types';
 import * as api from '../utils/api';
-import Cookies from 'universal-cookie';
 
 export const login = (data) => {
   let isLoading = true;
@@ -36,11 +35,24 @@ export const signup = (data) => {
   };
 };
 
+export const getProfile = () => {
+  return async (dispatch) => {
+    dispatch({ type: `${GET_PROFILE}` });
+
+    try {
+      const res = await api.getProfile();
+      dispatch({ type: `${GET_PROFILE}_SUCCESS`, payload: res.data });
+      return res.data;
+    } catch (error) {
+      dispatch({ type: `${GET_PROFILE}_FAILURE`, payload: error });
+    }
+  };
+};
+
 export const logout = () => {
   return async (dispatch) => {
     dispatch({ type: LOGOUT });
-    const cookie = new Cookies();
-    cookie.remove('Authorization');
+    api.removeToken();
     dispatch({ type: `${LOGOUT}_SUCCESS`, payload: null });
   };
 };
