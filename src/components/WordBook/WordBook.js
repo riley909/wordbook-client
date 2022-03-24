@@ -1,4 +1,4 @@
-import { Divider, PageHeader, Spin } from 'antd';
+import { Divider, PageHeader } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { FaBookMedical } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
@@ -13,7 +13,7 @@ import LoadingWithOutHeader from '../Loading/LoadingWithOutHeader';
 export default function WordBook({ home, wordbook, handleOk, getFolderList }) {
   const navigate = useNavigate();
   const token = useSelector((state) => state.user.auth.token);
-  const folderList = useSelector((state) => state.wordbook.folder.list.data);
+  const folderList = useSelector((state) => state.wordbook.folder.list.data || null);
   const loading = useSelector((state) => state.wordbook.folder.list.loading);
   const [visible, setVisible] = useState(false);
 
@@ -22,11 +22,11 @@ export default function WordBook({ home, wordbook, handleOk, getFolderList }) {
     navigate('/');
   }
 
-  console.log(folderList);
-
   useEffect(() => {
     getFolderList();
   }, []);
+
+  console.log(folderList);
 
   const openModal = () => {
     setVisible(true);
@@ -64,11 +64,14 @@ export default function WordBook({ home, wordbook, handleOk, getFolderList }) {
           <LoadingWithOutHeader />
         ) : (
           <div className={styles.list_item_area}>
-            {folderList.map((val) => (
-              <div key={val.id}>
-                <FolderListItem id={val.id} name={val.name} />
-              </div>
-            ))}
+            {folderList.map((val) => {
+              const count = val.words.length;
+              return (
+                <div key={val.id}>
+                  <FolderListItem id={val.id} name={val.name} count={count} />
+                </div>
+              );
+            })}
           </div>
         )}
 
