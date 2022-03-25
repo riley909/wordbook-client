@@ -13,8 +13,8 @@ import LoadingWithOutHeader from '../Loading/LoadingWithOutHeader';
 export default function WordBook({ home, wordbook, handleOk, getFolderList }) {
   const navigate = useNavigate();
   const token = useSelector((state) => state.user.auth.token);
-  const folderList = useSelector((state) => state.wordbook.folder.list.data || null);
-  const loading = useSelector((state) => state.wordbook.folder.list.loading);
+  const folderList = useSelector((state) => state.wordbook.folder.data || null);
+  const loading = useSelector((state) => state.wordbook.folder.loading);
   const [visible, setVisible] = useState(false);
 
   // 토큰이 없고, 팝업으로 접속하지 않을 경우
@@ -65,7 +65,7 @@ export default function WordBook({ home, wordbook, handleOk, getFolderList }) {
         ) : (
           <div className={styles.list_item_area}>
             {folderList.map((val) => {
-              const count = val.words.length;
+              const count = val.words ? val.words.length : 0;
               return (
                 <div key={val.id}>
                   <FolderListItem id={val.id} name={val.name} count={count} />
