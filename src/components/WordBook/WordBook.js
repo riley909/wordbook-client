@@ -24,7 +24,7 @@ export default function WordBook({ home, wordbook, handleOk, getFolderList }) {
 
   useEffect(() => {
     getFolderList();
-  }, []);
+  }, [getFolderList]);
 
   console.log(folderList);
 
