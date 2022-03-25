@@ -1,4 +1,4 @@
-import { CREATE_FOLDER, GET_FOLDER, GET_FOLDER_LIST } from '../_actions/types';
+import { CREATE_FOLDER, GET_FOLDER_WORDS, GET_FOLDER_LIST } from '../_actions/types';
 
 export const wordbookState = {
   folder: {
@@ -53,7 +53,7 @@ export default function (state = wordbookState, action) {
           data: null,
         },
       };
-    case `${GET_FOLDER}_SUCCESS`:
+    case `${GET_FOLDER_WORDS}_SUCCESS`:
       return {
         ...state,
         folder: {
@@ -62,7 +62,7 @@ export default function (state = wordbookState, action) {
           data: action.payload,
         },
       };
-    case `${GET_FOLDER}_FAILURE`:
+    case `${GET_FOLDER_WORDS}_FAILURE`:
       return {
         ...state,
         folder: {
