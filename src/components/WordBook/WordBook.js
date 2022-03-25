@@ -9,8 +9,15 @@ import { BiCog } from 'react-icons/bi';
 import AddFolderModal from './AddFolderModal';
 import FolderListItem from './FolderListItem';
 import LoadingWithOutHeader from '../Loading/LoadingWithOutHeader';
+import FolderListView from './FolderListView';
 
-export default function WordBook({ home, wordbook, handleOk, getFolderList }) {
+export default function WordBook({
+  home,
+  wordbook,
+  handleOk,
+  handleListItem,
+  getFolderList,
+}) {
   const navigate = useNavigate();
   const token = useSelector((state) => state.user.auth.token);
   const folderList = useSelector((state) => state.wordbook.folder.data || null);
@@ -68,7 +75,12 @@ export default function WordBook({ home, wordbook, handleOk, getFolderList }) {
               const count = val.words ? val.words.length : 0;
               return (
                 <div key={val.id}>
-                  <FolderListItem id={val.id} name={val.name} count={count} />
+                  <FolderListItem
+                    id={val.id}
+                    name={val.name}
+                    count={count}
+                    handleListItem={handleListItem}
+                  />
                 </div>
               );
             })}
