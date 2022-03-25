@@ -45,3 +45,5 @@ export const createFolder = async (data) => {
 };
 export const getFolderList = async () =>
   await axios.get(`${baseUrl}/folders`, withCredentials);
+export const getFolder = async (id) =>
+  await axios.get(`${baseUrl}/folders/${id}`, withCredentials);
