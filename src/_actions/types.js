@@ -6,3 +6,4 @@ export const DICT_SEARCH = 'DICT_SEARCH';
 export const DICT_SEARCH_VIEW = 'DICT_SEARCH_VIEW';
 export const CREATE_FOLDER = 'CREATE_FOLDER';
 export const GET_FOLDER_LIST = 'GET_FOLDER_LIST';
+export const GET_FOLDER_WORDS = 'GET_FOLDER_WORDS';
