@@ -21,6 +21,13 @@ export default function WordBookContainer() {
     [dispatch]
   );
 
+  const handleListItem = useCallback(
+    (id, name) => {
+      navigate(`/wordbook/folder?id=${id}&name=${name}`);
+    },
+    [navigate]
+  );
+
   const getFolderList = useCallback(async () => {
     dispatch(await getFolderListStart());
   }, [dispatch]);
@@ -30,6 +37,7 @@ export default function WordBookContainer() {
       home={home}
       wordbook={wordbook}
       handleOk={handleOk}
+      handleListItem={handleListItem}
       getFolderList={getFolderList}
     />
   );
