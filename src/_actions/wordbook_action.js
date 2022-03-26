@@ -35,12 +35,12 @@ export const getFolderList = () => {
   };
 };
 
-export const getFolderWords = (array) => {
+export const getFolderWords = (info, words) => {
   return async (dispatch) => {
     dispatch({ type: `${GET_FOLDER_WORDS}` });
 
     try {
-      dispatch({ type: `${GET_FOLDER_WORDS}_SUCCESS`, payload: array });
+      dispatch({ type: `${GET_FOLDER_WORDS}_SUCCESS`, payload: { info, words } });
     } catch (error) {
       dispatch({ type: `${GET_FOLDER_WORDS}_FAILURE`, payload: error });
     }
