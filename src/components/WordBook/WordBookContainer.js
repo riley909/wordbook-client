@@ -11,9 +11,6 @@ export default function WordBookContainer() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const home = () => window.open('/');
-  const wordbook = () => navigate('/wordbook');
-
   const handleOk = useCallback(
     async (reqData) => {
       dispatch(await createFolderStart(reqData));
@@ -34,8 +31,6 @@ export default function WordBookContainer() {
 
   return (
     <WordBook
-      home={home}
-      wordbook={wordbook}
       handleOk={handleOk}
       handleListItem={handleListItem}
       getFolderList={getFolderList}
