@@ -8,7 +8,7 @@ import { BiCog } from 'react-icons/bi';
 import AddFolderModal from './AddFolderModal';
 import FolderListItem from './FolderListItem';
 import LoadingWithOutHeader from '../Loading/LoadingWithOutHeader';
-import WordBookHeader from './WordBookHeader';
+import WordBookHeader from '../NavBar/WordBookHeader';
 
 export default function WordBook({ handleOk, handleListItem, getFolderList }) {
   const navigate = useNavigate();
