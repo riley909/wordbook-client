@@ -17,11 +17,7 @@ export default function DictList({ query, search, wordClick }) {
   const [showingNum, setShowingNum] = useState({ start: 1, end: 5 });
 
   if (loading || !searchResults) {
-    return (
-      <LoadingWithHeader>
-        <Header />
-      </LoadingWithHeader>
-    );
+    return <LoadingWithHeader header={<Header />} />;
   }
 
   const total = searchResults.channel.total;

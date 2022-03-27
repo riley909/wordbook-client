@@ -14,11 +14,7 @@ export default function DictView({ search, wordClick }) {
   const loading = useSelector((state) => state.dict.searchView.loading);
 
   if (loading || !searchViewResult) {
-    return (
-      <LoadingWithHeader>
-        <Header />
-      </LoadingWithHeader>
-    );
+    return <LoadingWithHeader header={<Header />} />;
   }
 
   const item = searchViewResult.channel.item;
