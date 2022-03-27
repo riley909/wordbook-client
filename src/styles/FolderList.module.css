@@ -6,7 +6,20 @@
 }
 
 .empty_area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   height: 400px;
+  background-color: white;
+  padding-top: 100px;
+}
+
+.empty_img {
+  height: 80px;
+}
+
+.empty_text {
+  font-size: 17px;
 }
 
 .folder_title_container {

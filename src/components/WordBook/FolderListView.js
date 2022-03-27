@@ -4,6 +4,7 @@ import styles from '../../styles/FolderList.module.css';
 import LoadingWithHeader from '../Loading/LoadingWithHeader';
 import WordBookHeader from '../NavBar/WordBookHeader';
 import { BsCheckCircle, BsTrash } from 'react-icons/bs';
+import warningSign from '../../img/Warning-Sign-PNG.png';
 
 export default function FolderListView() {
   const loading = useSelector((state) => state.wordbook.folder.loading);
@@ -24,7 +25,26 @@ export default function FolderListView() {
       {wordsData && (
         <>
           {wordsData.length === 0 ? (
-            <div className={styles.empty_area}></div>
+            <div>
+              <div className={styles.folder_title_container}>
+                <div className={styles.folder_title_area}>
+                  <span className={styles.folder_title}>{folderInfo.name}</span>
+                  <span className={styles.folder_title_counter}>{count}</span>
+                </div>
+              </div>
+
+              <div className={styles.folder_sort_area}>
+                <div>정렬(최신순, 오래된순, A-Z, Z-A)</div>
+                <div>설정 아이콘(선택삭제)</div>
+              </div>
+
+              <div className={styles.empty_area}>
+                <div>
+                  <img src={warningSign} className={styles.empty_img} />
+                </div>
+                <div className={styles.empty_text}>저장된 단어가 없습니다.</div>
+              </div>
+            </div>
           ) : (
             <div>
               <div className={styles.folder_title_container}>
