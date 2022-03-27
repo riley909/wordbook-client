@@ -22,10 +22,13 @@ export default function FolderListViewContainer() {
         words.map(async (val) => {
           // 폴더에 저장된 단어의 target_code로 각 단어 정보 조회
           const searchResult = await searchView(val.target_code);
-          wordsData.push(searchResult.data.channel);
+          wordsData.push({
+            search: searchResult.data.channel,
+            wordData: val,
+          });
         })
       );
-      dispatch(await getFolderWordsStart(wordsData));
+      dispatch(await getFolderWordsStart(res.data, wordsData));
     };
     fetchData(queryData.id);
   }, [dispatch, queryData]);
