@@ -7,6 +7,7 @@ import SignupPage from './pages/SignupPage';
 import DictListPage from './pages/DictListPage';
 import DictViewPage from './pages/DictViewPage';
 import WordBookPage from './pages/WordBookPage';
+import FolderListViewPage from './pages/FolderListViewPage';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/dict/search" element={<DictListPage />}></Route>
           <Route path="dict/searchView" element={<DictViewPage />}></Route>
           <Route path="/wordbook" element={<WordBookPage />}></Route>
+          <Route path="/wordbook/folder" element={<FolderListViewPage />} />
         </Routes>
       </div>
     </Router>

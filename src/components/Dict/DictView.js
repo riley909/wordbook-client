@@ -3,7 +3,7 @@ import Header from '../NavBar/Header';
 import SearchInput from './SearchInput';
 import { sortPos } from '../../utils/sortPos';
 import SenseInfo from './SenseInfo';
-import Loading from './Loading';
+import LoadingWithHeader from '../Loading/LoadingWithHeader';
 import Layout from '../Layout/Layout';
 import styles from '../../styles/DictView.module.css';
 import { Col } from 'antd';
@@ -14,7 +14,7 @@ export default function DictView({ search, wordClick }) {
   const loading = useSelector((state) => state.dict.searchView.loading);
 
   if (loading || !searchViewResult) {
-    return <Loading />;
+    return <LoadingWithHeader header={<Header />} />;
   }
 
   const item = searchViewResult.channel.item;

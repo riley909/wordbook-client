@@ -8,7 +8,7 @@ import styles from '../../styles/DictList.module.css';
 import { Col } from 'antd';
 import SearchInput from './SearchInput';
 import { sortPos } from '../../utils/sortPos';
-import Loading from './Loading';
+import LoadingWithHeader from '../Loading/LoadingWithHeader';
 import Side from '../NavBar/Side/Side';
 
 export default function DictList({ query, search, wordClick }) {
@@ -17,7 +17,7 @@ export default function DictList({ query, search, wordClick }) {
   const [showingNum, setShowingNum] = useState({ start: 1, end: 5 });
 
   if (loading || !searchResults) {
-    return <Loading />;
+    return <LoadingWithHeader header={<Header />} />;
   }
 
   const total = searchResults.channel.total;

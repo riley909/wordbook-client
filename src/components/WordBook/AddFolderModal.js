@@ -12,7 +12,7 @@ export default function AddFolderModal({ visible, setVisible, handleOk }) {
     setTimeout(() => {
       setVisible(false);
       setConfirmLoading(false);
-    }, 2000);
+    }, 1000);
   };
 
   const onCancel = () => {
