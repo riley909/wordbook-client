@@ -53,6 +53,14 @@ export default function (state = wordbookState, action) {
           data: null,
         },
       };
+    case `${GET_FOLDER_WORDS}_LOADING`:
+      return {
+        ...state,
+        folder: {
+          ...state.folder,
+          loading: action.payload,
+        },
+      };
     case `${GET_FOLDER_WORDS}_SUCCESS`:
       return {
         ...state,
