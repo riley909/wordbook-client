@@ -45,7 +45,7 @@ export default function WordBook({ handleOk, handleListItem, getFolderList }) {
         </div>
         <Divider className={styles.list_divider} />
 
-        {loading || !folderList ? (
+        {loading || !folderList || !folderList[0] ? (
           <LoadingWithOutHeader />
         ) : (
           <div className={styles.list_item_area}>
