@@ -1,0 +1,119 @@
+.container {
+  /* min width 300 
+  max width 900 */
+  width: 100%;
+  background-color: #f1f2f3;
+}
+
+.empty_area {
+  height: 400px;
+}
+
+.folder_title_container {
+  background-color: white;
+}
+
+.folder_title_area {
+  display: flex;
+  margin: 10px 20px 0 20px;
+  height: 50px;
+}
+
+.folder_title {
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 50px;
+}
+
+.folder_title_counter {
+  font-size: 13px;
+  font-weight: 600;
+  color: darkgrey;
+  margin-left: 5px;
+  line-height: 50px;
+}
+
+.folder_sort_area {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 50px;
+  padding-left: 15px;
+}
+
+.card_area {
+  background-color: white;
+  margin-bottom: 10px;
+  box-shadow: 1px 1px 7px #dfdfdf;
+}
+
+.card_title_area {
+  height: 70px;
+  line-height: 70px;
+  margin-left: 15px;
+}
+
+.card_title_text {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.card_title_pos {
+  font-size: 15px;
+  color: #de654a;
+  margin-left: 5px;
+}
+
+.dfn_container {
+  background-color: #f8f8f8;
+  margin: 0 15px 20px 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.dfn_area {
+  margin-left: 15px;
+  margin-right: 15px;
+  line-height: 24px;
+}
+
+.dfn_trans {
+  font-weight: bold;
+}
+
+.dfn_kor {
+  margin-left: 15px;
+}
+
+.card_footer_area {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 45px;
+  background-color: #f8f8f8;
+  padding: 0 15px 0 15px;
+}
+
+.card_footer_date {
+  font-size: 12px;
+  font-weight: 600;
+  color: #a0a0a0;
+}
+
+.card_footer_icon_area {
+  margin-left: auto;
+  margin-top: 5px;
+}
+
+.card_footer_check {
+  font-size: 22px;
+  color: #a0a0a0;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.card_footer_trash {
+  font-size: 22px;
+  color: #a0a0a0;
+  cursor: pointer;
+}
