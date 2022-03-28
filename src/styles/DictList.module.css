@@ -49,6 +49,17 @@
   color: #de654a;
 }
 
+.list_item_add {
+  margin: 6px;
+  font-size: 19px;
+  color: #d5d5d5;
+}
+
+.list_item_add:hover {
+  color: #6238c4;
+  cursor: pointer;
+}
+
 .list_item_word_area span {
   color: dimgray;
 }
