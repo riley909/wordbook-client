@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from '../../styles/DictList.module.css';
+import { MdAddCircle } from 'react-icons/md';
+import AddWordModal from './AddWordModal';
+import { useSelector } from 'react-redux';
 
 export default function DictListItem({
   target_code,
@@ -10,7 +13,9 @@ export default function DictListItem({
   trans_dfn,
   dfn,
   wordClick,
+  addClick,
 }) {
+  const token = useSelector((state) => state.user.auth.token);
   const arrDfn = [];
 
   // 뜻이 2개 이상일 경우
@@ -25,71 +30,92 @@ export default function DictListItem({
     });
   }
 
+  const [visible, setVisible] = useState(false);
+
   const onWordClick = (event) => {
     const target_code = event.target.id;
     wordClick(target_code);
   };
 
-  return (
-    <div className={styles.list_item_container}>
-      <div key={target_code}>
-        <div className={styles.list_item_word_area}>
-          <div id={target_code} className={styles.list_item_word} onClick={onWordClick}>
-            {word}
-          </div>
-          <div className={styles.list_item_pos}>
-            <span>[ </span>
-            {pos}
-            <span> |</span>
-          </div>
-          <div className={styles.list_item_trans_pos}>
-            {trans_pos}
-            <span> ]</span>
-          </div>
-        </div>
+  const openModal = () => {
+    setVisible(true);
+  };
 
-        {arrDfn.length !== 0 ? (
-          <>
-            {arrDfn.map((val, idx) => (
-              <>
-                {val.trans_word === '' ? (
-                  <div>
-                    <div>
-                      <span className={styles.list_item_idx}>{idx + 1}.</span>
-                      {val.dfn}
-                    </div>
-                    <div className={styles.list_item_indent}>
-                      <div>{val.trans_dfn}</div>
-                    </div>
-                  </div>
-                ) : (
-                  <div>
-                    <div>
-                      <span className={styles.list_item_idx}>{idx + 1}.</span>
-                      <span className={styles.list_item_trans_word}>
-                        {val.trans_word}
-                      </span>
-                    </div>
-                    <div className={styles.list_item_indent}>
-                      <div>{val.dfn}</div>
-                      <div>{val.trans_dfn}</div>
-                    </div>
-                  </div>
-                )}
-              </>
-            ))}
-          </>
-        ) : (
-          <>
-            <div className={styles.list_item_trans_word}>{trans_word}</div>
-            <div className={styles.list_item_indent}>
-              <div>{dfn}</div>
-              <div>{trans_dfn}</div>
+  return (
+    <>
+      <AddWordModal
+        visible={visible}
+        setVisible={setVisible}
+        target_code={target_code}
+        addClick={addClick}
+      />
+
+      <div className={styles.list_item_container}>
+        <div key={target_code}>
+          <div className={styles.list_item_word_area}>
+            <div className={styles.list_item_word} onClick={onWordClick}>
+              {word}
             </div>
-          </>
-        )}
+            <div className={styles.list_item_pos}>
+              <span>[ </span>
+              {pos}
+              <span> |</span>
+            </div>
+            <div className={styles.list_item_trans_pos}>
+              {trans_pos}
+              <span> ]</span>
+            </div>
+
+            {token && (
+              <div id={target_code} className={styles.list_item_add} onClick={openModal}>
+                <MdAddCircle />
+              </div>
+            )}
+          </div>
+
+          {arrDfn.length !== 0 ? (
+            <>
+              {arrDfn.map((val, idx) => (
+                <>
+                  {val.trans_word === '' ? (
+                    <div>
+                      <div>
+                        <span className={styles.list_item_idx}>{idx + 1}.</span>
+                        {val.dfn}
+                      </div>
+                      <div className={styles.list_item_indent}>
+                        <div>{val.trans_dfn}</div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div>
+                      <div>
+                        <span className={styles.list_item_idx}>{idx + 1}.</span>
+                        <span className={styles.list_item_trans_word}>
+                          {val.trans_word}
+                        </span>
+                      </div>
+                      <div className={styles.list_item_indent}>
+                        <div>{val.dfn}</div>
+                        <div>{val.trans_dfn}</div>
+                      </div>
+                    </div>
+                  )}
+                </>
+              ))}
+            </>
+          ) : (
+            <>
+              <div className={styles.list_item_trans_word}>{trans_word}</div>
+              <div className={styles.list_item_indent}>
+                <div>{dfn}</div>
+                <div>{trans_dfn}</div>
+              </div>
+            </>
+          )}
+        </div>
+        <div className={styles.list_item_divider} />
       </div>
-      <div className={styles.list_item_divider} />
-    </div>
+    </>
   );
 }
