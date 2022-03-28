@@ -1,0 +1,36 @@
+.list_title {
+  font-size: 13px;
+  font-weight: bold;
+  color: darkgrey;
+  margin-bottom: 5px;
+}
+
+.list_item_area {
+  line-height: 40px;
+}
+
+.list_item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 40px;
+}
+
+.list_item_counter {
+  font-size: 12px;
+  font-weight: 600;
+  color: darkgrey;
+  margin-left: 5px;
+}
+
+.list_item_icon {
+  height: 35px;
+  font-size: 16px;
+  margin-left: auto;
+  color: #d5d5d5;
+  cursor: pointer;
+}
+
+.list_divider {
+  margin: 0;
+}
