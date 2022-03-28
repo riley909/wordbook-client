@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import DictList from './DictList';
 import { search as searchStart } from '../../_actions/dict_action';
+import { createWord as createWordStart } from '../../_actions/wordbook_action';
 import { getQuery } from '../../utils/api';
 import QueryString from 'qs';
 import { useLocation, useNavigate } from 'react-router';
@@ -37,5 +38,19 @@ export default function DictListContainer() {
     [navigate]
   );
 
-  return <DictList query={queryData.q} search={search} wordClick={wordClick} />;
+  const addClick = useCallback(
+    async (data) => {
+      dispatch(await createWordStart(data));
+    },
+    [dispatch]
+  );
+
+  return (
+    <DictList
+      query={queryData.q}
+      search={search}
+      wordClick={wordClick}
+      addClick={addClick}
+    />
+  );
 }
