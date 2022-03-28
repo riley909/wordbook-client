@@ -46,8 +46,12 @@ export default function AddWordModal({ visible, setVisible, target_code, addClic
         visible={visible}
         onCancel={onCancel}
         keyboard
-        width={400}
-        footer={<button onClick={onAddClick}>저장</button>}
+        width={350}
+        footer={
+          <button onClick={onAddClick} className={styles.submit_button}>
+            저장
+          </button>
+        }
         className={styles.modal}>
         <div>
           {loading || !folderList ? (
