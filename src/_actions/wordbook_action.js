@@ -1,4 +1,4 @@
-import { CREATE_FOLDER, GET_FOLDER_WORDS, GET_FOLDER_LIST } from './types';
+import { CREATE_FOLDER, GET_FOLDER_WORDS, GET_FOLDER_LIST, CREATE_WORD } from './types';
 import * as api from '../utils/api';
 
 export const createFolder = (data) => {
@@ -49,6 +49,20 @@ export const getFolderWords = (info, words) => {
       dispatch({ type: `${GET_FOLDER_WORDS}_FAILURE`, payload: error });
       isLoading = false;
       dispatch({ type: `${GET_FOLDER_WORDS}_LOADING`, payload: isLoading });
+    }
+  };
+};
+
+export const createWord = (data) => {
+  return async (dispatch) => {
+    dispatch({ type: `${CREATE_WORD}` });
+
+    try {
+      const res = await api.createWord(data);
+      dispatch({ type: `${CREATE_WORD}_SUCCESS`, payload: res.data });
+      return res.data;
+    } catch (error) {
+      dispatch({ type: `${CREATE_WORD}_FAILURE`, payload: error });
     }
   };
 };
