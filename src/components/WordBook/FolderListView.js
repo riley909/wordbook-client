@@ -14,8 +14,7 @@ export default function FolderListView() {
   const wordsData = useSelector(
     (state) => folderInfo && state.wordbook.folder.data.words
   );
-  const count = folderInfo ? folderInfo.words.length : 0;
-  console.log('wordsData', wordsData);
+  const count = wordsData ? wordsData.length : 0;
 
   if (loading || !folderInfo) {
     return <LoadingWithHeader header={<WordBookHeader />} />;
