@@ -8,10 +8,12 @@ import warningSign from '../../img/Warning-Sign-PNG.png';
 
 export default function FolderListView() {
   const loading = useSelector((state) => state.wordbook.folder.loading);
-  const folderInfo = useSelector((state) => state.wordbook.folder.data.info);
-  console.log('folderInfo', folderInfo);
-
-  const wordsData = useSelector((state) => state.wordbook.folder.data.words);
+  const folderInfo = useSelector(
+    (state) => state.wordbook.folder.data && state.wordbook.folder.data.info
+  );
+  const wordsData = useSelector(
+    (state) => folderInfo && state.wordbook.folder.data.words
+  );
   const count = folderInfo ? folderInfo.words.length : 0;
   console.log('wordsData', wordsData);
 

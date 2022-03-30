@@ -47,3 +47,7 @@ export const getFolderList = async () =>
   await axios.get(`${baseUrl}/folders`, withCredentials);
 export const getFolder = async (id) =>
   await axios.get(`${baseUrl}/folders/${id}`, withCredentials);
+
+// WORD API
+export const createWord = async (data) =>
+  await axios.post(`${baseUrl}/words`, data, withCredentials);

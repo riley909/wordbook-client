@@ -36,5 +36,7 @@ export default function DictViewContainer() {
     [navigate]
   );
 
-  return <DictView search={search} wordClick={wordClick} />;
+  return (
+    <DictView search={search} wordClick={wordClick} target_code={queryData.target_code} />
+  );
 }
