@@ -32,7 +32,9 @@ export default function DictListItem({
   const [visible, setVisible] = useState(false);
 
   const onWordClick = (event) => {
+    console.log('1');
     const target_code = event.target.id;
+    console.log(event.target);
     wordClick(target_code);
   };
 
@@ -47,7 +49,7 @@ export default function DictListItem({
       <div className={styles.list_item_container}>
         <div key={target_code}>
           <div className={styles.list_item_word_area}>
-            <div className={styles.list_item_word} onClick={onWordClick}>
+            <div id={target_code} className={styles.list_item_word} onClick={onWordClick}>
               {word}
             </div>
             <div className={styles.list_item_pos}>
