@@ -30,7 +30,7 @@ export default function AddWordModal({ visible, setVisible, target_code }) {
     await dispatch(createWordStart(body));
     setVisible(false);
     await getFolderList();
-  }, [dispatch]);
+  }, [dispatch, value]);
 
   // USE EFFECT
   useEffect(() => {
