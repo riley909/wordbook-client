@@ -8,10 +8,14 @@ import Layout from '../Layout/Layout';
 import styles from '../../styles/DictView.module.css';
 import { Col } from 'antd';
 import Side from '../NavBar/Side/Side';
+import { useState } from 'react';
+import AddWordModal from './AddWordModal';
 
-export default function DictView({ search, wordClick }) {
+export default function DictView({ search, wordClick, target_code }) {
+  const token = useSelector((state) => state.user.auth.token);
   const searchViewResult = useSelector((state) => state.dict.searchView.data);
   const loading = useSelector((state) => state.dict.searchView.loading);
+  const [visible, setVisible] = useState(false);
 
   if (loading || !searchViewResult) {
     return <LoadingWithHeader header={<Header />} />;
@@ -20,19 +24,34 @@ export default function DictView({ search, wordClick }) {
   const item = searchViewResult.channel.item;
   const trans_pos = sortPos(item.word_info.pos[0]);
 
+  // 참고어 클릭시 사용되는 함수
   const onWordClick = (event) => {
-    const target_code = event.target.id;
-    wordClick(target_code);
+    const ref_target_code = event.target.id;
+    wordClick(ref_target_code);
+  };
+
+  const openModal = () => {
+    setVisible(true);
   };
 
   return (
     <div>
+      <AddWordModal visible={visible} setVisible={setVisible} target_code={target_code} />
       <Header />
       <SearchInput search={search} />
       <Layout>
         <Col span={16}>
           <div>
-            <div className={styles.word}>{item.word_info.word}</div>
+            <div className={styles.word_area}>
+              <div className={styles.word}>{item.word_info.word}</div>
+              {token && (
+                <div className={styles.add_button_area}>
+                  <button className={styles.add_button} onClick={openModal}>
+                    <span className={styles.add_button_icon}>+</span>단어장 저장
+                  </button>
+                </div>
+              )}
+            </div>
             <div className={styles.pos_area}>
               <div className={styles.pos_title_area}>
                 <div>품사</div>

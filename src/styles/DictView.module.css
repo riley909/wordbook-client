@@ -1,8 +1,33 @@
+.word_area {
+  display: flex;
+}
+
 .word {
   font-weight: 700;
   font-size: 27px;
   color: #6238c4;
+}
+
+.add_button_area {
+  margin-left: auto;
+}
+
+.add_button {
+  margin: 6px;
+  padding: 3px 8px 3px 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: grey;
+  background-color: white;
+  border: 1px #dfdfdf solid;
   cursor: pointer;
+}
+
+.add_button_icon {
+  font-size: 17px;
+  margin-right: 2px;
+  line-height: 13px;
+  color: #6666fc;
 }
 
 .pos_area {
