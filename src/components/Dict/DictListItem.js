@@ -13,7 +13,6 @@ export default function DictListItem({
   trans_dfn,
   dfn,
   wordClick,
-  addClick,
 }) {
   const token = useSelector((state) => state.user.auth.token);
   const arrDfn = [];
@@ -43,12 +42,7 @@ export default function DictListItem({
 
   return (
     <>
-      <AddWordModal
-        visible={visible}
-        setVisible={setVisible}
-        target_code={target_code}
-        addClick={addClick}
-      />
+      <AddWordModal visible={visible} setVisible={setVisible} target_code={target_code} />
 
       <div className={styles.list_item_container}>
         <div key={target_code}>

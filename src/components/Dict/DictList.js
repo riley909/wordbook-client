@@ -11,7 +11,7 @@ import { sortPos } from '../../utils/sortPos';
 import LoadingWithHeader from '../Loading/LoadingWithHeader';
 import Side from '../NavBar/Side/Side';
 
-export default function DictList({ query, search, wordClick, addClick }) {
+export default function DictList({ query, search, wordClick }) {
   const searchResults = useSelector((state) => state.dict.search.data);
   const loading = useSelector((state) => state.dict.search.loading);
   const [showingNum, setShowingNum] = useState({ start: 1, end: 5 });
@@ -84,7 +84,6 @@ export default function DictList({ query, search, wordClick, addClick }) {
                                 trans_dfn={trans_dfn}
                                 dfn={dfn}
                                 wordClick={wordClick}
-                                addClick={addClick}
                               />
                             ) : (
                               <DictListItem
@@ -96,7 +95,6 @@ export default function DictList({ query, search, wordClick, addClick }) {
                                 trans_dfn={val.sense.translation.trans_dfn}
                                 dfn={val.sense.definition}
                                 wordClick={wordClick}
-                                addClick={addClick}
                               />
                             )}
                           </div>

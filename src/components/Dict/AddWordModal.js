@@ -1,12 +1,15 @@
 import { Divider, Modal, Radio } from 'antd';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFolderList as getFolderListStart } from '../../_actions/wordbook_action';
+import {
+  getFolderList as getFolderListStart,
+  createWord as createWordStart,
+} from '../../_actions/wordbook_action';
 import LoadingWithOutHeader from '../Loading/LoadingWithOutHeader';
 import styles from '../../styles/AddWordModal.module.css';
 import { FaAngleRight } from 'react-icons/fa';
 
-export default function AddWordModal({ visible, setVisible, target_code, addClick }) {
+export default function AddWordModal({ visible, setVisible, target_code }) {
   const loading = useSelector((state) => state.wordbook.folder.loading);
   const folderList = useSelector(
     (state) => state.wordbook.folder.data && state.wordbook.folder.data
@@ -14,25 +17,28 @@ export default function AddWordModal({ visible, setVisible, target_code, addClic
   const dispatch = useDispatch();
   const [value, setValue] = useState(folderList && folderList[0].id);
 
+  // DISPATCH
   const getFolderList = useCallback(async () => {
     dispatch(await getFolderListStart());
   }, [dispatch]);
 
+  const onAddClick = useCallback(async () => {
+    const body = {
+      target_code,
+      folderId: value,
+    };
+    await dispatch(createWordStart(body));
+    setVisible(false);
+    await getFolderList();
+  }, [dispatch]);
+
+  // USE EFFECT
   useEffect(() => {
     getFolderList();
   }, [getFolderList]);
 
   const onChange = (event) => {
     setValue(event.target.value);
-  };
-
-  const onAddClick = () => {
-    const body = {
-      target_code,
-      folderId: value,
-    };
-    addClick(body);
-    setVisible(false);
   };
 
   const onCancel = () => {
