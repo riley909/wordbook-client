@@ -51,3 +51,5 @@ export const getFolder = async (id) =>
 // WORD API
 export const createWord = async (data) =>
   await axios.post(`${baseUrl}/words`, data, withCredentials);
+export const getWords = async (id, sort) =>
+  await axios.get(`${baseUrl}/words?folderId=${id}&sort=${sort}`, withCredentials);
