@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import FolderListView from './FolderListView';
 import { getFolder, getWords, searchView } from '../../utils/api';
 import { getFolderWords as getFolderWordsStart } from '../../_actions/wordbook_action';
 import QueryString from 'qs';
-import { useLocation } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 
 export default function FolderListViewContainer() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
   const queryData = QueryString.parse(location.search, { ignoreQueryPrefix: true });
@@ -33,5 +34,12 @@ export default function FolderListViewContainer() {
     fetchData(queryData.id, queryData.sort);
   }, [dispatch, queryData]);
 
-  return <FolderListView />;
+  const handleSelect = useCallback(
+    (sort) => {
+      navigate(`/wordbook/folder?id=${queryData.id}&name=${queryData.name}&sort=${sort}`);
+    },
+    [navigate]
+  );
+
+  return <FolderListView handleSelect={handleSelect} />;
 }
