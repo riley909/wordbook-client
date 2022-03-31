@@ -38,7 +38,7 @@ export default function FolderListViewContainer() {
     (sort) => {
       navigate(`/wordbook/folder?id=${queryData.id}&name=${queryData.name}&sort=${sort}`);
     },
-    [navigate]
+    [navigate, queryData]
   );
 
   return <FolderListView handleSelect={handleSelect} />;
