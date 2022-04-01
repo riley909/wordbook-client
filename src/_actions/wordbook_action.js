@@ -1,4 +1,10 @@
-import { CREATE_FOLDER, GET_FOLDER_WORDS, GET_FOLDER_LIST, CREATE_WORD } from './types';
+import {
+  CREATE_FOLDER,
+  GET_FOLDER_WORDS,
+  GET_FOLDER_LIST,
+  CREATE_WORD,
+  UPDATE_WORD_STATUS,
+} from './types';
 import * as api from '../utils/api';
 
 export const createFolder = (data) => {
@@ -63,6 +69,20 @@ export const createWord = (data) => {
       return res.data;
     } catch (error) {
       dispatch({ type: `${CREATE_WORD}_FAILURE`, payload: error });
+    }
+  };
+};
+
+export const updateWordStatus = (id) => {
+  return async (dispatch) => {
+    dispatch({ type: `${UPDATE_WORD_STATUS}` });
+
+    try {
+      const res = await api.updateWordStatus(id);
+      dispatch({ type: `${UPDATE_WORD_STATUS}_SUCCESS`, payload: res.data });
+      return res.data;
+    } catch (error) {
+      dispatch({ type: `${UPDATE_WORD_STATUS}_FAILURE`, payload: error });
     }
   };
 };
