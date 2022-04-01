@@ -20,7 +20,7 @@ export default function WordBookContainer() {
 
   const handleListItem = useCallback(
     (id, name) => {
-      navigate(`/wordbook/folder?id=${id}&name=${name}&sort=DESC`);
+      navigate(`/wordbook/folder?id=${id}&name=${name}&sort=DESC&limit=10&page=1`);
     },
     [navigate]
   );

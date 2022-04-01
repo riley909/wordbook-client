@@ -16,13 +16,13 @@ export default function FolderListViewContainer() {
   const queryData = QueryString.parse(location.search, { ignoreQueryPrefix: true });
 
   useEffect(() => {
-    const fetchData = async (id, sort) => {
+    const fetchData = async (id, sort, limit, offset) => {
       const wordsData = [];
       // 클릭한 폴더 정보 조회
-      const res = await getWords(id, sort);
-
+      const res = await getWords(id, sort, limit, offset);
+      const total = res.data[1];
       await Promise.all(
-        res.data.map(async (val) => {
+        res.data[0].map(async (val) => {
           // 폴더에 저장된 단어의 target_code로 각 단어 정보 조회
           const searchResult = await searchView(val.target_code);
           wordsData.push({
@@ -32,14 +32,16 @@ export default function FolderListViewContainer() {
         })
       );
       const folderInfo = await getFolder(id);
-      dispatch(await getFolderWordsStart(folderInfo.data, wordsData));
+      dispatch(await getFolderWordsStart(folderInfo.data, wordsData, total));
     };
-    fetchData(queryData.id, queryData.sort);
+    fetchData(queryData.id, queryData.sort, queryData.limit, queryData.page);
   }, [dispatch, queryData]);
 
   const handleSelect = useCallback(
     (sort) => {
-      navigate(`/wordbook/folder?id=${queryData.id}&name=${queryData.name}&sort=${sort}`);
+      navigate(
+        `/wordbook/folder?id=${queryData.id}&name=${queryData.name}&sort=${sort}&limit=${queryData.limit}&page=${queryData.page}`
+      );
     },
     [navigate, queryData]
   );
@@ -51,5 +53,11 @@ export default function FolderListViewContainer() {
     [dispatch]
   );
 
-  return <FolderListView handleSelect={handleSelect} handleStatus={handleStatus} />;
+  return (
+    <FolderListView
+      queryData={queryData}
+      handleSelect={handleSelect}
+      handleStatus={handleStatus}
+    />
+  );
 }
