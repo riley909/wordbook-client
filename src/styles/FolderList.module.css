@@ -125,6 +125,13 @@
   cursor: pointer;
 }
 
+.card_footer_check_active {
+  font-size: 22px;
+  color: #b2d56c;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
 .card_footer_trash {
   font-size: 22px;
   color: #a0a0a0;

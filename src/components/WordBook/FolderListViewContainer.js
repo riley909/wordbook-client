@@ -2,7 +2,10 @@ import React, { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import FolderListView from './FolderListView';
 import { getFolder, getWords, searchView } from '../../utils/api';
-import { getFolderWords as getFolderWordsStart } from '../../_actions/wordbook_action';
+import {
+  getFolderWords as getFolderWordsStart,
+  updateWordStatus as updateWordStatusStart,
+} from '../../_actions/wordbook_action';
 import QueryString from 'qs';
 import { useLocation, useNavigate } from 'react-router';
 
@@ -41,5 +44,12 @@ export default function FolderListViewContainer() {
     [navigate, queryData]
   );
 
-  return <FolderListView handleSelect={handleSelect} />;
+  const handleStatus = useCallback(
+    async (id) => {
+      await dispatch(updateWordStatusStart(id));
+    },
+    [dispatch]
+  );
+
+  return <FolderListView handleSelect={handleSelect} handleStatus={handleStatus} />;
 }
