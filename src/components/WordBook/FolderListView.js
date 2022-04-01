@@ -6,8 +6,9 @@ import WordBookHeader from '../NavBar/WordBookHeader';
 import { BsCheckCircle, BsCheckCircleFill, BsTrash } from 'react-icons/bs';
 import warningSign from '../../img/Warning-Sign-PNG.png';
 import { Select } from 'antd';
+import Pagination from './Pagination';
 
-export default function FolderListView({ handleSelect, handleStatus }) {
+export default function FolderListView({ queryData, limit, handleSelect, handleStatus }) {
   const loading = useSelector((state) => state.wordbook.folder.loading);
   const folderInfo = useSelector(
     (state) => state.wordbook.folder.data && state.wordbook.folder.data.info
@@ -19,6 +20,7 @@ export default function FolderListView({ handleSelect, handleStatus }) {
 
   const [defaultValue, setDefaultValue] = useState('latest');
   const [checkStatus, setCheckStatus] = useState([]);
+  const [showingNum, setShowingNum] = useState({ start: 1, end: 5 });
 
   // checkStatus의 초기 상태
   // 단어의 status가 1(체크된 것)인 단어의 id를 요소로 하는 배열
@@ -161,6 +163,15 @@ export default function FolderListView({ handleSelect, handleStatus }) {
                   </div>
                 );
               })}
+              <div className={styles.pagination_area}>
+                <Pagination
+                  queryData={queryData}
+                  total={total}
+                  limit={limit}
+                  showingNum={showingNum}
+                  setShowingNum={setShowingNum}
+                />
+              </div>
             </div>
           )}
         </>
