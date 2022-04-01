@@ -53,3 +53,5 @@ export const createWord = async (data) =>
   await axios.post(`${baseUrl}/words`, data, withCredentials);
 export const getWords = async (id, sort) =>
   await axios.get(`${baseUrl}/words?folderId=${id}&sort=${sort}`, withCredentials);
+export const updateWordStatus = async (id) =>
+  await axios.patch(`${baseUrl}/words/${id}`, null, withCredentials);

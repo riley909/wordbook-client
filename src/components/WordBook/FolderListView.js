@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import styles from '../../styles/FolderList.module.css';
 import LoadingWithHeader from '../Loading/LoadingWithHeader';
 import WordBookHeader from '../NavBar/WordBookHeader';
-import { BsCheckCircle, BsTrash } from 'react-icons/bs';
+import { BsCheckCircle, BsCheckCircleFill, BsTrash } from 'react-icons/bs';
 import warningSign from '../../img/Warning-Sign-PNG.png';
 import { Select } from 'antd';
 
-export default function FolderListView({ handleSelect }) {
+export default function FolderListView({ handleSelect, handleStatus }) {
   const loading = useSelector((state) => state.wordbook.folder.loading);
   const folderInfo = useSelector(
     (state) => state.wordbook.folder.data && state.wordbook.folder.data.info
@@ -17,6 +17,20 @@ export default function FolderListView({ handleSelect }) {
   );
   const count = wordsData ? wordsData.length : 0;
   const [defaultValue, setDefaultValue] = useState('latest');
+  const [checkStatus, setCheckStatus] = useState([]);
+
+  // checkStatus의 초기 상태
+  // 단어의 status가 1(체크된 것)인 단어의 id를 요소로 하는 배열
+  let defaultStatus = [];
+  if (wordsData) {
+    const filteredStatus = wordsData.filter((val) => val.wordData.status === 1);
+    filteredStatus.map((val) => defaultStatus.push(val.wordData.id));
+  }
+
+  // 데이터 로딩이 끝나면 defaultStatus를 set한다
+  useEffect(() => {
+    setCheckStatus(defaultStatus);
+  }, [wordsData]);
 
   if (loading || !folderInfo) {
     return <LoadingWithHeader header={<WordBookHeader />} />;
@@ -33,6 +47,17 @@ export default function FolderListView({ handleSelect }) {
       sort = 'ASC';
     }
     handleSelect(sort);
+  };
+
+  const onClickStatus = (id) => {
+    // checkStatus에 id가 이미 있으면 제거, 없으면 추가한다
+    setCheckStatus((prev) => {
+      const isIncluded = prev.includes(id);
+      if (isIncluded) return [...prev].filter((val) => val !== id);
+      else return [...prev, id];
+    });
+    // 단어 status를 dispatch
+    handleStatus(id);
   };
 
   return (
@@ -83,7 +108,6 @@ export default function FolderListView({ handleSelect }) {
               {wordsData.map((val) => {
                 const wordInfo = val.search.item.word_info;
                 const createdAt = val.wordData.createdAt.split('T')[0];
-                const status = val.wordData.status;
                 return (
                   <div key={val.wordData.id} className={styles.card_area}>
                     <div className={styles.card_title_area}>
@@ -114,11 +138,20 @@ export default function FolderListView({ handleSelect }) {
                     <div className={styles.card_footer_area}>
                       <div className={styles.card_footer_date}>{createdAt} 저장</div>
                       <div className={styles.card_footer_icon_area}>
-                        <span
-                          className={styles.card_footer_check}
-                          onClick={() => console.log(status)}>
-                          <BsCheckCircle />
-                        </span>
+                        {!checkStatus.includes(val.wordData.id) ? (
+                          <span
+                            className={styles.card_footer_check}
+                            onClick={() => onClickStatus(val.wordData.id)}>
+                            <BsCheckCircle />
+                          </span>
+                        ) : (
+                          <span
+                            className={styles.card_footer_check_active}
+                            onClick={() => onClickStatus(val.wordData.id)}>
+                            <BsCheckCircleFill />
+                          </span>
+                        )}
+
                         <span className={styles.card_footer_trash}>
                           <BsTrash />
                         </span>
