@@ -15,7 +15,8 @@ export default function FolderListView({ handleSelect, handleStatus }) {
   const wordsData = useSelector(
     (state) => folderInfo && state.wordbook.folder.data.words
   );
-  const count = wordsData ? wordsData.length : 0;
+  const total = useSelector((state) => folderInfo && state.wordbook.folder.data.total);
+
   const [defaultValue, setDefaultValue] = useState('latest');
   const [checkStatus, setCheckStatus] = useState([]);
 
@@ -70,7 +71,7 @@ export default function FolderListView({ handleSelect, handleStatus }) {
               <div className={styles.folder_title_container}>
                 <div className={styles.folder_title_area}>
                   <span className={styles.folder_title}>{folderInfo.name}</span>
-                  <span className={styles.folder_title_counter}>{count}</span>
+                  <span className={styles.folder_title_counter}>{total}</span>
                 </div>
               </div>
 
@@ -94,7 +95,7 @@ export default function FolderListView({ handleSelect, handleStatus }) {
               <div className={styles.folder_title_container}>
                 <div className={styles.folder_title_area}>
                   <span className={styles.folder_title}>{folderInfo.name}</span>
-                  <span className={styles.folder_title_counter}>{count}</span>
+                  <span className={styles.folder_title_counter}>{total}</span>
                 </div>
               </div>
 

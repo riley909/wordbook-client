@@ -41,14 +41,14 @@ export const getFolderList = () => {
   };
 };
 
-export const getFolderWords = (info, words) => {
+export const getFolderWords = (info, words, total) => {
   let isLoading = true;
   return async (dispatch) => {
     dispatch({ type: `${GET_FOLDER_WORDS}` });
     dispatch({ type: `${GET_FOLDER_WORDS}_LOADING`, payload: isLoading });
 
     try {
-      dispatch({ type: `${GET_FOLDER_WORDS}_SUCCESS`, payload: { info, words } });
+      dispatch({ type: `${GET_FOLDER_WORDS}_SUCCESS`, payload: { info, words, total } });
       isLoading = false;
       dispatch({ type: `${GET_FOLDER_WORDS}_LOADING`, payload: isLoading });
     } catch (error) {
