@@ -3,6 +3,7 @@ import {
   GET_FOLDER_WORDS,
   GET_FOLDER_LIST,
   CREATE_WORD,
+  UPDATE_WORD_STATUS,
 } from '../_actions/types';
 
 export const wordbookState = {
@@ -99,6 +100,26 @@ export default function (state = wordbookState, action) {
         },
       };
     case `${CREATE_WORD}_FAILURE`:
+      return {
+        ...state,
+        word: {
+          loading: false,
+          error: action.payload,
+          data: null,
+        },
+      };
+    case `${UPDATE_WORD_STATUS}_SUCCESS`:
+      return {
+        ...state,
+        word: {
+          loading: false,
+          error: null,
+          data: state.word.data.map((val) => {
+            return val.id === action.payload.id ? action.payload : val;
+          }),
+        },
+      };
+    case `${UPDATE_WORD_STATUS}_FAILURE`:
       return {
         ...state,
         word: {
