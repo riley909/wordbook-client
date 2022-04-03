@@ -13,7 +13,9 @@ import WordBookHeader from '../NavBar/WordBookHeader';
 export default function WordBook({ handleOk, handleListItem, getFolderList }) {
   const navigate = useNavigate();
   const token = useSelector((state) => state.user.auth.token);
-  const folderList = useSelector((state) => state.wordbook.folder.data || null);
+  const folderList = useSelector(
+    (state) => (state.wordbook.folder.data && state.wordbook.folder.data[0]) || null
+  );
   const loading = useSelector((state) => state.wordbook.folder.loading);
   const [visible, setVisible] = useState(false);
 
