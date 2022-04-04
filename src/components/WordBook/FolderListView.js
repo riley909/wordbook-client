@@ -37,7 +37,7 @@ export default function FolderListView({
   // 데이터 로딩이 끝나면 defaultStatus를 set한다
   useEffect(() => {
     setCheckStatus(defaultStatus);
-  }, [wordsData]);
+  }, [folderInfo]);
 
   if (loading || !folderInfo) {
     return <LoadingWithHeader header={<WordBookHeader />} />;
@@ -113,6 +113,7 @@ export default function FolderListView({
               {wordsData.map((val) => {
                 const wordInfo = val.search.item.word_info;
                 const createdAt = val.wordData.createdAt.split('T')[0];
+                const status = val.wordData.status;
                 return (
                   <div key={val.wordData.id} className={styles.card_area}>
                     <div className={styles.card_title_area}>

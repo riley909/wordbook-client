@@ -115,8 +115,10 @@ export default function (state = wordbookState, action) {
         word: {
           loading: false,
           error: null,
-          data: state.word.data.map((val) => {
-            return val.id === action.payload.id ? action.payload : val;
+          data: Object.assign(state.word.data, {
+            words: state.word.data.words.map((val) => {
+              return val.wordData.id === action.payload.id ? action.payload : val;
+            }),
           }),
         },
       };
