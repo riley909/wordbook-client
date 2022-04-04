@@ -12,10 +12,14 @@ import { FaAngleRight } from 'react-icons/fa';
 export default function AddWordModal({ visible, setVisible, target_code }) {
   const loading = useSelector((state) => state.wordbook.folder.loading);
   const folderList = useSelector(
-    (state) => state.wordbook.folder.data && state.wordbook.folder.data
+    (state) => state.wordbook.folder.data && state.wordbook.folder.data[0]
   );
   const dispatch = useDispatch();
-  const [value, setValue] = useState(folderList && folderList[0].id);
+  const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    setValue(folderList[0].id);
+  }, [folderList]);
 
   // DISPATCH
   const getFolderList = useCallback(async () => {
