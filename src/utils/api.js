@@ -58,3 +58,5 @@ export const getWords = async (id, sort, limit, offset) =>
   );
 export const updateWordStatus = async (id) =>
   await axios.patch(`${baseUrl}/words/${id}`, null, withCredentials);
+export const deleteWord = async (id) =>
+  await axios.delete(`${baseUrl}/words/${id}`, withCredentials);
