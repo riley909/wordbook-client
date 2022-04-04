@@ -4,6 +4,7 @@ import {
   GET_FOLDER_LIST,
   CREATE_WORD,
   UPDATE_WORD_STATUS,
+  DELETE_WORD,
 } from './types';
 import * as api from '../utils/api';
 
@@ -83,6 +84,20 @@ export const updateWordStatus = (id) => {
       return res.data;
     } catch (error) {
       dispatch({ type: `${UPDATE_WORD_STATUS}_FAILURE`, payload: error });
+    }
+  };
+};
+
+export const deleteWord = (id) => {
+  return async (dispatch) => {
+    dispatch({ type: `${DELETE_WORD}` });
+
+    try {
+      const res = await api.deleteWord(id);
+      dispatch({ type: `${DELETE_WORD}_SUCCESS`, payload: id });
+      return res.data;
+    } catch (error) {
+      dispatch({ type: `${DELETE_WORD}_FAILURE`, payload: error });
     }
   };
 };
