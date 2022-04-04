@@ -8,15 +8,19 @@ import warningSign from '../../img/Warning-Sign-PNG.png';
 import { Select } from 'antd';
 import Pagination from './Pagination';
 
-export default function FolderListView({ queryData, limit, handleSelect, handleStatus }) {
-  const loading = useSelector((state) => state.wordbook.folder.loading);
+export default function FolderListView({
+  queryData,
+  limit,
+  handleSelect,
+  handleStatus,
+  handleDelete,
+}) {
+  const loading = useSelector((state) => state.wordbook.word.loading);
   const folderInfo = useSelector(
-    (state) => state.wordbook.folder.data && state.wordbook.folder.data.info
+    (state) => state.wordbook.word.data && state.wordbook.word.data.info
   );
-  const wordsData = useSelector(
-    (state) => folderInfo && state.wordbook.folder.data.words
-  );
-  const total = useSelector((state) => folderInfo && state.wordbook.folder.data.total);
+  const wordsData = useSelector((state) => folderInfo && state.wordbook.word.data.words);
+  const total = useSelector((state) => folderInfo && state.wordbook.word.data.total);
 
   const [defaultValue, setDefaultValue] = useState('latest');
   const [checkStatus, setCheckStatus] = useState([]);
@@ -33,7 +37,7 @@ export default function FolderListView({ queryData, limit, handleSelect, handleS
   // 데이터 로딩이 끝나면 defaultStatus를 set한다
   useEffect(() => {
     setCheckStatus(defaultStatus);
-  }, [wordsData]);
+  }, [folderInfo]);
 
   if (loading || !folderInfo) {
     return <LoadingWithHeader header={<WordBookHeader />} />;
@@ -63,6 +67,10 @@ export default function FolderListView({ queryData, limit, handleSelect, handleS
     handleStatus(id);
   };
 
+  const onClickDelete = (id) => {
+    handleDelete(id);
+  };
+
   return (
     <div className={styles.container}>
       <WordBookHeader />
@@ -77,13 +85,7 @@ export default function FolderListView({ queryData, limit, handleSelect, handleS
                 </div>
               </div>
 
-              <div className={styles.folder_sort_area}>
-                <Select bordered={false} onChange={onChange} defaultValue={defaultValue}>
-                  <Select.Option value="latest">최신순</Select.Option>
-                  <Select.Option value="oldest">오래된순</Select.Option>
-                </Select>
-                <div>설정 아이콘(선택삭제)</div>
-              </div>
+              <div className={styles.folder_sort_area}></div>
 
               <div className={styles.empty_area}>
                 <div>
@@ -106,11 +108,12 @@ export default function FolderListView({ queryData, limit, handleSelect, handleS
                   <Select.Option value="latest">최신순</Select.Option>
                   <Select.Option value="oldest">오래된순</Select.Option>
                 </Select>
-                <div>설정 아이콘(선택삭제)</div>
+                {/* <div>설정 아이콘(선택삭제)</div> */}
               </div>
               {wordsData.map((val) => {
                 const wordInfo = val.search.item.word_info;
                 const createdAt = val.wordData.createdAt.split('T')[0];
+                const status = val.wordData.status;
                 return (
                   <div key={val.wordData.id} className={styles.card_area}>
                     <div className={styles.card_title_area}>
@@ -140,6 +143,7 @@ export default function FolderListView({ queryData, limit, handleSelect, handleS
                     </div>
                     <div className={styles.card_footer_area}>
                       <div className={styles.card_footer_date}>{createdAt} 저장</div>
+
                       <div className={styles.card_footer_icon_area}>
                         {!checkStatus.includes(val.wordData.id) ? (
                           <span
@@ -155,7 +159,9 @@ export default function FolderListView({ queryData, limit, handleSelect, handleS
                           </span>
                         )}
 
-                        <span className={styles.card_footer_trash}>
+                        <span
+                          className={styles.card_footer_trash}
+                          onClick={() => onClickDelete(val.wordData.id)}>
                           <BsTrash />
                         </span>
                       </div>

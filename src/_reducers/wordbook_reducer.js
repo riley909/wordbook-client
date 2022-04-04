@@ -4,6 +4,7 @@ import {
   GET_FOLDER_LIST,
   CREATE_WORD,
   UPDATE_WORD_STATUS,
+  DELETE_WORD,
 } from '../_actions/types';
 
 export const wordbookState = {
@@ -67,15 +68,15 @@ export default function (state = wordbookState, action) {
     case `${GET_FOLDER_WORDS}_LOADING`:
       return {
         ...state,
-        folder: {
-          ...state.folder,
+        word: {
+          ...state.word,
           loading: action.payload,
         },
       };
     case `${GET_FOLDER_WORDS}_SUCCESS`:
       return {
         ...state,
-        folder: {
+        word: {
           loading: false,
           error: null,
           data: action.payload,
@@ -84,7 +85,7 @@ export default function (state = wordbookState, action) {
     case `${GET_FOLDER_WORDS}_FAILURE`:
       return {
         ...state,
-        folder: {
+        word: {
           loading: false,
           error: action.payload,
           data: null,
@@ -114,12 +115,40 @@ export default function (state = wordbookState, action) {
         word: {
           loading: false,
           error: null,
-          data: state.word.data.map((val) => {
-            return val.id === action.payload.id ? action.payload : val;
+          data: Object.assign(state.word.data, {
+            words: state.word.data.words.map((val) => {
+              return val.wordData.id === action.payload.id ? action.payload : val;
+            }),
           }),
         },
       };
     case `${UPDATE_WORD_STATUS}_FAILURE`:
+      return {
+        ...state,
+        word: {
+          loading: false,
+          error: action.payload,
+          data: null,
+        },
+      };
+    case `${DELETE_WORD}_SUCCESS`:
+      return {
+        ...state,
+        word: {
+          loading: false,
+          error: null,
+          data: Object.assign(
+            state.word.data,
+            {
+              words: state.word.data.words.filter((val) => {
+                return val.wordData.id !== action.payload;
+              }),
+            },
+            { total: state.word.data.total - 1 }
+          ),
+        },
+      };
+    case `${DELETE_WORD}_FAILURE`:
       return {
         ...state,
         word: {

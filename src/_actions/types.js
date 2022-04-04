@@ -9,3 +9,4 @@ export const GET_FOLDER_LIST = 'GET_FOLDER_LIST';
 export const GET_FOLDER_WORDS = 'GET_FOLDER_WORDS';
 export const CREATE_WORD = 'CREATE_WORD';
 export const UPDATE_WORD_STATUS = 'UPDATE_WORD_STATUS';
+export const DELETE_WORD = 'DELETE_WORD';

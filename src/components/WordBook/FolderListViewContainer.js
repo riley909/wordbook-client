@@ -5,6 +5,7 @@ import { getFolder, getWords, searchView } from '../../utils/api';
 import {
   getFolderWords as getFolderWordsStart,
   updateWordStatus as updateWordStatusStart,
+  deleteWord as deleteWordStart,
 } from '../../_actions/wordbook_action';
 import QueryString from 'qs';
 import { useLocation, useNavigate } from 'react-router';
@@ -53,11 +54,19 @@ export default function FolderListViewContainer() {
     [dispatch]
   );
 
+  const handleDelete = useCallback(
+    async (id) => {
+      await dispatch(deleteWordStart(id));
+    },
+    [dispatch]
+  );
+
   return (
     <FolderListView
       queryData={queryData}
       handleSelect={handleSelect}
       handleStatus={handleStatus}
+      handleDelete={handleDelete}
     />
   );
 }
