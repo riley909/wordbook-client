@@ -22,6 +22,7 @@ export default function FolderListView({
   const wordsData = useSelector((state) => folderInfo && state.wordbook.word.data.words);
   const total = useSelector((state) => folderInfo && state.wordbook.word.data.total);
 
+  const [data, setData] = useState(null);
   const [defaultValue, setDefaultValue] = useState('latest');
   const [checkStatus, setCheckStatus] = useState([]);
   const [showingNum, setShowingNum] = useState({ start: 1, end: 5 });
@@ -37,9 +38,19 @@ export default function FolderListView({
   // 데이터 로딩이 끝나면 defaultStatus를 set한다
   useEffect(() => {
     setCheckStatus(defaultStatus);
+    setData(wordsData);
   }, [folderInfo]);
 
-  if (loading || !folderInfo) {
+  // url 이동시 새 state가 로딩중일때 이전 state가 렌더되는 문제
+  // url이 바뀔 때 마다 data를 null로 바꾼다
+  // ? 더 나은 방법 찾기
+  useEffect(() => {
+    setData(null);
+  }, [queryData]);
+
+  console.log(data);
+
+  if (loading || !folderInfo || !data) {
     return <LoadingWithHeader header={<WordBookHeader />} />;
   }
 
