@@ -60,3 +60,10 @@ export const updateWordStatus = async (id) =>
   await axios.patch(`${baseUrl}/words/${id}`, null, withCredentials);
 export const deleteWord = async (id) =>
   await axios.delete(`${baseUrl}/words/${id}`, withCredentials);
+
+// STUDYLOG API
+export const getStudyLogs = async (search, date, limit, offset) =>
+  await axios.get(
+    `${baseUrl}/study-logs?search=${search}&date=${date}&limit=${limit}&offset=${offset}`,
+    withCredentials
+  );
