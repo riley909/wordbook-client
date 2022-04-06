@@ -8,6 +8,7 @@ import Header from '../NavBar/Header';
 import SideWithOutPosts from '../NavBar/Side/SideWithOutPosts';
 import StudyLogListItem from './StudyLogListItem';
 import styles from '../../styles/StudyLogList.module.css';
+import StudyLogSearchInput from './StudyLogSearchInput';
 
 export default function StudyLog({ getStudyLogs }) {
   const navigate = useNavigate();
@@ -41,9 +42,10 @@ export default function StudyLog({ getStudyLogs }) {
       <Layout>
         <Col span={16}>
           <div className={styles.container}>
-            <div>날짜 선택</div>
-            <div>서치</div>
             <div>작성창</div>
+            <div>
+              <StudyLogSearchInput getStudyLogs={getStudyLogs} />
+            </div>
             <div className={styles.list_counter_area}>
               <div className={styles.list_counter}>총 {counter}개의 로그</div>
             </div>

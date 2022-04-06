@@ -4,6 +4,32 @@
   border-right: 1px #dfdfdf solid;
 }
 
+.search_area {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 10px 0 10px;
+  margin-bottom: 20px;
+}
+
+.date_picker {
+  margin-right: 10px;
+}
+
+.search_input {
+  width: 70%;
+}
+
+.search_tooltip_icon {
+  font-size: 18px;
+  color: #a0a0a0;
+  margin-right: 10px;
+}
+
+.search_tooltip_icon:hover {
+  color: #e4a434;
+}
+
 .list_counter_area {
   line-height: 40px;
   text-align: center;
