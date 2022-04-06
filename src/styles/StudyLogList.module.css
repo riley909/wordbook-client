@@ -1,0 +1,109 @@
+.container {
+  width: 550px;
+  border-left: 1px #dfdfdf solid;
+  border-right: 1px #dfdfdf solid;
+}
+
+.list_counter_area {
+  line-height: 40px;
+  text-align: center;
+  border-top: 1px #dfdfdf solid;
+  border-bottom: 2px #dfdfdf solid;
+}
+
+.list_counter {
+  font-size: 13px;
+  font-weight: 600;
+  color: #6238c4;
+}
+
+.item_border {
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px #dfdfdf solid;
+}
+
+.item_container {
+  width: 520px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.item_header {
+  display: flex;
+}
+
+.item_date_area {
+  display: flex;
+  cursor: pointer;
+}
+
+.item_date {
+  font-size: 17px;
+  font-weight: bold;
+  line-height: 17px;
+}
+
+.item_time {
+  font-size: 13px;
+  font-weight: bold;
+  color: #a0a0a0;
+  margin-left: 10px;
+}
+
+.item_icon_area {
+  display: flex;
+  margin-left: auto;
+}
+
+.item_edit_icon {
+  font-size: 16px;
+  color: #a0a0a0;
+}
+
+.item_edit_icon:hover {
+  color: #6666fc;
+  cursor: pointer;
+}
+
+.item_delete_icon {
+  font-size: 16px;
+  color: #a0a0a0;
+  margin-left: 10px;
+}
+
+.item_delete_icon:hover {
+  color: #de654a;
+  cursor: pointer;
+}
+
+.item_content_area {
+  margin: 5px 5px 10px 5px;
+}
+
+.item_comment_area {
+  display: flex;
+  width: fit-content;
+  cursor: pointer;
+}
+
+.item_comment_icon {
+  font-size: 16px;
+  color: #a0a0a0;
+}
+.item_comment_icon:hover {
+  font-size: 16px;
+  color: #6238c4;
+}
+
+.item_comment_count {
+  line-height: 18px;
+  font-weight: 600;
+  margin-left: 5px;
+}
+
+.item_footer {
+}
+
+.item_comments {
+}
