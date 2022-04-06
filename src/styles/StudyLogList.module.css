@@ -110,14 +110,9 @@
 .item_comment_area {
   display: flex;
   width: fit-content;
-  cursor: pointer;
 }
 
 .item_comment_icon {
-  font-size: 16px;
-  color: #a0a0a0;
-}
-.item_comment_icon:hover {
   font-size: 16px;
   color: #6238c4;
 }
