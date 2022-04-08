@@ -9,7 +9,7 @@ export default function StudyLogListItem({ list }) {
       {list.map((val) => {
         const createdAt = val.createdAt.split('.')[0].split('T');
         return (
-          <div className={styles.item_border}>
+          <div key={val.id} className={styles.item_border}>
             <div className={styles.item_container}>
               <div className={styles.item_header}>
                 <div className={styles.item_date_area}>
