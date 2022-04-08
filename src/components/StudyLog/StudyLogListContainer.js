@@ -13,9 +13,5 @@ export default function StudyLogListContainer() {
     [dispatch]
   );
 
-  useEffect(() => {
-    getStudyLogs('', '', 10, 1);
-  });
-
   return <StudyLogList getStudyLogs={getStudyLogs} />;
 }
