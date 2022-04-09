@@ -67,3 +67,5 @@ export const getStudyLogs = async (search, date, limit, offset) =>
     `${baseUrl}/study-logs?search=${search}&date=${date}&limit=${limit}&offset=${offset}`,
     withCredentials
   );
+export const createStudyLog = async (data) =>
+  await axios.post(`${baseUrl}/study-logs`, data, withCredentials);
