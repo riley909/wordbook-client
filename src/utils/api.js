@@ -69,6 +69,7 @@ export const getStudyLogs = async (search, date, limit, offset) =>
   );
 export const createStudyLog = async (data) =>
   await axios.post(`${baseUrl}/study-logs`, data, withCredentials);
-
 export const deleteStudyLog = async (id) =>
   await axios.delete(`${baseUrl}/study-logs/${id}`, withCredentials);
+export const updateStudyLog = async (id, data) =>
+  await axios.patch(`${baseUrl}/study-logs/${id}`, data, withCredentials);
