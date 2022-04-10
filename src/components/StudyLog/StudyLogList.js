@@ -42,11 +42,14 @@ export default function StudyLog({ getStudyLogs, createStudyLog, deleteStudyLog 
     // 처음 보여줄 데이터 가져옴(list !== null 이 된다)
     fetchData('', '', 10, page);
 
-    const observer = new IntersectionObserver((entries) => {
-      const entry = entries[0];
-      // 관찰 대상의 교차 상태(boolean)를 set 한다
-      setIsVisible(entry.isIntersecting);
-    });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        // 관찰 대상의 교차 상태(boolean)를 set 한다
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 1 }
+    );
     observer.observe(target.current);
   }, []);
 
@@ -58,8 +61,10 @@ export default function StudyLog({ getStudyLogs, createStudyLog, deleteStudyLog 
         if (!prev) return studyLogList;
         else return prev.concat(studyLogList);
       });
-    } else {
-      // 스크롤중이 아닐 때
+    }
+
+    if (isVisible === null) {
+      // 스크롤중이 아님. 작성, 수정, 삭제시
       setList(studyLogList);
     }
 
@@ -114,10 +119,12 @@ export default function StudyLog({ getStudyLogs, createStudyLog, deleteStudyLog 
     setPage(1);
     setTextValue('');
     setTextLength(0);
+    setIsVisible(null);
     createStudyLog(body);
   };
 
   const handleDelete = (id) => {
+    setIsVisible(null);
     deleteStudyLog(id);
   };
 
@@ -179,8 +186,9 @@ export default function StudyLog({ getStudyLogs, createStudyLog, deleteStudyLog 
                   </div>
                 </>
               )}
+              <div ref={target}></div>
             </div>
-            <div ref={target}>{loading || !list ? <LoadingWithOutHeader /> : null}</div>
+            <div>{loading || !list ? <LoadingWithOutHeader /> : null}</div>
           </div>
         </Col>
         <Col span={6}>
