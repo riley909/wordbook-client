@@ -11,7 +11,7 @@ import styles from '../../styles/StudyLogList.module.css';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import Search from 'antd/lib/input/Search';
 
-export default function StudyLog({ getStudyLogs, createStudyLog }) {
+export default function StudyLog({ getStudyLogs, createStudyLog, deleteStudyLog }) {
   const navigate = useNavigate();
   const token = useSelector((state) => state.user.auth.token);
   const loading = useSelector((state) => state.studylog.loading);
@@ -32,11 +32,25 @@ export default function StudyLog({ getStudyLogs, createStudyLog }) {
   const textRef = useRef();
   const MAX_LENGTH = 1000;
 
+  const fetchData = (search, date, limit, offset) => {
+    getStudyLogs(search, date, limit, offset);
+    setPage(offset + 1);
+  };
+
   useEffect(() => {
     if (!token) navigate('/');
     // 처음 보여줄 데이터 가져옴(list !== null 이 된다)
-    getStudyLogs('', '', 10, page);
-    setPage(page + 1);
+    fetchData('', '', 10, page);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        // 관찰 대상의 교차 상태(boolean)를 set 한다
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 1 }
+    );
+    observer.observe(target.current);
   }, []);
 
   // studyLogList가 갱신될때마다 setList 함
@@ -44,32 +58,18 @@ export default function StudyLog({ getStudyLogs, createStudyLog }) {
     // observe 하는 타겟이 visible 상태일 때(스크롤 내림)
     if (isVisible) {
       setList((prev) => {
-        // prev가 null이면 바로 list set
         if (!prev) return studyLogList;
-        // prev 있으면 prev + 새 데이터
         else return prev.concat(studyLogList);
       });
-    } else {
-      // 스크롤 중 아닐 때
+    }
+
+    if (isVisible === null) {
+      // 스크롤중이 아님. 작성, 수정, 삭제시
       setList(studyLogList);
     }
 
     setCounter(total);
   }, [studyLogList]);
-
-  const fetchData = (search, date, limit, offset) => {
-    getStudyLogs(search, date, limit, offset);
-    setPage(offset + 1);
-  };
-
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      const entry = entries[0];
-      // 관찰 대상의 교차 상태(boolean)를 set 한다
-      setIsVisible(entry.isIntersecting);
-    });
-    observer.observe(target.current);
-  }, []);
 
   // 관찰 대상과 교차상태(true)이고 데이터가 존재하면 다음 데이터를 가져온다
   useEffect(() => {
@@ -112,14 +112,20 @@ export default function StudyLog({ getStudyLogs, createStudyLog }) {
     }
   };
 
-  const handleCreate = async () => {
+  const handleCreate = () => {
     const body = {
       content: textValue,
     };
     setPage(1);
     setTextValue('');
     setTextLength(0);
+    setIsVisible(null);
     createStudyLog(body);
+  };
+
+  const handleDelete = (id) => {
+    setIsVisible(null);
+    deleteStudyLog(id);
   };
 
   return (
@@ -176,12 +182,13 @@ export default function StudyLog({ getStudyLogs, createStudyLog }) {
                     <div className={styles.list_counter}>총 {counter}개의 로그</div>
                   </div>
                   <div>
-                    <StudyLogListItem list={list} />
+                    <StudyLogListItem list={list} handleDelete={handleDelete} />
                   </div>
                 </>
               )}
+              <div ref={target}></div>
             </div>
-            <div ref={target}>{loading || !list ? <LoadingWithOutHeader /> : null}</div>
+            <div>{loading || !list ? <LoadingWithOutHeader /> : null}</div>
           </div>
         </Col>
         <Col span={6}>

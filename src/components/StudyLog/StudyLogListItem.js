@@ -3,7 +3,7 @@ import styles from '../../styles/StudyLogList.module.css';
 import { BsChatRightTextFill } from 'react-icons/bs';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 
-export default function StudyLogListItem({ list }) {
+export default function StudyLogListItem({ list, handleDelete }) {
   return (
     <div>
       {list.map((val) => {
@@ -21,7 +21,9 @@ export default function StudyLogListItem({ list }) {
                   <div className={styles.item_edit_icon}>
                     <FaEdit />
                   </div>
-                  <div className={styles.item_delete_icon}>
+                  <div
+                    className={styles.item_delete_icon}
+                    onClick={() => handleDelete(val.id)}>
                     <FaTrashAlt />
                   </div>
                 </div>
