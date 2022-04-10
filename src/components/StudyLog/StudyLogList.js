@@ -1,4 +1,4 @@
-import { Col, DatePicker, Divider, Tooltip } from 'antd';
+import { Col, DatePicker, Divider, Tooltip, message } from 'antd';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
@@ -121,11 +121,14 @@ export default function StudyLog({ getStudyLogs, createStudyLog, deleteStudyLog 
     setTextLength(0);
     setIsVisible(null);
     createStudyLog(body);
+    message.success('등록되었습니다.');
   };
 
   const handleDelete = (id) => {
+    setPage(1);
     setIsVisible(null);
     deleteStudyLog(id);
+    message.success('삭제되었습니다.');
   };
 
   return (
