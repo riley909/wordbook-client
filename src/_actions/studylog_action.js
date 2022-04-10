@@ -1,4 +1,4 @@
-import { GET_STUDYLOGS } from './types';
+import { CREATE_STUDYLOG, GET_STUDYLOGS } from './types';
 import * as api from '../utils/api';
 
 export const getStudyLogs = (search, date, limit, offset) => {
@@ -16,6 +16,25 @@ export const getStudyLogs = (search, date, limit, offset) => {
       dispatch({ type: `${GET_STUDYLOGS}_FAILURE`, payload: error });
       isLoading = false;
       dispatch({ type: `${GET_STUDYLOGS}_LOADING`, payload: isLoading });
+    }
+  };
+};
+
+export const createStudyLog = (data) => {
+  let isLoading = true;
+  return async (dispatch) => {
+    dispatch({ type: `${CREATE_STUDYLOG}` });
+    dispatch({ type: `${CREATE_STUDYLOG}_LOADING`, payload: isLoading });
+
+    try {
+      const res = await api.createStudyLog(data);
+      dispatch({ type: `${CREATE_STUDYLOG}_SUCCESS`, payload: res.data });
+      isLoading = false;
+      dispatch({ type: `${CREATE_STUDYLOG}_LOADING`, payload: isLoading });
+    } catch (error) {
+      dispatch({ type: `${CREATE_STUDYLOG}_FAILURE`, payload: error });
+      isLoading = false;
+      dispatch({ type: `${CREATE_STUDYLOG}_LOADING`, payload: isLoading });
     }
   };
 };

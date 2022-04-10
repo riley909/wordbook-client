@@ -1,5 +1,5 @@
-import { Col, DatePicker, Tooltip } from 'antd';
-import React, { useEffect, useRef, useState } from 'react';
+import { Col, DatePicker, Divider, Tooltip } from 'antd';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import Layout from '../Layout/Layout';
@@ -11,7 +11,7 @@ import styles from '../../styles/StudyLogList.module.css';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import Search from 'antd/lib/input/Search';
 
-export default function StudyLog({ getStudyLogs }) {
+export default function StudyLog({ getStudyLogs, createStudyLog }) {
   const navigate = useNavigate();
   const token = useSelector((state) => state.user.auth.token);
   const loading = useSelector((state) => state.studylog.loading);
@@ -25,8 +25,12 @@ export default function StudyLog({ getStudyLogs }) {
   const [dateText, setDateText] = useState('');
   const [query, setQuery] = useState('');
   const [isVisible, setIsVisible] = useState();
+  const [textLength, setTextLength] = useState(0);
+  const [textValue, setTextValue] = useState();
   const target = useRef();
   const searchRef = useRef();
+  const textRef = useRef();
+  const MAX_LENGTH = 1000;
 
   useEffect(() => {
     if (!token) navigate('/');
@@ -37,12 +41,19 @@ export default function StudyLog({ getStudyLogs }) {
 
   // studyLogList가 갱신될때마다 setList 함
   useEffect(() => {
-    setList((prev) => {
-      // prev가 null이면 바로 list set
-      if (!prev) return studyLogList;
-      // prev 있으면 prev + 새 데이터
-      else return prev.concat(studyLogList);
-    });
+    // observe 하는 타겟이 visible 상태일 때(스크롤 내림)
+    if (isVisible) {
+      setList((prev) => {
+        // prev가 null이면 바로 list set
+        if (!prev) return studyLogList;
+        // prev 있으면 prev + 새 데이터
+        else return prev.concat(studyLogList);
+      });
+    } else {
+      // 스크롤 중 아닐 때
+      setList(studyLogList);
+    }
+
     setCounter(total);
   }, [studyLogList]);
 
@@ -85,13 +96,56 @@ export default function StudyLog({ getStudyLogs }) {
     }
   };
 
+  const handleResizeHeight = useCallback(() => {
+    textRef.current.style.height = '34px';
+    textRef.current.style.height = textRef.current.scrollHeight + 'px';
+  }, []);
+
+  const handleTextLength = (e) => {
+    const value = e.target.value;
+    setTextValue(value);
+    setTextLength(value.length);
+
+    if (value.length > MAX_LENGTH) {
+      setTextValue(value.slice(0, MAX_LENGTH));
+      setTextLength(MAX_LENGTH);
+    }
+  };
+
+  const handleCreate = async () => {
+    const body = {
+      content: textValue,
+    };
+    setPage(1);
+    setTextValue('');
+    setTextLength(0);
+    createStudyLog(body);
+  };
+
   return (
     <div>
-      <Header />
+      <div className={styles.shadow}>
+        <Header />
+      </div>
       <Layout>
         <Col span={16}>
           <div className={styles.container}>
-            <div>작성창</div>
+            <div className={styles.input_area}>
+              <textarea
+                placeholder="오늘의 공부 기록을 남겨보세요."
+                ref={textRef}
+                onInput={handleResizeHeight}
+                onChange={handleTextLength}
+                value={textValue}
+              />
+              <div className={styles.input_button_area}>
+                <div>
+                  {textLength} / {MAX_LENGTH}
+                </div>
+                <button onClick={handleCreate}>작성하기</button>
+              </div>
+              <Divider className={styles.divider} />
+            </div>
 
             <div>
               <div className={styles.search_area}>
