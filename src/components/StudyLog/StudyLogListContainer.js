@@ -1,7 +1,10 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import StudyLogList from './StudyLogList';
-import { getStudyLogs as getStudyLogsStart } from '../../_actions/studylog_action';
+import {
+  getStudyLogs as getStudyLogsStart,
+  createStudyLog as createStudyLogStart,
+} from '../../_actions/studylog_action';
 
 export default function StudyLogListContainer() {
   const dispatch = useDispatch();
@@ -13,5 +16,12 @@ export default function StudyLogListContainer() {
     [dispatch]
   );
 
-  return <StudyLogList getStudyLogs={getStudyLogs} />;
+  const createStudyLog = useCallback(
+    async (data) => {
+      await dispatch(createStudyLogStart(data));
+    },
+    [dispatch]
+  );
+
+  return <StudyLogList getStudyLogs={getStudyLogs} createStudyLog={createStudyLog} />;
 }

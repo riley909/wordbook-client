@@ -11,7 +11,7 @@ import styles from '../../styles/StudyLogList.module.css';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import Search from 'antd/lib/input/Search';
 
-export default function StudyLog({ getStudyLogs }) {
+export default function StudyLog({ getStudyLogs, createStudyLog }) {
   const navigate = useNavigate();
   const token = useSelector((state) => state.user.auth.token);
   const loading = useSelector((state) => state.studylog.loading);
@@ -41,12 +41,19 @@ export default function StudyLog({ getStudyLogs }) {
 
   // studyLogList가 갱신될때마다 setList 함
   useEffect(() => {
-    setList((prev) => {
-      // prev가 null이면 바로 list set
-      if (!prev) return studyLogList;
-      // prev 있으면 prev + 새 데이터
-      else return prev.concat(studyLogList);
-    });
+    // observe 하는 타겟이 visible 상태일 때(스크롤 내림)
+    if (isVisible) {
+      setList((prev) => {
+        // prev가 null이면 바로 list set
+        if (!prev) return studyLogList;
+        // prev 있으면 prev + 새 데이터
+        else return prev.concat(studyLogList);
+      });
+    } else {
+      // 스크롤 중 아닐 때
+      setList(studyLogList);
+    }
+
     setCounter(total);
   }, [studyLogList]);
 
@@ -98,10 +105,21 @@ export default function StudyLog({ getStudyLogs }) {
     const value = e.target.value;
     setTextValue(value);
     setTextLength(value.length);
+
     if (value.length > MAX_LENGTH) {
       setTextValue(value.slice(0, MAX_LENGTH));
       setTextLength(MAX_LENGTH);
     }
+  };
+
+  const handleCreate = async () => {
+    const body = {
+      content: textValue,
+    };
+    setPage(1);
+    setTextValue('');
+    setTextLength(0);
+    createStudyLog(body);
   };
 
   return (
@@ -124,7 +142,7 @@ export default function StudyLog({ getStudyLogs }) {
                 <div>
                   {textLength} / {MAX_LENGTH}
                 </div>
-                <button>작성하기</button>
+                <button onClick={handleCreate}>작성하기</button>
               </div>
               <Divider className={styles.divider} />
             </div>
