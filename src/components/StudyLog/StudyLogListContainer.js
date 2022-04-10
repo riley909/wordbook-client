@@ -4,6 +4,7 @@ import StudyLogList from './StudyLogList';
 import {
   getStudyLogs as getStudyLogsStart,
   createStudyLog as createStudyLogStart,
+  deleteStudyLog as deleteStudyLogStart,
 } from '../../_actions/studylog_action';
 
 export default function StudyLogListContainer() {
@@ -23,5 +24,18 @@ export default function StudyLogListContainer() {
     [dispatch]
   );
 
-  return <StudyLogList getStudyLogs={getStudyLogs} createStudyLog={createStudyLog} />;
+  const deleteStudyLog = useCallback(
+    async (id) => {
+      await dispatch(deleteStudyLogStart(id));
+    },
+    [dispatch]
+  );
+
+  return (
+    <StudyLogList
+      getStudyLogs={getStudyLogs}
+      createStudyLog={createStudyLog}
+      deleteStudyLog={deleteStudyLog}
+    />
+  );
 }

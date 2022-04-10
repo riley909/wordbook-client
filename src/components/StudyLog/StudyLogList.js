@@ -107,7 +107,7 @@ export default function StudyLog({ getStudyLogs, createStudyLog, deleteStudyLog 
     }
   };
 
-  const handleCreate = async () => {
+  const handleCreate = () => {
     const body = {
       content: textValue,
     };
@@ -115,6 +115,10 @@ export default function StudyLog({ getStudyLogs, createStudyLog, deleteStudyLog 
     setTextValue('');
     setTextLength(0);
     createStudyLog(body);
+  };
+
+  const handleDelete = (id) => {
+    deleteStudyLog(id);
   };
 
   return (
@@ -171,7 +175,7 @@ export default function StudyLog({ getStudyLogs, createStudyLog, deleteStudyLog 
                     <div className={styles.list_counter}>총 {counter}개의 로그</div>
                   </div>
                   <div>
-                    <StudyLogListItem list={list} />
+                    <StudyLogListItem list={list} handleDelete={handleDelete} />
                   </div>
                 </>
               )}
