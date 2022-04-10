@@ -1,4 +1,9 @@
-import { CREATE_STUDYLOG, DELETE_STUDYLOG, GET_STUDYLOGS } from '../_actions/types';
+import {
+  CREATE_STUDYLOG,
+  DELETE_STUDYLOG,
+  GET_STUDYLOGS,
+  UPDATE_STUDYLOG,
+} from '../_actions/types';
 
 export const studyLogState = {
   loading: false,
@@ -64,6 +69,30 @@ export default function (state = studyLogState, action) {
         },
       };
     case `${DELETE_STUDYLOG}_FAILURE`:
+      return {
+        loading: false,
+        error: action.payload,
+        data: null,
+      };
+    case `${UPDATE_STUDYLOG}_LOADING`:
+      return {
+        ...state,
+        loading: action.payload,
+      };
+    case `${UPDATE_STUDYLOG}_SUCCESS`:
+      return {
+        loading: false,
+        error: null,
+        data: {
+          ...state.data,
+          total: state.data.total - 1,
+          currentPage: 1,
+          data: state.data.data.map((val) =>
+            val.id === action.payload.id ? action.payload : val
+          ),
+        },
+      };
+    case `${UPDATE_STUDYLOG}_FAILURE`:
       return {
         loading: false,
         error: action.payload,
