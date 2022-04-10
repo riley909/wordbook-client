@@ -34,7 +34,9 @@ export default function StudyLogListItem({ list }) {
                   <div className={styles.item_comment_icon}>
                     <BsChatRightTextFill />
                   </div>
-                  <div className={styles.item_comment_count}>{val.commentIds.length}</div>
+                  <div className={styles.item_comment_count}>
+                    {val.commentIds ? val.commentIds.length : 0}
+                  </div>
                 </div>
               </div>
             </div>
