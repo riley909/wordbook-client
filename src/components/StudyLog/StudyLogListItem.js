@@ -2,6 +2,7 @@ import React from 'react';
 import styles from '../../styles/StudyLogList.module.css';
 import { BsChatRightTextFill } from 'react-icons/bs';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
+import { Popconfirm } from 'antd';
 
 export default function StudyLogListItem({ list, handleDelete }) {
   return (
@@ -21,11 +22,15 @@ export default function StudyLogListItem({ list, handleDelete }) {
                   <div className={styles.item_edit_icon}>
                     <FaEdit />
                   </div>
-                  <div
-                    className={styles.item_delete_icon}
-                    onClick={() => handleDelete(val.id)}>
-                    <FaTrashAlt />
-                  </div>
+                  <Popconfirm
+                    title="이 로그를 삭제할까요?"
+                    onConfirm={() => handleDelete(val.id)}
+                    okText="확인"
+                    cancelText="취소">
+                    <div className={styles.item_delete_icon}>
+                      <FaTrashAlt />
+                    </div>
+                  </Popconfirm>
                 </div>
               </div>
               <div className={styles.item_content_area}>
