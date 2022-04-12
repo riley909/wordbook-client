@@ -85,10 +85,9 @@ export default function (state = studyLogState, action) {
         error: null,
         data: {
           ...state.data,
-          total: state.data.total - 1,
           currentPage: 1,
           data: state.data.data.map((val) =>
-            val.id === action.payload.id ? action.payload : val
+            val.id === action.payload.studyLog.id ? action.payload.studyLog : val
           ),
         },
       };
