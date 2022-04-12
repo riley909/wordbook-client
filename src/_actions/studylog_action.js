@@ -1,4 +1,9 @@
-import { CREATE_STUDYLOG, DELETE_STUDYLOG, GET_STUDYLOGS } from './types';
+import {
+  CREATE_STUDYLOG,
+  DELETE_STUDYLOG,
+  GET_STUDYLOGS,
+  UPDATE_STUDYLOG,
+} from './types';
 import * as api from '../utils/api';
 
 export const getStudyLogs = (search, date, limit, offset) => {
@@ -54,6 +59,25 @@ export const deleteStudyLog = (id) => {
       dispatch({ type: `${DELETE_STUDYLOG}_FAILURE`, payload: error });
       isLoading = false;
       dispatch({ type: `${DELETE_STUDYLOG}_LOADING`, payload: isLoading });
+    }
+  };
+};
+
+export const updateStudyLog = (id, data) => {
+  let isLoading = true;
+  return async (dispatch) => {
+    dispatch({ type: `${UPDATE_STUDYLOG}` });
+    dispatch({ type: `${UPDATE_STUDYLOG}_LOADING`, payload: isLoading });
+
+    try {
+      const res = await api.updateStudyLog(id, data);
+      dispatch({ type: `${UPDATE_STUDYLOG}_SUCCESS`, payload: res.data });
+      isLoading = false;
+      dispatch({ type: `${UPDATE_STUDYLOG}_LOADING`, payload: isLoading });
+    } catch (error) {
+      dispatch({ type: `${UPDATE_STUDYLOG}_FAILURE`, payload: error });
+      isLoading = false;
+      dispatch({ type: `${UPDATE_STUDYLOG}_LOADING`, payload: isLoading });
     }
   };
 };

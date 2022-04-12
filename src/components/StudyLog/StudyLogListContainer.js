@@ -5,6 +5,7 @@ import {
   getStudyLogs as getStudyLogsStart,
   createStudyLog as createStudyLogStart,
   deleteStudyLog as deleteStudyLogStart,
+  updateStudyLog as updateStudyLogStart,
 } from '../../_actions/studylog_action';
 
 export default function StudyLogListContainer() {
@@ -31,11 +32,19 @@ export default function StudyLogListContainer() {
     [dispatch]
   );
 
+  const updateStudyLog = useCallback(
+    async (id, data) => {
+      await dispatch(updateStudyLogStart(id, data));
+    },
+    [dispatch]
+  );
+
   return (
     <StudyLogList
       getStudyLogs={getStudyLogs}
       createStudyLog={createStudyLog}
       deleteStudyLog={deleteStudyLog}
+      updateStudyLog={updateStudyLog}
     />
   );
 }
