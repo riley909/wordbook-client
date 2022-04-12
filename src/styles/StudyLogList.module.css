@@ -158,6 +158,10 @@ textarea:focus {
   margin: 5px 5px 10px 5px;
 }
 
+.item_content {
+  white-space: pre-wrap;
+}
+
 .item_comment_area {
   display: flex;
   width: fit-content;
