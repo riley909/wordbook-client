@@ -11,7 +11,12 @@ import styles from '../../styles/StudyLogList.module.css';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import Search from 'antd/lib/input/Search';
 
-export default function StudyLog({ getStudyLogs, createStudyLog, deleteStudyLog }) {
+export default function StudyLog({
+  getStudyLogs,
+  createStudyLog,
+  deleteStudyLog,
+  updateStudyLog,
+}) {
   const navigate = useNavigate();
   const token = useSelector((state) => state.user.auth.token);
   const loading = useSelector((state) => state.studylog.loading);
@@ -131,6 +136,13 @@ export default function StudyLog({ getStudyLogs, createStudyLog, deleteStudyLog 
     message.success('삭제되었습니다.');
   };
 
+  const handleUpdate = (id, data) => {
+    setPage(1);
+    setIsVisible(null);
+    updateStudyLog(id, data);
+    message.success('수정되었습니다.');
+  };
+
   return (
     <div>
       <div className={styles.shadow}>
@@ -185,7 +197,12 @@ export default function StudyLog({ getStudyLogs, createStudyLog, deleteStudyLog 
                     <div className={styles.list_counter}>총 {counter}개의 로그</div>
                   </div>
                   <div>
-                    <StudyLogListItem list={list} handleDelete={handleDelete} />
+                    <StudyLogListItem
+                      list={list}
+                      handleDelete={handleDelete}
+                      handleUpdate={handleUpdate}
+                      MAX_LENGTH={MAX_LENGTH}
+                    />
                   </div>
                 </>
               )}
