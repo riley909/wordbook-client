@@ -22,6 +22,7 @@ export default function StudyLogListItem({
   };
 
   const handleResizeHeight = (idx) => {
+    textRefs.current[idx].current.style.height = 'auto';
     textRefs.current[idx].current.style.height =
       textRefs.current[idx].current.scrollHeight + 'px';
   };
@@ -96,16 +97,14 @@ export default function StudyLogListItem({
                   </div>
                 </div>
               ) : (
-                <div>
-                  수정
+                <div className={styles.edit_area}>
                   <textarea
                     ref={textRefs.current[idx]}
                     onInput={() => handleResizeHeight(idx)}
                     onChange={handleTextLength}
                     value={itemTextValue}
                   />
-                  <Divider />
-                  <div>
+                  <div className={styles.edit_button_area}>
                     <div>
                       {itemTextLength} / {MAX_LENGTH}
                     </div>
