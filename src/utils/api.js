@@ -73,3 +73,10 @@ export const deleteStudyLog = async (id) =>
   await axios.delete(`${baseUrl}/study-logs/${id}`, withCredentials);
 export const updateStudyLog = async (id, data) =>
   await axios.patch(`${baseUrl}/study-logs/${id}`, data, withCredentials);
+
+// COMMENT API
+export const getComments = async (studyLogId, limit, offset) =>
+  await axios.get(
+    `${baseUrl}/comments?studyLogId=${studyLogId}&limit=${limit}&offset=${offset}`,
+    withCredentials
+  );
