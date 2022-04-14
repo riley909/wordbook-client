@@ -164,6 +164,7 @@
 .item_comment_area {
   display: flex;
   width: fit-content;
+  cursor: pointer;
 }
 
 .item_comment_icon {

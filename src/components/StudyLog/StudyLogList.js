@@ -16,6 +16,7 @@ export default function StudyLog({
   createStudyLog,
   deleteStudyLog,
   updateStudyLog,
+  getComments,
 }) {
   const navigate = useNavigate();
   const token = useSelector((state) => state.user.auth.token);
@@ -202,6 +203,7 @@ export default function StudyLog({
                       handleDelete={handleDelete}
                       handleUpdate={handleUpdate}
                       MAX_LENGTH={MAX_LENGTH}
+                      getComments={getComments}
                     />
                   </div>
                 </>
