@@ -2,17 +2,21 @@ import React, { useRef, useState } from 'react';
 import styles from '../../styles/StudyLogList.module.css';
 import { BsChatRightTextFill } from 'react-icons/bs';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
-import { Divider, Popconfirm } from 'antd';
+import { Popconfirm } from 'antd';
+import CommentItem from './CommentItem';
 
 export default function StudyLogListItem({
   list,
   handleDelete,
   handleUpdate,
   MAX_LENGTH,
+  getComments,
 }) {
   const [editClick, setEditClick] = useState(null);
+  const [commentClick, setCommentClick] = useState(null);
   const [itemTextLength, setItemTextLength] = useState(0);
   const [itemTextValue, setItemTextValue] = useState();
+  const [comments, setComments] = useState(null);
   const textRefs = useRef([React.createRef(), React.createRef()]);
 
   const openUpdateForm = (val) => {
@@ -47,6 +51,16 @@ export default function StudyLogListItem({
     };
     handleUpdate(id, body);
     setEditClick(null);
+  };
+
+  const openCommentForm = (val) => {
+    if (commentClick === val.id) {
+      setCommentClick(null);
+      setComments(null);
+    } else {
+      setCommentClick(val.id);
+      getComments(val.id, '', '');
+    }
   };
 
   return (
@@ -86,12 +100,30 @@ export default function StudyLogListItem({
                     <div className={styles.item_content}>{val.content}</div>
                   </div>
                   <div className={styles.item_footer}>
-                    <div className={styles.item_comment_area}>
-                      <div className={styles.item_comment_icon}>
-                        <BsChatRightTextFill />
+                    <div>
+                      <div
+                        className={styles.item_comment_area}
+                        onClick={() => openCommentForm(val)}>
+                        <div className={styles.item_comment_icon}>
+                          <BsChatRightTextFill />
+                        </div>
+                        <div className={styles.item_comment_count}>
+                          {val.commentIds ? val.commentIds.length : 0}
+                        </div>
                       </div>
-                      <div className={styles.item_comment_count}>
-                        {val.commentIds ? val.commentIds.length : 0}
+                      <div>
+                        {commentClick === val.id && (
+                          <div>
+                            <div>
+                              <CommentItem
+                                getComments={getComments}
+                                studyLogId={commentClick}
+                                comments={comments}
+                                setComments={setComments}
+                              />
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
