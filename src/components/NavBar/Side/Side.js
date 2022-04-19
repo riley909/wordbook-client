@@ -64,7 +64,7 @@ export default function Side() {
             <span onClick={toLogin}>스터디로그</span>
           </div>
           <Divider className={styles.divider} />
-          <LatestPosts />
+          <LatestPosts token={token} />
           <Divider className={styles.divider} />
           <History token={token} />
           <Divider className={styles.divider} />
