@@ -33,6 +33,7 @@ export default function SideWithOutPosts() {
   const toWordBook = () => {
     window.open('/wordbook', '단어장', 'width=450, height=700, scrollbars=yes');
   };
+  const toStudyLog = () => navigate('/studyLog');
 
   return (
     <>
@@ -42,11 +43,11 @@ export default function SideWithOutPosts() {
             <div className={styles.side_email_area}>
               <span className={styles.side_email}>{email}</span> 님의
             </div>
-            <span onClick={toWordBook} className={styles.side_wordbook}>
-              단어장
-            </span>
-            <Divider type="vertical" className={styles.divider_vertical} />
-            <span>스터디로그</span>
+            <div className={styles.side_menu_area}>
+              <span onClick={toWordBook}>단어장</span>
+              <Divider type="vertical" className={styles.divider_vertical} />
+              <span onClick={toStudyLog}>스터디로그</span>
+            </div>
           </div>
           <Divider className={styles.divider} />
           <History />
@@ -55,11 +56,9 @@ export default function SideWithOutPosts() {
       ) : (
         <div>
           <div>
-            <span onClick={toLogin} className={styles.side_wordbook}>
-              단어장
-            </span>
+            <span onClick={toLogin}>단어장</span>
             <Divider type="vertical" className={styles.divider_vertical} />
-            <span>스터디로그</span>
+            <span onClick={toLogin}>스터디로그</span>
           </div>
           <Divider className={styles.divider} />
           <History />
