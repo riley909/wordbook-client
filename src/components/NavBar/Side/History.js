@@ -4,7 +4,7 @@ import QueryString from 'qs';
 import { useLocation, useNavigate } from 'react-router';
 import { IoCloseOutline } from 'react-icons/io5';
 
-export default function History() {
+export default function History({ token }) {
   const location = useLocation();
 
   // 최근 검색어를 관리할 useState
@@ -46,6 +46,11 @@ export default function History() {
     navigate(`/dict/search?page=1&q=${word}`);
   };
 
+  const toLogin = () => navigate('/login');
+  const toWordBook = () => {
+    window.open('/wordbook', '단어장', 'width=450, height=700, scrollbars=yes');
+  };
+
   return (
     <div>
       <div className={styles.history_title}>내가 찾은 단어</div>
@@ -59,7 +64,15 @@ export default function History() {
           </div>
         ))}
       </div>
-      <button className={styles.button}>내 단어장 가기</button>
+      {token ? (
+        <button onClick={toWordBook} className={styles.button}>
+          내 단어장 가기
+        </button>
+      ) : (
+        <button onClick={toLogin} className={styles.button}>
+          내 단어장 가기
+        </button>
+      )}
     </div>
   );
 }

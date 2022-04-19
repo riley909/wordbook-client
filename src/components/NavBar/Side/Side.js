@@ -66,7 +66,7 @@ export default function Side() {
           <Divider className={styles.divider} />
           <LatestPosts />
           <Divider className={styles.divider} />
-          <History />
+          <History token={token} />
           <Divider className={styles.divider} />
         </div>
       )}
