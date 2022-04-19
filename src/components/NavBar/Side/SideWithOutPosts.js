@@ -1,13 +1,33 @@
 import { Divider } from 'antd';
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styles from '../../../styles/NavBar/Side.module.css';
 import History from './History';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
+import { getProfile as getProfileStart } from '../../../_actions/user_action';
 
-export default function Side({ email }) {
+export default function SideWithOutPosts() {
   const token = useSelector((state) => state.user.auth.token);
+  const myEmail = useSelector((state) =>
+    state.user.profile ? state.user.profile.data.email : null
+  );
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState('');
+
+  const getProfile = useCallback(async () => {
+    dispatch(await getProfileStart());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (token) {
+      getProfile();
+    }
+  }, []);
+
+  useEffect(() => {
+    setEmail(myEmail);
+  }, [myEmail]);
 
   const toLogin = () => navigate('/login');
   const toWordBook = () => {
