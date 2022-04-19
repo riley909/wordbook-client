@@ -1,10 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styles from '../../styles/StudyLogList.module.css';
 import { BsChatRightTextFill } from 'react-icons/bs';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import { Popconfirm } from 'antd';
 import CommentItem from './CommentItem';
-import { useSelector } from 'react-redux';
 
 export default function StudyLogListItem({
   list,
@@ -13,7 +12,6 @@ export default function StudyLogListItem({
   MAX_LENGTH,
   getComments,
 }) {
-  const commentList = useSelector((state) => state.comment.data);
   const [editClick, setEditClick] = useState(null);
   const [commentClick, setCommentClick] = useState(null);
   const [itemTextLength, setItemTextLength] = useState(0);
@@ -26,17 +24,6 @@ export default function StudyLogListItem({
     setItemTextValue(val.content);
     setItemTextLength(val.content.length);
   };
-
-  const openCommentForm = (val) => {
-    if (commentClick === val.id) setCommentClick(null);
-    else setCommentClick(val.id);
-
-    getComments(val.id, '', '');
-  };
-
-  useEffect(() => {
-    setComments(commentList);
-  }, [commentList]);
 
   const handleResizeHeight = (idx) => {
     textRefs.current[idx].current.style.height = 'auto';
@@ -64,6 +51,16 @@ export default function StudyLogListItem({
     };
     handleUpdate(id, body);
     setEditClick(null);
+  };
+
+  const openCommentForm = (val) => {
+    if (commentClick === val.id) {
+      setCommentClick(null);
+      setComments(null);
+    } else {
+      setCommentClick(val.id);
+      getComments(val.id, '', '');
+    }
   };
 
   return (
@@ -117,7 +114,14 @@ export default function StudyLogListItem({
                       <div>
                         {commentClick === val.id && (
                           <div>
-                            <CommentItem comments={comments} />
+                            <div>
+                              <CommentItem
+                                getComments={getComments}
+                                studyLogId={commentClick}
+                                comments={comments}
+                                setComments={setComments}
+                              />
+                            </div>
                           </div>
                         )}
                       </div>
