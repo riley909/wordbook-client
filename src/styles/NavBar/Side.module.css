@@ -24,6 +24,22 @@
   margin-bottom: 10px;
 }
 
+.latest_posts_item {
+  margin-bottom: 8px;
+}
+
+.latest_posts_date {
+  font-size: 11px;
+}
+
+.latest_posts_content {
+  font-size: 13px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: break-all;
+}
+
 .history_title {
   font-weight: bold;
   margin-bottom: 10px;
