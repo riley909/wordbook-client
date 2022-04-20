@@ -23,10 +23,6 @@ export default function Header() {
     await dispatch(logoutStart());
   }, [dispatch]);
 
-  const mybook = useCallback(() => {
-    navigate('/mybook');
-  }, [navigate]);
-
   const home = useCallback(() => {
     navigate('/');
   }, [navigate]);
@@ -60,9 +56,6 @@ export default function Header() {
             </div>
           }
           extra={[
-            <Button key="1" onClick={mybook} className={styles.button}>
-              마이북
-            </Button>,
             <Button key="2" onClick={logout} className={styles.button}>
               로그아웃
             </Button>,
