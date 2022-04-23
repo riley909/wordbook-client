@@ -28,7 +28,7 @@ export default function (state = wordbookState, action) {
         folder: {
           loading: false,
           error: null,
-          data: state.folder.data.concat(action.payload),
+          data: [[action.payload, ...state.folder.data[0]], state.folder.data[1] + 1],
         },
       };
     case `${CREATE_FOLDER}_FAILURE`:
