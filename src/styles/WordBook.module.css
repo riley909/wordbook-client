@@ -78,6 +78,13 @@
 }
 
 .list_item {
+  display: flex;
+  margin: 0 20px 0 20px;
+  height: 50px;
+}
+
+.list_item_pointer {
+  display: flex;
   margin: 0 20px 0 20px;
   height: 50px;
   cursor: pointer;
@@ -88,4 +95,13 @@
   font-weight: 600;
   color: darkgrey;
   margin-left: 5px;
+}
+
+.list_item_icons {
+  margin-left: auto;
+}
+
+.list_item_icons > span {
+  margin-left: 15px;
+  cursor: pointer;
 }

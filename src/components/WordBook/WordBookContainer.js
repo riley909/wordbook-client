@@ -5,6 +5,7 @@ import WordBook from './WordBook';
 import {
   createFolder as createFolderStart,
   getFolderList as getFolderListStart,
+  deleteFolder as deleteFolderStart,
 } from '../../_actions/wordbook_action';
 
 export default function WordBookContainer() {
@@ -29,11 +30,19 @@ export default function WordBookContainer() {
     dispatch(await getFolderListStart());
   }, [dispatch]);
 
+  const deleteFolder = useCallback(
+    async (id) => {
+      await dispatch(deleteFolderStart(id));
+    },
+    [dispatch]
+  );
+
   return (
     <WordBook
       handleOk={handleOk}
       handleListItem={handleListItem}
       getFolderList={getFolderList}
+      deleteFolder={deleteFolder}
     />
   );
 }

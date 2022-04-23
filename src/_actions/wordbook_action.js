@@ -5,6 +5,7 @@ import {
   CREATE_WORD,
   UPDATE_WORD_STATUS,
   DELETE_WORD,
+  DELETE_FOLDER,
 } from './types';
 import * as api from '../utils/api';
 
@@ -38,6 +39,19 @@ export const getFolderList = () => {
       dispatch({ type: `${GET_FOLDER_LIST}_FAILURE`, payload: error });
       isLoading = false;
       dispatch({ type: `${GET_FOLDER_LIST}_LOADING`, payload: isLoading });
+    }
+  };
+};
+
+export const deleteFolder = (id) => {
+  return async (dispatch) => {
+    dispatch({ type: `${DELETE_FOLDER}` });
+
+    try {
+      await api.deleteFolder(id);
+      dispatch({ type: `${DELETE_FOLDER}_SUCCESS`, payload: id });
+    } catch (error) {
+      dispatch({ type: `${DELETE_FOLDER}_FAILURE`, payload: error });
     }
   };
 };
