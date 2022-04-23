@@ -10,7 +10,12 @@ import FolderListItem from './FolderListItem';
 import LoadingWithOutHeader from '../Loading/LoadingWithOutHeader';
 import WordBookHeader from '../NavBar/WordBookHeader';
 
-export default function WordBook({ handleOk, handleListItem, getFolderList }) {
+export default function WordBook({
+  handleOk,
+  handleListItem,
+  getFolderList,
+  deleteFolder,
+}) {
   const navigate = useNavigate();
   const token = useSelector((state) => state.user.auth.token);
   const folderList = useSelector(
@@ -18,6 +23,7 @@ export default function WordBook({ handleOk, handleListItem, getFolderList }) {
   );
   const loading = useSelector((state) => state.wordbook.folder.loading);
   const [visible, setVisible] = useState(false);
+  const [settings, setSettings] = useState(false);
 
   // 토큰이 없고, 팝업으로 접속하지 않을 경우
   if (!token) {
@@ -28,10 +34,16 @@ export default function WordBook({ handleOk, handleListItem, getFolderList }) {
     getFolderList();
   }, [getFolderList]);
 
-  console.log(folderList);
-
   const openModal = () => {
     setVisible(true);
+  };
+
+  const openSettings = () => {
+    setSettings((prev) => !prev);
+  };
+
+  const handleFolderDelete = (id) => {
+    deleteFolder(id);
   };
 
   return (
@@ -42,7 +54,7 @@ export default function WordBook({ handleOk, handleListItem, getFolderList }) {
           <div className={styles.list_title}>단어장 목록</div>
           <div className={styles.list_icon_area}>
             <FaFolderPlus className={styles.list_add_icon} onClick={openModal} />
-            <BiCog className={styles.list_settings_icon} />
+            <BiCog className={styles.list_settings_icon} onClick={openSettings} />
           </div>
         </div>
         <Divider className={styles.list_divider} />
@@ -59,7 +71,9 @@ export default function WordBook({ handleOk, handleListItem, getFolderList }) {
                     id={val.id}
                     name={val.name}
                     count={count}
+                    settings={settings}
                     handleListItem={handleListItem}
+                    handleFolderDelete={handleFolderDelete}
                   />
                 </div>
               );
