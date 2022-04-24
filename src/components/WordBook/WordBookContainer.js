@@ -6,6 +6,7 @@ import {
   createFolder as createFolderStart,
   getFolderList as getFolderListStart,
   deleteFolder as deleteFolderStart,
+  updateFolderName as updateFolderNameStart,
 } from '../../_actions/wordbook_action';
 
 export default function WordBookContainer() {
@@ -37,12 +38,20 @@ export default function WordBookContainer() {
     [dispatch]
   );
 
+  const updateFolderName = useCallback(
+    async (id, data) => {
+      await dispatch(updateFolderNameStart(id, data));
+    },
+    [dispatch]
+  );
+
   return (
     <WordBook
       handleOk={handleOk}
       handleListItem={handleListItem}
       getFolderList={getFolderList}
       deleteFolder={deleteFolder}
+      updateFolderName={updateFolderName}
     />
   );
 }

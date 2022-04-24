@@ -6,6 +6,7 @@ import {
   UPDATE_WORD_STATUS,
   DELETE_WORD,
   DELETE_FOLDER,
+  UPDATE_FOLDER_NAME,
 } from './types';
 import * as api from '../utils/api';
 
@@ -52,6 +53,19 @@ export const deleteFolder = (id) => {
       dispatch({ type: `${DELETE_FOLDER}_SUCCESS`, payload: id });
     } catch (error) {
       dispatch({ type: `${DELETE_FOLDER}_FAILURE`, payload: error });
+    }
+  };
+};
+
+export const updateFolderName = (id, data) => {
+  return async (dispatch) => {
+    dispatch({ type: `${UPDATE_FOLDER_NAME}` });
+
+    try {
+      const res = await api.updateFolderName(id, data);
+      dispatch({ type: `${UPDATE_FOLDER_NAME}_SUCCESS`, payload: res.data });
+    } catch (error) {
+      dispatch({ type: `${UPDATE_FOLDER_NAME}_FAILURE`, payload: error });
     }
   };
 };

@@ -15,6 +15,7 @@ export default function WordBook({
   handleListItem,
   getFolderList,
   deleteFolder,
+  updateFolderName,
 }) {
   const navigate = useNavigate();
   const token = useSelector((state) => state.user.auth.token);
@@ -46,6 +47,10 @@ export default function WordBook({
     deleteFolder(id);
   };
 
+  const handleFolderUpdateName = (id, data) => {
+    updateFolderName(id, data);
+  };
+
   return (
     <div className={styles.container}>
       <WordBookHeader />
@@ -74,6 +79,7 @@ export default function WordBook({
                     settings={settings}
                     handleListItem={handleListItem}
                     handleFolderDelete={handleFolderDelete}
+                    handleFolderUpdateName={handleFolderUpdateName}
                   />
                 </div>
               );

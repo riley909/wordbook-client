@@ -49,6 +49,8 @@ export const getFolder = async (id) =>
   await axios.get(`${baseUrl}/folders/${id}`, withCredentials);
 export const deleteFolder = async (id) =>
   await axios.delete(`${baseUrl}/folders/${id}`, withCredentials);
+export const updateFolderName = async (id, data) =>
+  await axios.patch(`${baseUrl}/folders/${id}`, data, withCredentials);
 
 // WORD API
 export const createWord = async (data) =>
