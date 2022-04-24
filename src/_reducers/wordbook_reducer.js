@@ -6,6 +6,7 @@ import {
   UPDATE_WORD_STATUS,
   DELETE_WORD,
   DELETE_FOLDER,
+  UPDATE_FOLDER_NAME,
 } from '../_actions/types';
 
 export const wordbookState = {
@@ -79,6 +80,29 @@ export default function (state = wordbookState, action) {
         },
       };
     case `${DELETE_FOLDER}_FAILURE`:
+      return {
+        ...state,
+        folder: {
+          loading: false,
+          error: action.payload,
+          data: null,
+        },
+      };
+    case `${UPDATE_FOLDER_NAME}_SUCCESS`:
+      return {
+        ...state,
+        folder: {
+          loading: false,
+          error: null,
+          data: [
+            state.folder.data[0].map((val) =>
+              val.id === action.payload.id ? action.payload : val
+            ),
+            state.folder.data[1],
+          ],
+        },
+      };
+    case `${UPDATE_FOLDER_NAME}_FAILURE`:
       return {
         ...state,
         folder: {
