@@ -43,8 +43,8 @@ export const searchView = async (query) =>
 export const createFolder = async (data) => {
   return await axios.post(`${baseUrl}/folders`, data, withCredentials);
 };
-export const getFolderList = async () =>
-  await axios.get(`${baseUrl}/folders`, withCredentials);
+export const getFolderList = async (limit, offset) =>
+  await axios.get(`${baseUrl}/folders?limit=${limit}&offset=${offset}`, withCredentials);
 export const getFolder = async (id) =>
   await axios.get(`${baseUrl}/folders/${id}`, withCredentials);
 export const deleteFolder = async (id) =>

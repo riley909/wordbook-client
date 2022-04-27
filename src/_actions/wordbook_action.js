@@ -24,14 +24,14 @@ export const createFolder = (data) => {
   };
 };
 
-export const getFolderList = () => {
+export const getFolderList = (limit, offset) => {
   let isLoading = true;
   return async (dispatch) => {
     dispatch({ type: `${GET_FOLDER_LIST}` });
     dispatch({ type: `${GET_FOLDER_LIST}_LOADING`, payload: isLoading });
 
     try {
-      const res = await api.getFolderList();
+      const res = await api.getFolderList(limit, offset);
       dispatch({ type: `${GET_FOLDER_LIST}_SUCCESS`, payload: res.data });
       isLoading = false;
       dispatch({ type: `${GET_FOLDER_LIST}_LOADING`, payload: isLoading });
