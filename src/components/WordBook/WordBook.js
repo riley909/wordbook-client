@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router';
 import styles from '../../styles/WordBook.module.css';
 import { FaFolderPlus } from 'react-icons/fa';
 import { BiCog } from 'react-icons/bi';
+import { BsChevronCompactDown } from 'react-icons/bs';
 import AddFolderModal from './AddFolderModal';
 import FolderListItem from './FolderListItem';
 import LoadingWithOutHeader from '../Loading/LoadingWithOutHeader';
@@ -22,7 +23,12 @@ export default function WordBook({
   const folderList = useSelector(
     (state) => (state.wordbook.folder.data && state.wordbook.folder.data[0]) || null
   );
+  const total = useSelector((state) => folderList && state.wordbook.folder.data[1]);
   const loading = useSelector((state) => state.wordbook.folder.loading);
+  const limit = 5;
+  const lastPage = Math.ceil(total / limit);
+  const [list, setList] = useState(null);
+  const [page, setPage] = useState(1);
   const [visible, setVisible] = useState(false);
   const [settings, setSettings] = useState(false);
 
@@ -32,8 +38,15 @@ export default function WordBook({
   }
 
   useEffect(() => {
-    getFolderList();
+    getFolderList(limit, page);
   }, [getFolderList]);
+
+  useEffect(() => {
+    setList((prev) => {
+      if (!prev) return folderList;
+      else return prev.concat(folderList);
+    });
+  }, [folderList]);
 
   const openModal = () => {
     setVisible(true);
@@ -51,6 +64,13 @@ export default function WordBook({
     updateFolderName(id, data);
   };
 
+  const handleShowMore = () => {
+    if (page < lastPage) {
+      getFolderList(limit, page + 1);
+      setPage(page + 1);
+    }
+  };
+
   return (
     <div className={styles.container}>
       <WordBookHeader />
@@ -64,11 +84,9 @@ export default function WordBook({
         </div>
         <Divider className={styles.list_divider} />
 
-        {loading || !folderList || !folderList[0] ? (
-          <LoadingWithOutHeader />
-        ) : (
+        {list ? (
           <div className={styles.list_item_area}>
-            {folderList.map((val) => {
+            {list.map((val) => {
               const count = val.words ? val.words.length : 0;
               return (
                 <div key={val.id}>
@@ -84,7 +102,12 @@ export default function WordBook({
                 </div>
               );
             })}
+            <div className={styles.list_show_more} onClick={handleShowMore}>
+              <BsChevronCompactDown />
+            </div>
           </div>
+        ) : (
+          <LoadingWithOutHeader />
         )}
 
         <AddFolderModal visible={visible} setVisible={setVisible} handleOk={handleOk} />

@@ -73,6 +73,14 @@
   cursor: pointer;
 }
 
+.list_show_more {
+  font-size: 30px;
+  color: grey;
+  height: 50px;
+  text-align: center;
+  cursor: pointer;
+}
+
 .list_item_area {
   line-height: 50px;
 }

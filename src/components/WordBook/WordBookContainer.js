@@ -27,9 +27,12 @@ export default function WordBookContainer() {
     [navigate]
   );
 
-  const getFolderList = useCallback(async () => {
-    dispatch(await getFolderListStart());
-  }, [dispatch]);
+  const getFolderList = useCallback(
+    async (limit, offset) => {
+      dispatch(await getFolderListStart(limit, offset));
+    },
+    [dispatch]
+  );
 
   const deleteFolder = useCallback(
     async (id) => {
