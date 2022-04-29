@@ -21,9 +21,13 @@ export default function History({ token }) {
       const result = localStorage.getItem('history');
       const parsed = JSON.parse(result);
 
-      // 히스토리 10개 저장
-      history.current = parsed.splice(0, 10);
-      setWords([...history.current]);
+      if (parsed) {
+        // 히스토리 10개 저장
+        history.current = parsed.splice(0, 10);
+        setWords([...history.current]);
+      } else {
+        setWords([]);
+      }
     }
   }, []);
 
