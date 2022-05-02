@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 
-const baseUrl = `http://ec2-18-222-33-252.us-east-2.compute.amazonaws.com:4000`;
+const baseUrl = `http://${process.env.REACT_APP_HOST}:4000`;
 const cookie = new Cookies();
 
 // TOKEN
