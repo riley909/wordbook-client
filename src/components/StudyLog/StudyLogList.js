@@ -29,7 +29,7 @@ export default function StudyLog({
     (state) => state.studylog.data && state.studylog.data.data
   );
   const total = useSelector((state) => studyLogList && state.studylog.data.total);
-  const [list, setList] = useState(null);
+  const [list, setList] = useState([]);
   const [counter, setCounter] = useState(null);
   const [page, setPage] = useState(1);
   const [dateText, setDateText] = useState('');
@@ -41,6 +41,8 @@ export default function StudyLog({
   const searchRef = useRef();
   const textRef = useRef();
   const MAX_LENGTH = 1000;
+
+  console.log(list);
 
   const fetchData = (search, date, limit, offset) => {
     getStudyLogs(search, date, limit, offset);
@@ -68,7 +70,7 @@ export default function StudyLog({
     // observe 하는 타겟이 visible 상태일 때(스크롤 내림)
     if (isVisible) {
       setList((prev) => {
-        if (!prev) return studyLogList;
+        if (prev.length === 0) return studyLogList;
         else return prev.concat(studyLogList);
       });
     }
