@@ -1,6 +1,6 @@
 import { Col, DatePicker, Divider, Tooltip, message } from 'antd';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import Layout from '../Layout/Layout';
 import LoadingWithOutHeader from '../Loading/LoadingWithOutHeader';
@@ -10,6 +10,7 @@ import StudyLogListItem from './StudyLogListItem';
 import styles from '../../styles/StudyLogList.module.css';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import Search from 'antd/lib/input/Search';
+import { checkCookieToken } from '../../utils/checkCookieToken';
 
 export default function StudyLog({
   getStudyLogs,
@@ -18,6 +19,9 @@ export default function StudyLog({
   updateStudyLog,
   getComments,
 }) {
+  const dispatch = useDispatch();
+  checkCookieToken(dispatch);
+
   const navigate = useNavigate();
   const token = useSelector((state) => state.user.auth.token);
   const loading = useSelector((state) => state.studylog.loading);

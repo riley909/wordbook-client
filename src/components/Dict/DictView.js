@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Header from '../NavBar/Header';
 import SearchInput from './SearchInput';
 import { sortPos } from '../../utils/sortPos';
@@ -10,8 +10,12 @@ import { Col } from 'antd';
 import Side from '../NavBar/Side/Side';
 import { useState } from 'react';
 import AddWordModal from './AddWordModal';
+import { checkCookieToken } from '../../utils/checkCookieToken';
 
 export default function DictView({ search, wordClick, target_code }) {
+  const dispatch = useDispatch();
+  checkCookieToken(dispatch);
+
   const token = useSelector((state) => state.user.auth.token);
   const searchViewResult = useSelector((state) => state.dict.searchView.data);
   const loading = useSelector((state) => state.dict.searchView.loading);

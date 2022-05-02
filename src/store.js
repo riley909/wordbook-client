@@ -1,12 +1,11 @@
 import { applyMiddleware, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
-import Cookies from 'universal-cookie';
 import rootReducer from './_reducers/index';
+import { loadToken } from './utils/api';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const cookie = new Cookies();
-const token = cookie.get('Authorization') || null;
+const token = loadToken();
 
 const store = createStore(
   rootReducer,

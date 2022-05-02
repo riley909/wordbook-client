@@ -1,7 +1,6 @@
 import { Divider } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from '../../styles/WordBook.module.css';
 import { FaFolderPlus } from 'react-icons/fa';
 import { BiCog } from 'react-icons/bi';
@@ -10,6 +9,7 @@ import AddFolderModal from './AddFolderModal';
 import FolderListItem from './FolderListItem';
 import LoadingWithOutHeader from '../Loading/LoadingWithOutHeader';
 import WordBookHeader from '../NavBar/WordBookHeader';
+import { checkCookieToken } from '../../utils/checkCookieToken';
 
 export default function WordBook({
   handleOk,
@@ -18,24 +18,24 @@ export default function WordBook({
   deleteFolder,
   updateFolderName,
 }) {
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  checkCookieToken(dispatch);
+
   const token = useSelector((state) => state.user.auth.token);
+  if (!token) {
+    window.close();
+  }
+
   const folderList = useSelector(
     (state) => (state.wordbook.folder.data && state.wordbook.folder.data[0]) || null
   );
   const total = useSelector((state) => folderList && state.wordbook.folder.data[1]);
-  const loading = useSelector((state) => state.wordbook.folder.loading);
   const limit = 5;
   const lastPage = Math.ceil(total / limit);
   const [list, setList] = useState(null);
   const [page, setPage] = useState(1);
   const [visible, setVisible] = useState(false);
   const [settings, setSettings] = useState(false);
-
-  // 토큰이 없고, 팝업으로 접속하지 않을 경우
-  if (!token) {
-    navigate('/');
-  }
 
   useEffect(() => {
     getFolderList(limit, page);

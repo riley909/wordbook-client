@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import DictListItem from './DictListItem';
 import Header from '../NavBar/Header';
 import Pagination from './Pagination';
@@ -10,8 +10,12 @@ import SearchInput from './SearchInput';
 import { sortPos } from '../../utils/sortPos';
 import LoadingWithHeader from '../Loading/LoadingWithHeader';
 import Side from '../NavBar/Side/Side';
+import { checkCookieToken } from '../../utils/checkCookieToken';
 
 export default function DictList({ query, search, wordClick }) {
+  const dispatch = useDispatch();
+  checkCookieToken(dispatch);
+
   const searchResults = useSelector((state) => state.dict.search.data);
   const loading = useSelector((state) => state.dict.search.loading);
   const [showingNum, setShowingNum] = useState({ start: 1, end: 5 });

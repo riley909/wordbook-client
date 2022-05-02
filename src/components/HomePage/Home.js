@@ -10,10 +10,14 @@ import Encyclopedia from './Encyclopedia';
 import NextButton from './NextButton';
 import Header from '../NavBar/Header';
 import Side from '../NavBar/Side/Side';
-import { useSelector } from 'react-redux';
+import { loadToken } from '../../utils/api';
+import { useDispatch } from 'react-redux';
+import { checkCookieToken } from '../../utils/checkCookieToken';
 
 export default function Home({ search, login }) {
-  const token = useSelector((state) => state.user.auth.token);
+  const dispatch = useDispatch();
+  checkCookieToken(dispatch);
+
   const searchRef = useRef(null);
 
   // 슬라이드 개수(0부터 시작)
