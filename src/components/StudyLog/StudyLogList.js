@@ -35,6 +35,7 @@ export default function StudyLog({
   const LIMIT = 10;
 
   const searchRef = useRef();
+  const [moment, setMoment] = useState(null);
   const [dateText, setDateText] = useState('');
   const [query, setQuery] = useState('');
 
@@ -78,13 +79,14 @@ export default function StudyLog({
 
   const onChange = (date, dateString) => {
     setDateText(dateString);
+    setMoment(date);
   };
 
   const onSearch = (value) => {
     initPageAndList();
     setQuery(value);
     if (dateText || value) {
-      fetchData(value, dateText, 10, 1);
+      fetchData(value, dateText, LIMIT, 1);
     } else {
       alert('검색 조건을 입력해 주세요.');
     }
@@ -111,9 +113,13 @@ export default function StudyLog({
       content: textValue,
     };
     initPageAndList();
+    setQuery('');
+    setDateText('');
+    setMoment(null);
     setTextValue('');
     setTextLength(0);
     createStudyLog(body);
+    fetchData('', '', LIMIT, page);
     message.success('등록되었습니다.');
   };
 
@@ -162,7 +168,7 @@ export default function StudyLog({
                   </span>
                 </Tooltip>
                 <div className={styles.date_picker}>
-                  <DatePicker size="large" onChange={onChange} />
+                  <DatePicker size="large" onChange={onChange} value={moment} />
                 </div>
                 <div className={styles.search_input}>
                   <Search
