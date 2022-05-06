@@ -59,6 +59,11 @@ export default function StudyLog({
     setPage(page + 1);
   };
 
+  const initPageAndList = useCallback(() => {
+    setPage(1);
+    setList(null);
+  });
+
   useEffect(() => {
     setList((prev) => {
       if (page === 1) {
@@ -76,8 +81,7 @@ export default function StudyLog({
   };
 
   const onSearch = (value) => {
-    setPage(1);
-    setList(null);
+    initPageAndList();
     setQuery(value);
     if (dateText || value) {
       fetchData(value, dateText, 10, 1);
@@ -106,8 +110,7 @@ export default function StudyLog({
     const body = {
       content: textValue,
     };
-    setPage(1);
-    setList(null);
+    initPageAndList();
     setTextValue('');
     setTextLength(0);
     createStudyLog(body);
@@ -115,15 +118,13 @@ export default function StudyLog({
   };
 
   const handleDelete = (id) => {
-    setPage(1);
-    setList(null);
+    initPageAndList();
     deleteStudyLog(id);
     message.success('삭제되었습니다.');
   };
 
   const handleUpdate = (id, data) => {
-    setPage(1);
-    setList(null);
+    initPageAndList();
     updateStudyLog(id, data);
     message.success('수정되었습니다.');
   };
