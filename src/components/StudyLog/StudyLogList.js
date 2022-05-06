@@ -52,20 +52,17 @@ export default function StudyLog({
 
   const fetchData = async (search, date, limit, offset) => {
     await getStudyLogs(search, date, limit, offset);
-    setPage(page + 1);
   };
 
   const loadMore = () => {
-    fetchData(query, dateText, LIMIT, page);
+    fetchData(query, dateText, LIMIT, page + 1);
+    setPage(page + 1);
   };
 
   useEffect(() => {
     setList((prev) => {
-      console.log('set!');
-      if (!prev) {
-        if (studyLogList && studyLogList.length >= LIMIT) {
-          return studyLogList;
-        }
+      if (page === 1) {
+        return studyLogList;
       } else {
         return prev.concat(studyLogList);
       }
@@ -79,11 +76,11 @@ export default function StudyLog({
   };
 
   const onSearch = (value) => {
-    setList(null);
     setPage(1);
+    setList(null);
     setQuery(value);
     if (dateText || value) {
-      // fetchData(value, dateText, 10, 1);
+      fetchData(value, dateText, 10, 1);
     } else {
       alert('검색 조건을 입력해 주세요.');
     }
