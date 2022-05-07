@@ -29,87 +29,75 @@ export default function StudyLog({
     (state) => state.studylog.data && state.studylog.data.data
   );
   const total = useSelector((state) => studyLogList && state.studylog.data.total);
-  const [list, setList] = useState([]);
+  const [list, setList] = useState();
   const [counter, setCounter] = useState(null);
   const [page, setPage] = useState(1);
+  const LIMIT = 10;
+
+  const searchRef = useRef();
+  const [moment, setMoment] = useState(null);
   const [dateText, setDateText] = useState('');
   const [query, setQuery] = useState('');
-  const [isVisible, setIsVisible] = useState();
+
   const [textLength, setTextLength] = useState(0);
   const [textValue, setTextValue] = useState();
-  const target = useRef();
-  const searchRef = useRef();
   const textRef = useRef();
   const MAX_LENGTH = 1000;
 
   console.log(list);
 
-  const fetchData = (search, date, limit, offset) => {
-    getStudyLogs(search, date, limit, offset);
-    setPage(offset + 1);
-  };
-
   useEffect(() => {
     if (!token) navigate('/');
-    // 처음 보여줄 데이터 가져옴(list !== null 이 된다)
-    fetchData('', '', 10, page);
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        // 관찰 대상의 교차 상태(boolean)를 set 한다
-        setIsVisible(entry.isIntersecting);
-      },
-      { threshold: 1 }
-    );
-    observer.observe(target.current);
+    fetchData(query, dateText, LIMIT, page);
   }, []);
 
-  // studyLogList가 갱신될때마다 setList 함
-  useEffect(() => {
-    // observe 하는 타겟이 visible 상태일 때(스크롤 내림)
-    if (isVisible) {
-      setList((prev) => {
-        if (prev.length === 0) return studyLogList;
-        else return prev.concat(studyLogList);
-      });
-    }
+  const fetchData = async (search, date, limit, offset) => {
+    await getStudyLogs(search, date, limit, offset);
+  };
 
-    if (isVisible === null) {
-      // 스크롤중이 아님. 작성, 수정, 삭제시
-      setList(studyLogList);
-    }
+  const loadMore = () => {
+    fetchData(query, dateText, LIMIT, page + 1);
+    setPage(page + 1);
+  };
+
+  const initStates = useCallback(() => {
+    setPage(1);
+    setList(null);
+    setQuery('');
+    setDateText('');
+    setMoment(null);
+  });
+
+  useEffect(() => {
+    setList((prev) => {
+      if (page === 1) {
+        return studyLogList;
+      } else {
+        return prev.concat(studyLogList);
+      }
+    });
 
     setCounter(total);
   }, [studyLogList]);
 
-  // 관찰 대상과 교차상태(true)이고 데이터가 존재하면 다음 데이터를 가져온다
-  useEffect(() => {
-    if (isVisible && list) {
-      // 전체 글을 다 불러오면 멈춘다
-      if (list.length !== total) {
-        fetchData(query, dateText, 10, page);
-      }
-    }
-  }, [isVisible]);
-
   const onChange = (date, dateString) => {
     setDateText(dateString);
+    setMoment(date);
   };
 
   const onSearch = (value) => {
-    setList(null);
-    setPage(1);
-    setQuery(value);
     if (dateText || value) {
-      fetchData(value, dateText, 10, 1);
+      setPage(1);
+      setList(null);
+      setQuery(value);
+      fetchData(value, dateText, LIMIT, page);
     } else {
       alert('검색 조건을 입력해 주세요.');
     }
   };
 
   const handleResizeHeight = useCallback(() => {
-    textRef.current.style.height = '34px';
+    textRef.current.style.height = 'auto';
     textRef.current.style.height = textRef.current.scrollHeight + 'px';
   }, []);
 
@@ -128,25 +116,26 @@ export default function StudyLog({
     const body = {
       content: textValue,
     };
-    setPage(1);
+    initStates();
     setTextValue('');
     setTextLength(0);
-    setIsVisible(null);
+    textRef.current.style.height = 'auto';
     createStudyLog(body);
+    fetchData('', '', LIMIT, 1);
     message.success('등록되었습니다.');
   };
 
   const handleDelete = (id) => {
-    setPage(1);
-    setIsVisible(null);
+    initStates();
     deleteStudyLog(id);
+    fetchData('', '', LIMIT, 1);
     message.success('삭제되었습니다.');
   };
 
   const handleUpdate = (id, data) => {
-    setPage(1);
-    setIsVisible(null);
+    initStates();
     updateStudyLog(id, data);
+    fetchData('', '', LIMIT, 1);
     message.success('수정되었습니다.');
   };
 
@@ -183,7 +172,7 @@ export default function StudyLog({
                   </span>
                 </Tooltip>
                 <div className={styles.date_picker}>
-                  <DatePicker size="large" onChange={onChange} />
+                  <DatePicker size="large" onChange={onChange} value={moment} />
                 </div>
                 <div className={styles.search_input}>
                   <Search
@@ -212,9 +201,13 @@ export default function StudyLog({
                       getComments={getComments}
                     />
                   </div>
+                  {total !== list.length && (
+                    <div className={styles.list_more_area} onClick={loadMore}>
+                      <div className={styles.list_more}>더 보기</div>
+                    </div>
+                  )}
                 </>
               )}
-              <div ref={target}></div>
             </div>
             <div>{loading || !list ? <LoadingWithOutHeader /> : null}</div>
           </div>
