@@ -93,7 +93,7 @@ export default function StudyLog({
   };
 
   const handleResizeHeight = useCallback(() => {
-    textRef.current.style.height = '34px';
+    textRef.current.style.height = 'auto';
     textRef.current.style.height = textRef.current.scrollHeight + 'px';
   }, []);
 
@@ -118,6 +118,7 @@ export default function StudyLog({
     setMoment(null);
     setTextValue('');
     setTextLength(0);
+    textRef.current.style.height = 'auto';
     createStudyLog(body);
     fetchData('', '', LIMIT, page);
     message.success('등록되었습니다.');
