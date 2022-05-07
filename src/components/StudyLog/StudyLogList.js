@@ -83,9 +83,9 @@ export default function StudyLog({
   };
 
   const onSearch = (value) => {
-    initPageAndList();
-    setQuery(value);
     if (dateText || value) {
+      initPageAndList();
+      setQuery(value);
       fetchData(value, dateText, LIMIT, 1);
     } else {
       alert('검색 조건을 입력해 주세요.');
