@@ -60,9 +60,12 @@ export default function StudyLog({
     setPage(page + 1);
   };
 
-  const initPageAndList = useCallback(() => {
+  const initStates = useCallback(() => {
     setPage(1);
     setList(null);
+    setQuery('');
+    setDateText('');
+    setMoment(null);
   });
 
   useEffect(() => {
@@ -84,9 +87,10 @@ export default function StudyLog({
 
   const onSearch = (value) => {
     if (dateText || value) {
-      initPageAndList();
+      setPage(1);
+      setList(null);
       setQuery(value);
-      fetchData(value, dateText, LIMIT, 1);
+      fetchData(value, dateText, LIMIT, page);
     } else {
       alert('검색 조건을 입력해 주세요.');
     }
@@ -112,10 +116,7 @@ export default function StudyLog({
     const body = {
       content: textValue,
     };
-    initPageAndList();
-    setQuery('');
-    setDateText('');
-    setMoment(null);
+    initStates();
     setTextValue('');
     setTextLength(0);
     textRef.current.style.height = 'auto';
@@ -125,14 +126,16 @@ export default function StudyLog({
   };
 
   const handleDelete = (id) => {
-    initPageAndList();
+    initStates();
     deleteStudyLog(id);
+    fetchData('', '', LIMIT, page);
     message.success('삭제되었습니다.');
   };
 
   const handleUpdate = (id, data) => {
-    initPageAndList();
+    initStates();
     updateStudyLog(id, data);
+    fetchData('', '', LIMIT, page);
     message.success('수정되었습니다.');
   };
 
