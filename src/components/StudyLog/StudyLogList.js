@@ -121,21 +121,21 @@ export default function StudyLog({
     setTextLength(0);
     textRef.current.style.height = 'auto';
     createStudyLog(body);
-    fetchData('', '', LIMIT, page);
+    fetchData('', '', LIMIT, 1);
     message.success('등록되었습니다.');
   };
 
   const handleDelete = (id) => {
     initStates();
     deleteStudyLog(id);
-    fetchData('', '', LIMIT, page);
+    fetchData('', '', LIMIT, 1);
     message.success('삭제되었습니다.');
   };
 
   const handleUpdate = (id, data) => {
     initStates();
     updateStudyLog(id, data);
-    fetchData('', '', LIMIT, page);
+    fetchData('', '', LIMIT, 1);
     message.success('수정되었습니다.');
   };
 
