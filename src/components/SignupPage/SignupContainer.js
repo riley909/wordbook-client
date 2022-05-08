@@ -13,6 +13,9 @@ export default function SignupContainer() {
     async (reqData) => {
       const response = await dispatch(signupStart(reqData));
       if (response.result) {
+        await api.login(reqData);
+        await api.createFolder({ name: '새 폴더' });
+        api.removeToken();
         navigate('/login');
       }
     },
