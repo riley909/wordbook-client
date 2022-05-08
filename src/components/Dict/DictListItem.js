@@ -13,6 +13,8 @@ export default function DictListItem({
   trans_dfn,
   dfn,
   wordClick,
+  folders,
+  handleCreate,
 }) {
   const token = useSelector((state) => state.user.auth.token);
   const arrDfn = [];
@@ -44,8 +46,6 @@ export default function DictListItem({
 
   return (
     <>
-      <AddWordModal visible={visible} setVisible={setVisible} target_code={target_code} />
-
       <div className={styles.list_item_container}>
         <div key={target_code}>
           <div className={styles.list_item_word_area}>
@@ -72,7 +72,7 @@ export default function DictListItem({
           {arrDfn.length !== 0 ? (
             <>
               {arrDfn.map((val, idx) => (
-                <>
+                <div key={idx}>
                   {val.trans_word === '' ? (
                     <div>
                       <div>
@@ -97,7 +97,7 @@ export default function DictListItem({
                       </div>
                     </div>
                   )}
-                </>
+                </div>
               ))}
             </>
           ) : (
@@ -112,6 +112,14 @@ export default function DictListItem({
         </div>
         <div className={styles.list_item_divider} />
       </div>
+
+      <AddWordModal
+        visible={visible}
+        setVisible={setVisible}
+        target_code={target_code}
+        folders={folders}
+        handleCreate={handleCreate}
+      />
     </>
   );
 }
