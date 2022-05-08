@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DictListItem from './DictListItem';
 import Header from '../NavBar/Header';
@@ -12,13 +12,27 @@ import LoadingWithHeader from '../Loading/LoadingWithHeader';
 import Side from '../NavBar/Side/Side';
 import { checkCookieToken } from '../../utils/checkCookieToken';
 
-export default function DictList({ query, search, wordClick }) {
+export default function DictList({
+  query,
+  search,
+  wordClick,
+  createWord,
+  getFolderList,
+}) {
   const dispatch = useDispatch();
   checkCookieToken(dispatch);
 
   const searchResults = useSelector((state) => state.dict.search.data);
   const loading = useSelector((state) => state.dict.search.loading);
+  const folderList = useSelector(
+    (state) => state.wordbook.folder.data && state.wordbook.folder.data[0]
+  );
+  const [folders, setFolders] = useState(null);
   const [showingNum, setShowingNum] = useState({ start: 1, end: 5 });
+
+  useEffect(() => {
+    setFolders(folderList);
+  }, [folderList]);
 
   if (loading || !searchResults) {
     return <LoadingWithHeader header={<Header />} />;
@@ -43,6 +57,11 @@ export default function DictList({ query, search, wordClick }) {
       return null;
     });
   }
+
+  const handleCreate = (data) => {
+    createWord(data);
+    getFolderList(5, 1);
+  };
 
   return (
     <div>
@@ -88,6 +107,8 @@ export default function DictList({ query, search, wordClick }) {
                                 trans_dfn={trans_dfn}
                                 dfn={dfn}
                                 wordClick={wordClick}
+                                folders={folders}
+                                handleCreate={handleCreate}
                               />
                             ) : (
                               <DictListItem
@@ -99,6 +120,8 @@ export default function DictList({ query, search, wordClick }) {
                                 trans_dfn={val.sense.translation.trans_dfn}
                                 dfn={val.sense.definition}
                                 wordClick={wordClick}
+                                folders={folders}
+                                handleCreate={handleCreate}
                               />
                             )}
                           </div>
@@ -118,6 +141,8 @@ export default function DictList({ query, search, wordClick }) {
                           trans_dfn={trans_dfn}
                           dfn={dfn}
                           wordClick={wordClick}
+                          folders={folders}
+                          handleCreate={handleCreate}
                         />
                       ) : (
                         <DictListItem
@@ -129,6 +154,8 @@ export default function DictList({ query, search, wordClick }) {
                           trans_dfn={sense.translation.trans_dfn}
                           dfn={sense.definition}
                           wordClick={wordClick}
+                          folders={folders}
+                          handleCreate={handleCreate}
                         />
                       )}
                     </div>

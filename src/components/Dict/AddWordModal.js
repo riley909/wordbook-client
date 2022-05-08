@@ -1,45 +1,34 @@
 import { Divider, Modal, Radio } from 'antd';
 import React, { useCallback, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  getFolderList as getFolderListStart,
-  createWord as createWordStart,
-} from '../../_actions/wordbook_action';
+import { useDispatch } from 'react-redux';
 import LoadingWithOutHeader from '../Loading/LoadingWithOutHeader';
 import styles from '../../styles/AddWordModal.module.css';
 import { FaAngleRight } from 'react-icons/fa';
 
-export default function AddWordModal({ visible, setVisible, target_code }) {
-  const loading = useSelector((state) => state.wordbook.folder.loading);
-  const folderList = useSelector(
-    (state) => state.wordbook.folder.data && state.wordbook.folder.data[0]
-  );
+export default function AddWordModal({
+  visible,
+  setVisible,
+  target_code,
+  folders,
+  handleCreate,
+}) {
   const dispatch = useDispatch();
   const [value, setValue] = useState(0);
 
   useEffect(() => {
-    setValue(folderList[0].id);
-  }, [folderList]);
-
-  // DISPATCH
-  const getFolderList = useCallback(async () => {
-    dispatch(await getFolderListStart());
-  }, [dispatch]);
+    if (folders && folders[0]) {
+      setValue(folders[0].id);
+    }
+  }, [folders]);
 
   const onAddClick = useCallback(async () => {
     const body = {
       target_code,
       folderId: value,
     };
-    await dispatch(createWordStart(body));
+    handleCreate(body);
     setVisible(false);
-    await getFolderList();
   }, [dispatch, value]);
-
-  // USE EFFECT
-  useEffect(() => {
-    getFolderList();
-  }, [getFolderList]);
 
   const onChange = (event) => {
     setValue(event.target.value);
@@ -64,14 +53,14 @@ export default function AddWordModal({ visible, setVisible, target_code }) {
         }
         className={styles.modal}>
         <div>
-          {loading || !folderList ? (
+          {!folders ? (
             <LoadingWithOutHeader />
           ) : (
             <div>
               <div className={styles.list_title}>단어장 목록</div>
               <Divider className={styles.list_divider} />
               <div className={styles.list_item_area}>
-                {folderList.map((val) => {
+                {folders.map((val) => {
                   const count = val.words ? val.words.length : 0;
                   return (
                     <div key={val.id}>
