@@ -1,6 +1,10 @@
 import React, { useCallback, useEffect } from 'react';
 import DictList from './DictList';
 import { search as searchStart } from '../../_actions/dict_action';
+import {
+  getFolderList as getFolderListStart,
+  createWord as createWordStart,
+} from '../../_actions/wordbook_action';
 import { getQuery } from '../../utils/api';
 import QueryString from 'qs';
 import { useLocation, useNavigate } from 'react-router';
@@ -12,10 +16,15 @@ export default function DictListContainer() {
   const dispatch = useDispatch();
   const queryData = QueryString.parse(location.search, { ignoreQueryPrefix: true });
 
+  const getFolderList = useCallback(async (limit, offset) => {
+    await dispatch(getFolderListStart(limit, offset));
+  }, []);
+
   useEffect(() => {
     const fetchData = async () => {
       const queries = getQuery(queryData.q, queryData.page);
       await dispatch(searchStart(queries));
+      await getFolderList(5, 1);
     };
     fetchData();
 
@@ -37,5 +46,20 @@ export default function DictListContainer() {
     [navigate]
   );
 
-  return <DictList query={queryData.q} search={search} wordClick={wordClick} />;
+  const createWord = useCallback(
+    async (data) => {
+      await dispatch(createWordStart(data));
+    },
+    [dispatch]
+  );
+
+  return (
+    <DictList
+      query={queryData.q}
+      search={search}
+      wordClick={wordClick}
+      createWord={createWord}
+      getFolderList={getFolderList}
+    />
+  );
 }
