@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router';
 import styles from '../../../styles/NavBar/Side.module.css';
 import { getStudyLogs as getStudyLogsStart } from '../../../_actions/studylog_action';
 
-export default function LatestPosts({ token }) {
+export default function LatestPosts() {
+  const token = useSelector((state) => state.user.auth.token);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const studyLogList = useSelector(
