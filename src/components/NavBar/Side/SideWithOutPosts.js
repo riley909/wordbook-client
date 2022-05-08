@@ -33,7 +33,7 @@ export default function SideWithOutPosts() {
   const toWordBook = () => {
     window.open('/wordbook', '단어장', 'width=450, height=700, scrollbars=yes');
   };
-  const toStudyLog = () => navigate('/studyLog');
+  const toStudyLog = () => window.location.replace('/studyLog');
 
   return (
     <>
