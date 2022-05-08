@@ -1,11 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from '../../../styles/NavBar/Side.module.css';
 import QueryString from 'qs';
+import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router';
 import { IoCloseOutline } from 'react-icons/io5';
 
-export default function History({ token }) {
+export default function History() {
   const location = useLocation();
+  const token = useSelector((state) => state.user.auth.token);
 
   // 최근 검색어를 관리할 useState
   const [words, setWords] = useState([]);

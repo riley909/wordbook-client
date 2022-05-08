@@ -34,7 +34,7 @@ export default function Side() {
   const toWordBook = () => {
     window.open('/wordbook', '단어장', 'width=450, height=700, scrollbars=yes');
   };
-  const toStudyLog = () => navigate('/studyLog');
+  const toStudyLog = () => window.location.replace('/studyLog');
 
   return (
     <>
@@ -64,9 +64,9 @@ export default function Side() {
             <span onClick={toLogin}>스터디로그</span>
           </div>
           <Divider className={styles.divider} />
-          <LatestPosts token={token} />
+          <LatestPosts />
           <Divider className={styles.divider} />
-          <History token={token} />
+          <History />
           <Divider className={styles.divider} />
         </div>
       )}

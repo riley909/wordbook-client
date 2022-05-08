@@ -1,14 +1,11 @@
 import { PageHeader } from 'antd';
 import React from 'react';
 import { FaBookMedical } from 'react-icons/fa';
-import { useNavigate } from 'react-router';
 import styles from '../../styles/WordBook.module.css';
 
 export default function WordBookHeader() {
-  const navigate = useNavigate();
-
   const home = () => window.open('/');
-  const wordbook = () => navigate('/wordbook');
+  const wordbook = () => window.location.replace('/wordbook');
 
   return (
     <div className={styles.header}>
