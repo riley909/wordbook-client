@@ -24,7 +24,7 @@ export default function DictListContainer() {
     const fetchData = async () => {
       const queries = getQuery(queryData.q, queryData.page);
       await dispatch(searchStart(queries));
-      await getFolderList(5, 1);
+      await getFolderList(100, 1);
     };
     fetchData();
 
@@ -49,6 +49,7 @@ export default function DictListContainer() {
   const createWord = useCallback(
     async (data) => {
       await dispatch(createWordStart(data));
+      getFolderList(100, 1);
     },
     [dispatch]
   );

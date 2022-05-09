@@ -12,13 +12,7 @@ import LoadingWithHeader from '../Loading/LoadingWithHeader';
 import Side from '../NavBar/Side/Side';
 import { checkCookieToken } from '../../utils/checkCookieToken';
 
-export default function DictList({
-  query,
-  search,
-  wordClick,
-  createWord,
-  getFolderList,
-}) {
+export default function DictList({ query, search, wordClick, createWord }) {
   const dispatch = useDispatch();
   checkCookieToken(dispatch);
 
@@ -60,7 +54,6 @@ export default function DictList({
 
   const handleCreate = (data) => {
     createWord(data);
-    getFolderList(5, 1);
   };
 
   return (
