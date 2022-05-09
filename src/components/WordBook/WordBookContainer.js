@@ -13,9 +13,17 @@ export default function WordBookContainer() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const getFolderList = useCallback(
+    async (limit, offset) => {
+      dispatch(await getFolderListStart(limit, offset));
+    },
+    [dispatch]
+  );
+
   const handleOk = useCallback(
     async (reqData) => {
       dispatch(await createFolderStart(reqData));
+      getFolderList(5, 1);
     },
     [dispatch]
   );
@@ -27,16 +35,10 @@ export default function WordBookContainer() {
     [navigate]
   );
 
-  const getFolderList = useCallback(
-    async (limit, offset) => {
-      dispatch(await getFolderListStart(limit, offset));
-    },
-    [dispatch]
-  );
-
   const deleteFolder = useCallback(
     async (id) => {
       await dispatch(deleteFolderStart(id));
+      getFolderList(5, 1);
     },
     [dispatch]
   );
@@ -44,6 +46,7 @@ export default function WordBookContainer() {
   const updateFolderName = useCallback(
     async (id, data) => {
       await dispatch(updateFolderNameStart(id, data));
+      getFolderList(5, 1);
     },
     [dispatch]
   );

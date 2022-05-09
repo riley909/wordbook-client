@@ -1,13 +1,14 @@
 import { Button, Input, Modal } from 'antd';
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 
-export default function AddFolderModal({ visible, setVisible, handleOk }) {
+export default function AddFolderModal({ visible, setVisible, handleOk, setPage }) {
   const [confirmLoading, setConfirmLoading] = useState(false);
-  const folderRef = useRef(null);
+  const [folderName, setFolderName] = useState('');
 
   const onOk = () => {
-    const folderName = folderRef.current.state.value;
+    setPage(1);
     handleOk({ name: folderName });
+    setFolderName('');
     setConfirmLoading(true);
     setTimeout(() => {
       setVisible(false);
@@ -17,6 +18,11 @@ export default function AddFolderModal({ visible, setVisible, handleOk }) {
 
   const onCancel = () => {
     setVisible(false);
+  };
+
+  const onChange = (e) => {
+    const val = e.target.value;
+    setFolderName(val);
   };
 
   return (
@@ -35,7 +41,12 @@ export default function AddFolderModal({ visible, setVisible, handleOk }) {
           </Button>,
         ]}>
         <div>
-          <Input placeholder="새폴더" size="large" ref={folderRef} />
+          <Input
+            placeholder="새폴더"
+            size="large"
+            onChange={onChange}
+            value={folderName}
+          />
         </div>
       </Modal>
     </div>

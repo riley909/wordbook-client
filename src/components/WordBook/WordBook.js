@@ -43,7 +43,7 @@ export default function WordBook({
 
   useEffect(() => {
     setList((prev) => {
-      if (!prev) return folderList;
+      if (page === 1) return folderList;
       else return prev.concat(folderList);
     });
   }, [folderList]);
@@ -57,10 +57,12 @@ export default function WordBook({
   };
 
   const handleFolderDelete = (id) => {
+    setPage(1);
     deleteFolder(id);
   };
 
   const handleFolderUpdateName = (id, data) => {
+    setPage(1);
     updateFolderName(id, data);
   };
 
@@ -110,7 +112,12 @@ export default function WordBook({
           <LoadingWithOutHeader />
         )}
 
-        <AddFolderModal visible={visible} setVisible={setVisible} handleOk={handleOk} />
+        <AddFolderModal
+          visible={visible}
+          setVisible={setVisible}
+          handleOk={handleOk}
+          setPage={setPage}
+        />
       </div>
     </div>
   );
