@@ -1,12 +1,13 @@
 import { Button, Input, Modal } from 'antd';
 import React, { useRef, useState } from 'react';
 
-export default function AddFolderModal({ visible, setVisible, handleOk }) {
+export default function AddFolderModal({ visible, setVisible, handleOk, setPage }) {
   const [confirmLoading, setConfirmLoading] = useState(false);
   const folderRef = useRef(null);
 
   const onOk = () => {
     const folderName = folderRef.current.state.value;
+    setPage(1);
     handleOk({ name: folderName });
     setConfirmLoading(true);
     setTimeout(() => {
