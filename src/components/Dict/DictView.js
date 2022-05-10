@@ -11,6 +11,7 @@ import Side from '../NavBar/Side/Side';
 import { useState } from 'react';
 import AddWordModal from './AddWordModal';
 import { checkCookieToken } from '../../utils/checkCookieToken';
+import Footer from '../Footer/Footer';
 
 export default function DictView({ search, wordClick, target_code }) {
   const dispatch = useDispatch();
@@ -73,8 +74,10 @@ export default function DictView({ search, wordClick, target_code }) {
         <Col span={6}>
           <Side />
         </Col>
+        <div>
+          <Footer />
+        </div>
       </Layout>
-      <div>Footer</div>
     </div>
   );
 }

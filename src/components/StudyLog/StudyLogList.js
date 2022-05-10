@@ -11,6 +11,7 @@ import styles from '../../styles/StudyLogList.module.css';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import Search from 'antd/lib/input/Search';
 import { checkCookieToken } from '../../utils/checkCookieToken';
+import Footer from '../Footer/Footer';
 
 export default function StudyLog({
   getStudyLogs,
@@ -215,8 +216,10 @@ export default function StudyLog({
         <Col span={6}>
           <SideWithOutPosts />
         </Col>
+        <div>
+          <Footer />
+        </div>
       </Layout>
-      <div>Footer</div>
     </div>
   );
 }

@@ -13,6 +13,7 @@ import Side from '../NavBar/Side/Side';
 import { loadToken } from '../../utils/api';
 import { useDispatch } from 'react-redux';
 import { checkCookieToken } from '../../utils/checkCookieToken';
+import Footer from '../Footer/Footer';
 
 export default function Home({ search, login }) {
   const dispatch = useDispatch();
@@ -120,8 +121,9 @@ export default function Home({ search, login }) {
         <Col span={6}>
           <Side />
         </Col>
-        <Divider style={{ backgroundColor: 'grey' }} />
-        <div>Footer</div>
+        <div>
+          <Footer />
+        </div>
       </LayoutBottom>
     </div>
   );
