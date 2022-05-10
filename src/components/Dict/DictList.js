@@ -11,6 +11,7 @@ import { sortPos } from '../../utils/sortPos';
 import LoadingWithHeader from '../Loading/LoadingWithHeader';
 import Side from '../NavBar/Side/Side';
 import { checkCookieToken } from '../../utils/checkCookieToken';
+import Footer from '../Footer/Footer';
 
 export default function DictList({ query, search, wordClick, createWord }) {
   const dispatch = useDispatch();
@@ -174,8 +175,10 @@ export default function DictList({ query, search, wordClick, createWord }) {
         <Col span={6} className={styles.side}>
           <Side />
         </Col>
+        <div>
+          <Footer />
+        </div>
       </Layout>
-      <div>Footer</div>
     </div>
   );
 }
