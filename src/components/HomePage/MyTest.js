@@ -27,7 +27,9 @@ const MyTest = ({ login }) => {
             </div>
           </div>
         ) : (
-          <div className={styles.test_contents}>내 성적</div>
+          <div className={styles.test_contents_login}>
+            <div>준비중</div>
+          </div>
         )}
       </div>
     </div>
