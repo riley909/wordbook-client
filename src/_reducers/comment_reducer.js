@@ -1,4 +1,4 @@
-import { GET_COMMENTS } from '../_actions/types';
+import { CREATE_COMMENTS, GET_COMMENTS } from '../_actions/types';
 
 const commentState = {
   loading: false,
@@ -20,6 +20,26 @@ export default function (state = commentState, action) {
         data: action.payload,
       };
     case `${GET_COMMENTS}_FAILURE`:
+      return {
+        loading: false,
+        error: action.payload,
+        data: null,
+      };
+    case `${CREATE_COMMENTS}_SUCCESS`:
+      return {
+        loading: false,
+        error: null,
+        data: {
+          ...state.data,
+          total: state.data.total + 1,
+          currentPage: 1,
+          data: [
+            action.payload.comment,
+            ...state.data.data.slice(0, state.data.data.length - 1),
+          ],
+        },
+      };
+    case `${CREATE_COMMENTS}_FAILURE`:
       return {
         loading: false,
         error: action.payload,
