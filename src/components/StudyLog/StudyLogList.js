@@ -19,6 +19,7 @@ export default function StudyLog({
   deleteStudyLog,
   updateStudyLog,
   getComments,
+  createComment,
 }) {
   const dispatch = useDispatch();
   checkCookieToken(dispatch);
@@ -200,6 +201,7 @@ export default function StudyLog({
                       handleUpdate={handleUpdate}
                       MAX_LENGTH={MAX_LENGTH}
                       getComments={getComments}
+                      createComment={createComment}
                     />
                   </div>
                   {total !== list.length && (

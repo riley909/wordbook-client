@@ -11,12 +11,14 @@ export default function StudyLogListItem({
   handleUpdate,
   MAX_LENGTH,
   getComments,
+  createComment,
 }) {
   const [editClick, setEditClick] = useState(null);
   const [commentClick, setCommentClick] = useState(null);
   const [itemTextLength, setItemTextLength] = useState(0);
   const [itemTextValue, setItemTextValue] = useState();
   const [comments, setComments] = useState(null);
+  const [commentText, setCommentText] = useState('');
   const COMMENT_LIMIT = 5;
   const textRefs = useRef([React.createRef(), React.createRef()]);
 
@@ -62,6 +64,20 @@ export default function StudyLogListItem({
       setCommentClick(val.id);
       getComments(val.id, COMMENT_LIMIT, 1);
     }
+  };
+
+  const commentOnChange = (e) => {
+    const val = e.target.value;
+    setCommentText(val);
+  };
+
+  const handleCreateComment = () => {
+    const body = {
+      content: commentText,
+      studyLogId: commentClick,
+    };
+    createComment(body);
+    setCommentText('');
   };
 
   return (
@@ -115,6 +131,10 @@ export default function StudyLogListItem({
                       <div>
                         {commentClick === val.id && (
                           <div>
+                            <div className={styles.comment_textarea}>
+                              <textarea onChange={commentOnChange} value={commentText} />
+                              <button onClick={handleCreateComment}>작성</button>
+                            </div>
                             <div>
                               <CommentItem
                                 getComments={getComments}
