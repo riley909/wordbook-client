@@ -17,6 +17,7 @@ export default function StudyLogListItem({
   const [itemTextLength, setItemTextLength] = useState(0);
   const [itemTextValue, setItemTextValue] = useState();
   const [comments, setComments] = useState(null);
+  const COMMENT_LIMIT = 5;
   const textRefs = useRef([React.createRef(), React.createRef()]);
 
   const openUpdateForm = (val) => {
@@ -59,7 +60,7 @@ export default function StudyLogListItem({
       setComments(null);
     } else {
       setCommentClick(val.id);
-      getComments(val.id, '', '');
+      getComments(val.id, COMMENT_LIMIT, 1);
     }
   };
 
@@ -120,6 +121,7 @@ export default function StudyLogListItem({
                                 studyLogId={commentClick}
                                 comments={comments}
                                 setComments={setComments}
+                                COMMENT_LIMIT={COMMENT_LIMIT}
                               />
                             </div>
                           </div>
