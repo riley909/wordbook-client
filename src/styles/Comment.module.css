@@ -23,3 +23,11 @@
 .item_delete_icon {
   margin-left: 10px;
 }
+
+.item_show_more {
+  font-size: 30px;
+  color: grey;
+  height: 25px;
+  text-align: center;
+  cursor: pointer;
+}

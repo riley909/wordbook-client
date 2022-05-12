@@ -84,3 +84,5 @@ export const getComments = async (studyLogId, limit, offset) =>
     `${baseUrl}/comments?studyLogId=${studyLogId}&limit=${limit}&offset=${offset}`,
     withCredentials
   );
+export const createComment = async (data) =>
+  await axios.post(`${baseUrl}/comments`, data, withCredentials);

@@ -3,6 +3,7 @@ import styles from '../../styles/Comment.module.css';
 import { FaTimes } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import LoadingWithOutHeader from '../Loading/LoadingWithOutHeader';
+import { BsChevronCompactDown } from 'react-icons/bs';
 
 export default function CommentItem({
   getComments,
@@ -75,7 +76,11 @@ export default function CommentItem({
               </div>
             );
           })}
-          <div onClick={() => handleMoreComments(studyLogId)}>더보기</div>
+          <div
+            className={styles.item_show_more}
+            onClick={() => handleMoreComments(studyLogId)}>
+            <BsChevronCompactDown />
+          </div>
         </div>
       ) : (
         <LoadingWithOutHeader />

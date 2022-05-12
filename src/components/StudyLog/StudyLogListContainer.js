@@ -7,7 +7,10 @@ import {
   deleteStudyLog as deleteStudyLogStart,
   updateStudyLog as updateStudyLogStart,
 } from '../../_actions/studylog_action';
-import { getComments as getCommentsStart } from '../../_actions/comment_action';
+import {
+  getComments as getCommentsStart,
+  createComment as createCommentStart,
+} from '../../_actions/comment_action';
 
 export default function StudyLogListContainer() {
   const dispatch = useDispatch();
@@ -47,6 +50,13 @@ export default function StudyLogListContainer() {
     [dispatch]
   );
 
+  const createComment = useCallback(
+    async (data) => {
+      await dispatch(createCommentStart(data));
+    },
+    [dispatch]
+  );
+
   return (
     <StudyLogList
       getStudyLogs={getStudyLogs}
@@ -54,6 +64,7 @@ export default function StudyLogListContainer() {
       deleteStudyLog={deleteStudyLog}
       updateStudyLog={updateStudyLog}
       getComments={getComments}
+      createComment={createComment}
     />
   );
 }
