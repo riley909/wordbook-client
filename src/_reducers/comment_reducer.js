@@ -1,4 +1,4 @@
-import { CREATE_COMMENTS, GET_COMMENTS } from '../_actions/types';
+import { CREATE_COMMENTS, DELETE_COMMENTS, GET_COMMENTS } from '../_actions/types';
 
 const commentState = {
   loading: false,
@@ -40,6 +40,23 @@ export default function (state = commentState, action) {
         },
       };
     case `${CREATE_COMMENTS}_FAILURE`:
+      return {
+        loading: false,
+        error: action.payload,
+        data: null,
+      };
+    case `${DELETE_COMMENTS}_SUCCESS`:
+      return {
+        loading: false,
+        error: null,
+        data: {
+          ...state.data,
+          total: state.data.total - 1,
+          currentPage: 1,
+          data: state.data.data.filter((val) => val.id !== action.payload),
+        },
+      };
+    case `${DELETE_COMMENTS}_FAILURE`:
       return {
         loading: false,
         error: action.payload,

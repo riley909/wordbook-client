@@ -86,3 +86,5 @@ export const getComments = async (studyLogId, limit, offset) =>
   );
 export const createComment = async (data) =>
   await axios.post(`${baseUrl}/comments`, data, withCredentials);
+export const deleteComment = async (id) =>
+  await axios.delete(`${baseUrl}/comments/${id}`, withCredentials);

@@ -12,6 +12,7 @@ export default function StudyLogListItem({
   MAX_LENGTH,
   getComments,
   createComment,
+  deleteComment,
 }) {
   const [editClick, setEditClick] = useState(null);
   const [commentClick, setCommentClick] = useState(null);
@@ -80,6 +81,11 @@ export default function StudyLogListItem({
     setCommentText('');
   };
 
+  const handleDeleteComment = (id, studyLogId, limit) => {
+    deleteComment(id);
+    getComments(studyLogId, limit, 1);
+  };
+
   return (
     <div>
       {list.map((val, idx) => {
@@ -142,6 +148,7 @@ export default function StudyLogListItem({
                                 comments={comments}
                                 setComments={setComments}
                                 COMMENT_LIMIT={COMMENT_LIMIT}
+                                handleDeleteComment={handleDeleteComment}
                               />
                             </div>
                           </div>
