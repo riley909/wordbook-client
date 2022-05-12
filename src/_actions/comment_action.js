@@ -1,4 +1,4 @@
-import { CREATE_COMMENTS, GET_COMMENTS } from './types';
+import { CREATE_COMMENTS, DELETE_COMMENTS, GET_COMMENTS } from './types';
 import * as api from '../utils/api';
 
 export const getComments = (studyLogId, limit, offset) => {
@@ -29,6 +29,19 @@ export const createComment = (data) => {
       dispatch({ type: `${CREATE_COMMENTS}_SUCCESS`, payload: res.data });
     } catch (error) {
       dispatch({ type: `${CREATE_COMMENTS}_FAILURE`, payload: error });
+    }
+  };
+};
+
+export const deleteComment = (id) => {
+  return async (dispatch) => {
+    dispatch({ type: `${DELETE_COMMENTS}` });
+
+    try {
+      const res = await api.deleteComment(id);
+      dispatch({ type: `${DELETE_COMMENTS}_SUCCESS`, payload: id });
+    } catch (error) {
+      dispatch({ type: `${DELETE_COMMENTS}_FAILURE`, payload: error });
     }
   };
 };
