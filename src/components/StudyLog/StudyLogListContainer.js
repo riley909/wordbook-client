@@ -10,6 +10,7 @@ import {
 import {
   getComments as getCommentsStart,
   createComment as createCommentStart,
+  deleteComment as deleteCommentStart,
 } from '../../_actions/comment_action';
 
 export default function StudyLogListContainer() {
@@ -57,6 +58,13 @@ export default function StudyLogListContainer() {
     [dispatch]
   );
 
+  const deleteComment = useCallback(
+    async (id) => {
+      await dispatch(deleteCommentStart(id));
+    },
+    [dispatch]
+  );
+
   return (
     <StudyLogList
       getStudyLogs={getStudyLogs}
@@ -65,6 +73,7 @@ export default function StudyLogListContainer() {
       updateStudyLog={updateStudyLog}
       getComments={getComments}
       createComment={createComment}
+      deleteComment={deleteComment}
     />
   );
 }

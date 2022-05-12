@@ -11,6 +11,7 @@ export default function CommentItem({
   comments,
   setComments,
   COMMENT_LIMIT,
+  handleDeleteComment,
 }) {
   const commentList = useSelector(
     (state) => state.comment.data && state.comment.data.data
@@ -68,7 +69,11 @@ export default function CommentItem({
                 <div className={styles.item_container}>
                   <div className={styles.item_content}>{val.content}</div>
                   <div className={styles.item_date}>{createdAt}</div>
-                  <div className={styles.item_delete_icon}>
+                  <div
+                    className={styles.item_delete_icon}
+                    onClick={() =>
+                      handleDeleteComment(val.id, studyLogId, COMMENT_LIMIT)
+                    }>
                     <FaTimes />
                   </div>
                 </div>
