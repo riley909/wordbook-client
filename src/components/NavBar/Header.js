@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FaBookMedical } from 'react-icons/fa';
 import styles from '../../styles/NavBar/Header.module.css';
 import { useNavigate } from 'react-router';
-import { logout as logoutStart } from '../../_actions/user_action';
+import { login as loginStart, logout as logoutStart } from '../../_actions/user_action';
 
 export default function Header() {
   const token = useSelector((state) => state.user.auth.token);
@@ -27,6 +27,14 @@ export default function Header() {
     navigate('/');
   }, [navigate]);
 
+  const guestLogin = useCallback(async () => {
+    const body = {
+      email: process.env.REACT_APP_GUEST_ID,
+      password: process.env.REACT_APP_GUEST_PWD,
+    };
+    await dispatch(loginStart(body));
+  }, [dispatch]);
+
   return (
     <>
       {!token ? (
@@ -38,10 +46,13 @@ export default function Header() {
             </div>
           }
           extra={[
-            <Button key="1" onClick={login} className={styles.button}>
+            <Button key="1" onClick={guestLogin} className={styles.guest_button}>
+              체험하기
+            </Button>,
+            <Button key="2" onClick={login} className={styles.button}>
               로그인
             </Button>,
-            <Button key="2" onClick={signup} className={styles.button}>
+            <Button key="3" onClick={signup} className={styles.button}>
               회원가입
             </Button>,
           ]}
