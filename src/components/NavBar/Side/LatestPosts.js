@@ -28,8 +28,12 @@ export default function LatestPosts() {
   }, []);
 
   useEffect(() => {
-    setLatestStudyLogs(studyLogList);
-  }, [studyLogList]);
+    if (token) {
+      setLatestStudyLogs(studyLogList);
+    } else {
+      setLatestStudyLogs(null);
+    }
+  }, [studyLogList, token]);
 
   return (
     <div>
