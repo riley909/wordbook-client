@@ -33,7 +33,7 @@ export default function Header() {
       password: process.env.REACT_APP_GUEST_PWD,
     };
     await dispatch(loginStart(body));
-  }, [token]);
+  }, []);
 
   return (
     <>

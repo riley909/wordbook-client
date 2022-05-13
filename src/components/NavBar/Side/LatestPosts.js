@@ -25,11 +25,15 @@ export default function LatestPosts() {
 
   useEffect(() => {
     getStudyLogs('', '', 5, 1);
-  }, []);
+  }, [token]);
 
   useEffect(() => {
-    setLatestStudyLogs(studyLogList);
-  }, [studyLogList]);
+    if (token) {
+      setLatestStudyLogs(studyLogList);
+    } else {
+      setLatestStudyLogs(null);
+    }
+  }, [studyLogList, token]);
 
   return (
     <div>
