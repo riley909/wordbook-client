@@ -25,7 +25,7 @@ export default function LatestPosts() {
 
   useEffect(() => {
     getStudyLogs('', '', 5, 1);
-  }, []);
+  }, [token]);
 
   useEffect(() => {
     if (token) {
