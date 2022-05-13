@@ -70,6 +70,10 @@ export default function (state = userState, action) {
           error: null,
           token: action.payload,
         },
+        profile: {
+          error: null,
+          data: '',
+        },
       };
     default:
       return state;

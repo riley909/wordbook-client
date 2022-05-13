@@ -9,8 +9,8 @@ import { getProfile as getProfileStart } from '../../../_actions/user_action';
 
 export default function Side() {
   const token = useSelector((state) => state.user.auth.token);
-  const myEmail = useSelector((state) =>
-    state.user.profile ? state.user.profile.data.email : null
+  const myEmail = useSelector(
+    (state) => state.user.profile && state.user.profile.data.email
   );
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -24,10 +24,11 @@ export default function Side() {
     if (token) {
       getProfile();
     }
-  }, []);
+  }, [token]);
 
   useEffect(() => {
     setEmail(myEmail);
+    console.log(myEmail);
   }, [myEmail]);
 
   const toLogin = () => navigate('/login');
