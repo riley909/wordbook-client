@@ -1,4 +1,7 @@
 # WORDBOOK
+
+WORDBOOK은 한국어-인도네시아어 사전을 이용해 단어를 찾고 공부한 내용을 기록할 수 있는 서비스 입니다.
+
 <kbd>
 <img width="1019" alt="스크린샷 2022-05-13 오전 12 10 07" src="https://user-images.githubusercontent.com/67426853/168297943-cb362c36-5528-49e5-bb5f-3be72187f5bf.png">
 </kbd>
@@ -24,9 +27,11 @@
 <br/>
 <br/>
 
-#### [배포 링크](https://bit.ly/3P4ogPg)
+### [배포 링크](https://bit.ly/3P4ogPg)
 
 ## Stacks
+
+<img src="https://user-images.githubusercontent.com/67426853/168419505-e1d72b2a-d171-42d3-bd09-a441796caf65.png"/>
 
 ## More Information
 
