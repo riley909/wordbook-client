@@ -46,8 +46,12 @@ export default function DictList({ query, search, wordClick, createWord }) {
   let dfn = [];
   if (Array.isArray(sense)) {
     sense.map((val) => {
-      trans_word.push(val.translation.trans_word);
-      trans_dfn.push(val.translation.trans_dfn);
+      const transWord = val.translation.trans_word;
+      const transDfn = val.translation.trans_dfn;
+      if (transWord) {
+        trans_word.push(transWord);
+        trans_dfn.push(transDfn);
+      }
       dfn.push(val.definition);
       return null;
     });
@@ -83,8 +87,12 @@ export default function DictList({ query, search, wordClick, createWord }) {
                         dfn = [];
                         if (Array.isArray(val.sense)) {
                           val.sense.map((el) => {
-                            trans_word.push(el.translation.trans_word);
-                            trans_dfn.push(el.translation.trans_dfn);
+                            const transWord = el.translation.trans_word;
+                            const transDfn = el.translation.trans_dfn;
+                            if (transWord) {
+                              trans_word.push(transWord);
+                              trans_dfn.push(transDfn);
+                            }
                             dfn.push(el.definition);
                             return null;
                           });
@@ -141,11 +149,11 @@ export default function DictList({ query, search, wordClick, createWord }) {
                       ) : (
                         <DictListItem
                           target_code={item.target_code}
-                          trans_word={sense.translation.trans_word}
+                          trans_word={sense.translation && sense.translation.trans_word}
                           word={item.word}
                           pos={pos}
                           trans_pos={trans_pos}
-                          trans_dfn={sense.translation.trans_dfn}
+                          trans_dfn={sense.translation && sense.translation.trans_dfn}
                           dfn={sense.definition}
                           wordClick={wordClick}
                           folders={folders}
