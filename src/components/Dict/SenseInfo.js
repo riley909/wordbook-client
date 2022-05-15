@@ -4,6 +4,15 @@ import RelInfo from './RelInfo';
 import styles from '../../styles/DictView.module.css';
 
 export default function SenseInfo({ sense_info, onWordClick }) {
+  // 의미가 1개 일 경우
+
+  let transWord = null;
+  let transDfn = null;
+  if (sense_info.translation) {
+    transWord = sense_info.translation.trans_word;
+    transDfn = sense_info.translation.trans_dfn;
+  }
+
   return (
     <>
       {Array.isArray(sense_info) ? (
@@ -38,14 +47,15 @@ export default function SenseInfo({ sense_info, onWordClick }) {
       ) : (
         <>
           <div>
-            <div className={styles.sense_trans_word}>
-              {sense_info.translation.trans_word}
-            </div>
+            <div className={styles.sense_trans_word}>{transWord}</div>
             <div className={styles.sense_indent}>
               <div>{sense_info.definition}</div>
-              <div>{sense_info.translation.trans_dfn}</div>
+              <div>{transDfn}</div>
             </div>
-            <ExampleInfo example_info={sense_info.example_info} />
+            {sense_info.example_info && (
+              <ExampleInfo example_info={sense_info.example_info} />
+            )}
+
             <>
               {sense_info.rel_info && (
                 <RelInfo
