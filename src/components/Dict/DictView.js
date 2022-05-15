@@ -8,19 +8,27 @@ import Layout from '../Layout/Layout';
 import styles from '../../styles/DictView.module.css';
 import { Col } from 'antd';
 import Side from '../NavBar/Side/Side';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AddWordModal from './AddWordModal';
 import { checkCookieToken } from '../../utils/checkCookieToken';
 import Footer from '../Footer/Footer';
 
-export default function DictView({ search, wordClick, target_code }) {
+export default function DictView({ search, wordClick, target_code, createWord }) {
   const dispatch = useDispatch();
   checkCookieToken(dispatch);
 
   const token = useSelector((state) => state.user.auth.token);
   const searchViewResult = useSelector((state) => state.dict.searchView.data);
   const loading = useSelector((state) => state.dict.searchView.loading);
+  const folderList = useSelector(
+    (state) => state.wordbook.folder.data && state.wordbook.folder.data[0]
+  );
+  const [folders, setFolders] = useState(null);
   const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    setFolders(folderList);
+  }, [folderList]);
 
   if (loading || !searchViewResult) {
     return <LoadingWithHeader header={<Header />} />;
@@ -39,9 +47,19 @@ export default function DictView({ search, wordClick, target_code }) {
     setVisible(true);
   };
 
+  const handleCreate = (data) => {
+    createWord(data);
+  };
+
   return (
     <div>
-      <AddWordModal visible={visible} setVisible={setVisible} target_code={target_code} />
+      <AddWordModal
+        visible={visible}
+        setVisible={setVisible}
+        target_code={target_code}
+        folders={folders}
+        handleCreate={handleCreate}
+      />
       <Header />
       <SearchInput search={search} />
       <Layout>
