@@ -16,9 +16,12 @@ export default function DictListContainer() {
   const dispatch = useDispatch();
   const queryData = QueryString.parse(location.search, { ignoreQueryPrefix: true });
 
-  const getFolderList = useCallback(async (limit, offset) => {
-    await dispatch(getFolderListStart(limit, offset));
-  }, []);
+  const getFolderList = useCallback(
+    async (limit, offset) => {
+      await dispatch(getFolderListStart(limit, offset));
+    },
+    [dispatch]
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,7 +32,7 @@ export default function DictListContainer() {
     fetchData();
 
     // queryData가 바뀔때마다 dispatch
-  }, [dispatch, queryData]);
+  }, [dispatch, queryData, getFolderList]);
 
   const search = useCallback(
     (query) => {
@@ -51,7 +54,7 @@ export default function DictListContainer() {
       await dispatch(createWordStart(data));
       getFolderList(100, 1);
     },
-    [dispatch]
+    [dispatch, getFolderList]
   );
 
   return (
@@ -60,7 +63,6 @@ export default function DictListContainer() {
       search={search}
       wordClick={wordClick}
       createWord={createWord}
-      getFolderList={getFolderList}
     />
   );
 }
